@@ -1,0 +1,30 @@
+using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
+
+public class Climate : MonoBehaviour {
+  
+  public enum ClimateType {sunny, rainy, windy, snowy}
+  public ClimateType climateType;
+  
+  public Sprite climateIcon;
+  public float duration;
+  
+	void OnEnable(){
+		ClimateManager.OnTriggerClimate += TriggerClimate;
+	}
+	
+	void OnDisable(){
+		ClimateManager.OnTriggerClimate -= TriggerClimate;
+	}
+	
+	void TriggerClimate(Climate climate){
+	  StartCoroutine(EmitClimate());
+	}
+	
+	IENumerator EmitClimate(){
+	  yield return new WaitForSecond(duration);
+	  Debug.Log("Climate has finished");
+	}
+}
