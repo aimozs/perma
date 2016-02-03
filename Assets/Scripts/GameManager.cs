@@ -9,8 +9,11 @@ public class GameManager : MonoBehaviour {
 
 	public List<GameObject> garden = new List<GameObject>();
 
+	public Plant[] instancesPlant;
+
 	public GameObject camera;
 	public int currentParcel = 0;
+	public int currentLevel = 0;
 	public static int currentPlant = 0;
 	public Color colorHighlight;
 	public Color colorBasic;
@@ -20,8 +23,8 @@ public class GameManager : MonoBehaviour {
 	private float _horizontal;
 	private float _scroll;
 
-	public delegate void GrowThatPlant();
-	public static event GrowThatPlant OnClicked;
+//	public delegate void GrowThatPlant();
+//	public static event GrowThatPlant OnClicked;
 
 	private static GameManager instance;
 	public static GameManager Instance {
@@ -39,16 +42,17 @@ public class GameManager : MonoBehaviour {
 		Load();
 		GenerateGarden();
 		SetCamera(currentParcel);
+		GetInstancesPlant();
 	}
 
-	void OnEnable(){
-		OnClicked += GrowThat;
-	}
-
-	void OnDisable(){
-		OnClicked -= GrowThat;
-		Save();
-	}
+//	void OnEnable(){
+//		OnClicked += GrowThat;
+//	}
+//
+//	void OnDisable(){
+//		OnClicked -= GrowThat;
+//		Save();
+//	}
 
 	void SetCamera(int parcel){
 		camera.GetComponent<UnityStandardAssets.Cameras.AutoCam>().SetTarget(garden[parcel].transform);
@@ -57,6 +61,10 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		GetInput();
+	}
+
+	void GetInstancesPlant(){
+		instancesPlant = GameObject.FindObjectsOfType<Plant>();
 	}
 
 
@@ -78,9 +86,12 @@ public class GameManager : MonoBehaviour {
 
 		if(Input.GetKeyDown(KeyCode.A)){
 			Plant[] instancesPlant = GameObject.FindObjectsOfType<Plant>();
+
+				
 			Debug.Log("There's a total of " + instancesPlant.Length + "plants");
 		}
 	}
+
 
 	public void SelectNextParcel(bool next){
 		HighlightCurrentParcel(garden[currentParcel], false);
@@ -112,16 +123,35 @@ public class GameManager : MonoBehaviour {
 
 	}
 
-	public void GrowThat(){
-		Grow(garden[currentParcel], GardenManager.Instance.GetCurrentPlant(currentPlant));
-	}
+//	public void GrowThat(){
+//		if(GardenManager.Instance.GetCurrentPlant(currentPlant) != null)
+//			Grow(garden[currentParcel], GardenManager.Instance.GetCurrentPlant(currentPlant));
+//	}
 
 	public void WaterThat(){
-		GardenManager.Instance.WaterThis(garden[currentParcel].GetComponentInChildren<Plant>().plantType.ToString());
+		if(garden[currentParcel].GetComponentInChildren<Plant>() != null)
+			GardenManager.Instance.WaterThis(garden[currentParcel].GetComponentInChildren<Plant>().plantType.ToString());
+
+		GetInstancesPlant();
+
+		Debug.Log((int)(instancesPlant.Length/3) + "sprouts vs garden size " + (gardenSize-2));
+
+		if((int)(instancesPlant.Length/3) > (gardenSize-2)){
+			currentLevel++;
+			currentLevel = Mathf.Clamp(currentLevel, 0, GardenManager.numberOfPlants);
+
+			if(GardenManager.Instance.GetCurrentPlant(currentLevel) != null)
+				GardenManager.Instance.IncreaseSeedNumber(GardenManager.Instance.GetCurrentPlant(currentLevel).plantType.ToString(), true);
+
+			gardenSize++;
+			CreateParcel(gardenSize);
+		}
 	}
 
 	public void Grow(GameObject parcel, Plant plant){
-		Debug.Log("growing " + plant.plantType + "on parcel number " + parcel.name);
+		if(GardenManager.Instance.debugGarden)
+			Debug.Log("growing " + plant.plantType + "on parcel number " + parcel.name);
+		
 		parcel.AddComponent<Plant>();
 		parcel.GetComponent<Plant>().SetPlant(parcel, plant);
 
@@ -142,13 +172,17 @@ public class GameManager : MonoBehaviour {
 
 	void GenerateGarden(){
 		for(int g = 1; g <= gardenSize; g++){
-			Vector3 position = new Vector3(g, 0, 0);
-			GameObject parcel = Instantiate(tile, position, Quaternion.identity) as GameObject;
-			parcel.name = parcel.name + g;
-			garden.Add(parcel);
+			CreateParcel(g);
 		}
 
 		GardenManager.Instance.InitPlants();
+	}
+
+	void CreateParcel(int arrayPos){
+		Vector3 position = new Vector3(arrayPos, 0, 0);
+		GameObject parcel = Instantiate(tile, position, Quaternion.identity) as GameObject;
+		parcel.name = parcel.name + arrayPos;
+		garden.Add(parcel);
 	}
 
 

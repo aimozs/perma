@@ -21,12 +21,15 @@ public class GardenManager : MonoBehaviour {
 	public void InitPlants(){
 		GetAllPlants();
 
-		AllPlants[Plant.plantEnum.Tomato.ToString()].seedNumber = 1;
+
+//		AllPlants[Plant.plantEnum.Tomato.ToString()].seedNumber = 1;
 
 		foreach(KeyValuePair<string, Plant> plant in AllPlants){
 			UIManager.Instance.AddBtnPlant(plant.Value);
 		}
 
+		if(GetCurrentPlant(GameManager.Instance.currentLevel) != null)
+			IncreaseSeedNumber(GetCurrentPlant(GameManager.Instance.currentLevel).plantType.ToString(), true);
 	}
 
 	// Use this for initialization
@@ -38,7 +41,9 @@ public class GardenManager : MonoBehaviour {
 			if(debugGarden)
 				Debug.Log("Adding to all plants " + plant.plantType.ToString());
 			AllPlants.Add(plant.plantType.ToString(), plant);
-			Debug.Log(AllPlants[plant.plantType.ToString()].plantIcon.name);
+
+			if(debugGarden)
+				Debug.Log(AllPlants[plant.plantType.ToString()].plantIcon.name);
 		}
 
 		if(debugGarden)
@@ -49,28 +54,31 @@ public class GardenManager : MonoBehaviour {
 		if(debugGarden)
 			Debug.Log("index asked: " + index);
 		int i = 0;
-		Plant currentPlant = new Plant();
+
 		foreach(KeyValuePair<string, Plant> plant in AllPlants){
 			if(i == index){
-				Debug.Log(i + " equal " + index + " for : " + plant.Value.plantPrefab.name);
-				currentPlant = plant.Value;
-				break;
+				if(debugGarden)
+					Debug.Log(i + " equal " + index + " for : " + plant.Value.plantPrefab.name);
+				
+				return plant.Value;
 			} else{
 				i++;
 				if(debugGarden)
 					Debug.Log("Not equal " + i);
 			}
-				
 		}
-		if(debugGarden)
-			Debug.Log("returning " + currentPlant.plantType.ToString());
-		return currentPlant;
+		return null;
 	}
 
 	public void IncreaseSeedNumber(string plantType, bool inc){
-		Debug.Log("Increase plant seed number for " + plantType.ToString());
+		if(debugGarden)
+			Debug.Log("Increase plant seed number for " + plantType.ToString());
+		
 		Plant plant = AllPlants[plantType.ToString()];
-		Debug.Log("on GO " + plant.name);
+
+		if(debugGarden)
+			Debug.Log("on GO " + plant.name);
+		
 		if(inc)
 			plant.seedNumber++;
 		else
@@ -79,18 +87,31 @@ public class GardenManager : MonoBehaviour {
 	}
 
 	public void WaterThis(string plantType){
-		Debug.Log("Watering plant  " + plantType.ToString());
+		if(debugGarden)
+			Debug.Log("Watering plant  " + plantType.ToString());
+		
 		Plant plant = AllPlants[plantType.ToString()];
-		Debug.Log("on GO " + plant.name);
+
+		if(debugGarden)
+			Debug.Log("on GO " + plant.name);
 
 		switch(plant.plantStage){
 		case Plant.stageEnum.seedling:
-			plant.plantStage = Plant.stageEnum.plant;
+			plant.plantStage = Plant.stageEnum.germination;
+			break;
+		case Plant.stageEnum.germination:
+			plant.plantStage = Plant.stageEnum.growth;
+			break;
+		case Plant.stageEnum.growth:
+			plant.plantStage = Plant.stageEnum.product;
 			break;
 		default:
 			break;
 		}
-		Debug.Log("it's now " + plant.plantStage.ToString());
+
+		if(debugGarden)
+			Debug.Log("it's now " + plant.plantStage.ToString());
+		
 		IncreaseSeedNumber(plantType.ToString(), true);
 		return;
 	}

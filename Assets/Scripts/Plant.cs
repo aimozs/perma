@@ -5,7 +5,7 @@ using System.Collections;
 public class Plant : MonoBehaviour {
 
 	public enum plantEnum {Tomato, Potato, Basil, Corn}
-	public enum stageEnum {seedling, plant}
+	public enum stageEnum {seedling, germination, growth, product}
 
 	public int seedNumber = 0;
 	public int productNumber = 0;

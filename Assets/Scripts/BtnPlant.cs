@@ -16,12 +16,14 @@ public class BtnPlant : MonoBehaviour {
 	}
 
 	public void RefreshUI(){
-		Debug.Log("refreshing UI");
+		if(UIManager.Instance.debugUI)
+			Debug.Log("refreshing Btn");
 		GetComponentInChildren<Text>().text = plant.seedNumber.ToString();
 	}
 
 	public void SetPlantUI(){
-		Debug.Log("Adding sprite to button");
+		if(UIManager.Instance.debugUI)
+			Debug.Log("Adding sprite to button");
 		transform.GetComponent<Image>().sprite = plant.plantIcon;
 		RefreshUI();
 	}
