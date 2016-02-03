@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour {
 
 	public bool debugUI = true;
 	public GameObject plantSelectPanel;
+	public GameObject climatePanel;
 	public GameObject infos;
 
 	public List<GameObject> btns = new List<GameObject>();
@@ -36,6 +37,15 @@ public class UIManager : MonoBehaviour {
 
 		if(debugUI)
 			Debug.Log("Add a btn for " + plant.plantType.ToString());
+	}
+	
+	public void AddClimate(Climate climate){
+		GameObject btnClimate = Instantiate(GameModel.Instance.btnClimatePrefab);
+		btnClimate.transform.SetParent(climatePanel.transform, false);
+		btnClimate.GetComponent<BtnClimate>().climate = climate;
+		//btnClimate.GetComponent<BtnClimate>().climate.plantBtn = btnPlant;
+		btnClimate.GetComponent<BtnClimate>().SetClimateUI();
+		//btns.Add(btnPlant);
 	}
 
 	public void HighlightCurrentPlant(bool highlight){
