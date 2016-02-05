@@ -87,6 +87,8 @@ public class GardenManager : MonoBehaviour {
 	}
 
 	public void WaterThis(string plantType){
+
+			
 		if(debugGarden)
 			Debug.Log("Watering plant  " + plantType.ToString());
 		
@@ -95,25 +97,10 @@ public class GardenManager : MonoBehaviour {
 		if(debugGarden)
 			Debug.Log("on GO " + plant.name);
 
-		switch(plant.plantStage){
-		case Plant.stageEnum.seedling:
-			plant.plantStage = Plant.stageEnum.germination;
-			break;
-		case Plant.stageEnum.germination:
-			plant.plantStage = Plant.stageEnum.growth;
-			break;
-		case Plant.stageEnum.growth:
-			plant.plantStage = Plant.stageEnum.product;
-			break;
-		default:
-			break;
-		}
 
-		if(debugGarden)
-			Debug.Log("it's now " + plant.plantStage.ToString());
-		
 		IncreaseSeedNumber(plantType.ToString(), true);
 		return;
 	}
+
 
 }

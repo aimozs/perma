@@ -4,6 +4,10 @@ using System.Collections;
 public class GameModel : MonoBehaviour {
 
 	public GameObject btnPlantPrefab;
+	public GameObject btnClimatePrefab;
+
+	public GameObject plantPrefab;
+	public GameObject germination;
 
 	private static GameModel instance;
 	public static GameModel Instance {

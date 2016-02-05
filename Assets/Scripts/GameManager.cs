@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour {
 
+	public bool debugGame;
 	public int gardenSize;
 	public GameObject tile;
 
@@ -129,33 +130,47 @@ public class GameManager : MonoBehaviour {
 //	}
 
 	public void WaterThat(){
-		if(garden[currentParcel].GetComponentInChildren<Plant>() != null)
-			GardenManager.Instance.WaterThis(garden[currentParcel].GetComponentInChildren<Plant>().plantType.ToString());
+		if(Well.Instance.levelUI.value > .1f){
+			Well.Instance.UpdateLevel(false);
 
-		GetInstancesPlant();
+			if(garden[currentParcel].GetComponent<Parcel>() != null){
+				garden[currentParcel].GetComponent<Parcel>().ReceivesWater();
+			}
 
-		Debug.Log((int)(instancesPlant.Length/3) + "sprouts vs garden size " + (gardenSize-2));
+//			if(garden[currentParcel].GetComponentInChildren<Plant>() != null)
+//				GardenManager.Instance.WaterThis(garden[currentParcel].GetComponentInChildren<Plant>().plantType.ToString());
 
-		if((int)(instancesPlant.Length/3) > (gardenSize-2)){
-			currentLevel++;
-			currentLevel = Mathf.Clamp(currentLevel, 0, GardenManager.numberOfPlants);
-
-			if(GardenManager.Instance.GetCurrentPlant(currentLevel) != null)
-				GardenManager.Instance.IncreaseSeedNumber(GardenManager.Instance.GetCurrentPlant(currentLevel).plantType.ToString(), true);
-
-			gardenSize++;
-			CreateParcel(gardenSize);
+//			GetInstancesPlant();
+//
+//			if(debugGame)
+//				Debug.Log((int)(instancesPlant.Length/3) + "sprouts vs garden size " + (gardenSize-2));
+//
+//			if((int)(instancesPlant.Length/3) > (gardenSize-2)){
+//				currentLevel++;
+//				currentLevel = Mathf.Clamp(currentLevel, 0, GardenManager.numberOfPlants);
+//
+				if(GardenManager.Instance.GetCurrentPlant(currentLevel) != null)
+					GardenManager.Instance.IncreaseSeedNumber(GardenManager.Instance.GetCurrentPlant(currentLevel).plantType.ToString(), true);
+//
+//				gardenSize++;
+//				CreateParcel(gardenSize);
+//			}
 		}
+
 	}
 
-	public void Grow(GameObject parcel, Plant plant){
-		if(GardenManager.Instance.debugGarden)
-			Debug.Log("growing " + plant.plantType + "on parcel number " + parcel.name);
-		
-		parcel.AddComponent<Plant>();
-		parcel.GetComponent<Plant>().SetPlant(parcel, plant);
+//	public void Grow(GameObject parcel, Plant plant){
+//		if(GardenManager.Instance.debugGarden)
+//			Debug.Log("growing " + plant.plantType + "on parcel number " + parcel.name);
+//		
+//		parcel.AddComponent<Plant>();
+//		parcel.GetComponent<Plant>().SetPlant(parcel, plant);
+//
+//
+//	}
 
-
+	public void GrowThatHere(Plant plant){
+		garden[currentParcel].GetComponent<Parcel>().SetPlant(plant);
 	}
 
 	void HighlightCurrentParcel(GameObject parcel, bool highlight){

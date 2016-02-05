@@ -8,7 +8,8 @@ public class BtnPlant : MonoBehaviour {
 
 	public void PlantThat(){
 		if(plant.seedNumber > 0){
-			GameManager.Instance.Grow(GameManager.Instance.garden[GameManager.Instance.currentParcel], plant);
+			GameManager.Instance.GrowThatHere(plant);
+//			GameManager.Instance.Grow(GameManager.Instance.garden[GameManager.Instance.currentParcel], plant);
 			GardenManager.Instance.IncreaseSeedNumber(plant.plantType.ToString(), false);
 		}
 

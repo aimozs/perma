@@ -1,16 +1,12 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.Advertisements;
 
-public class UnityAdsButton : MonoBehaviour
-{
-    void OnGUI ()
-    {
-        Rect buttonRect = new Rect (10, 10, 150, 50);
-        string buttonText = Advertisement.IsReady () ? "Show Ad" : "Waiting...";
+public class UnityAdsButton : MonoBehaviour {
 
-        if (GUI.Button (buttonRect, buttonText)) {
-            Advertisement.Show ();
-        }
+	public void DisplayAd ()
+    {
+		Advertisement.Show ();
     }
 }

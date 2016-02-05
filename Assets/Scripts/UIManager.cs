@@ -41,9 +41,11 @@ public class UIManager : MonoBehaviour {
 	
 	public void AddClimate(Climate climate){
 		GameObject btnClimate = Instantiate(GameModel.Instance.btnClimatePrefab);
+//		Debug.Log(btnClimate.name);
 		btnClimate.transform.SetParent(climatePanel.transform, false);
+		btnClimate.name = btnClimate.name + climatePanel.transform.childCount.ToString();
 		btnClimate.GetComponent<BtnClimate>().climate = climate;
-		//btnClimate.GetComponent<BtnClimate>().climate.plantBtn = btnPlant;
+//		btnClimate.GetComponent<BtnClimate>().climate.climateBtn = btnClimate;
 		btnClimate.GetComponent<BtnClimate>().SetClimateUI();
 		//btns.Add(btnPlant);
 	}
@@ -83,4 +85,26 @@ public class UIManager : MonoBehaviour {
 			}
 		}
 	}
+
+//	public void SetDuration(){
+//		climatePanel.transform.GetChild(0).GetComponent<BtnClimate>().climate.duration = UnityEngine.Random.Range(10f, 60f);
+//
+//	}
+
+	public void StartTimerForecast(){
+		StartCoroutine(UpdateTimer());
+	}
+
+	IEnumerator UpdateTimer(){
+		BtnClimate currentClimate = climatePanel.transform.GetChild(0).GetComponent<BtnClimate>();
+		if(currentClimate.timer > 0f){
+			currentClimate.timer--;
+			currentClimate.RefreshUI();
+		} else {
+			ClimateManager.Instance.RenewCLimate();
+		}
+		yield return new WaitForSeconds(1f);
+		StartCoroutine(UpdateTimer());
+	}
+
 }

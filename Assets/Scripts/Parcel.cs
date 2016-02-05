@@ -14,4 +14,14 @@ public class Parcel : MonoBehaviour {
     pH = UnityEngine.Random.Range(3f, 11f);
   }
 
+	public void SetPlant(Plant plant){
+		GameObject newPlant = Instantiate(GameModel.Instance.plantPrefab) as GameObject;
+		newPlant.GetComponent<PlantPrefab>().plant = plant;
+		newPlant.transform.SetParent(transform, false);
+	}
+
+	public void ReceivesWater(){
+		if(GetComponentInChildren<PlantPrefab>() != null)
+			GetComponentInChildren<PlantPrefab>().IncreaseSize(pH);
+	}
 }

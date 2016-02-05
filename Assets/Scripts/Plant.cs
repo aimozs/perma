@@ -12,23 +12,19 @@ public class Plant : MonoBehaviour {
 	public int productNumber = 0;
 
 	public plantEnum plantType = plantEnum.Tomato;
-	public stageEnum plantStage = stageEnum.seedling;
+
 	
 	public Sprite plantIcon;
 	public GameObject plantPrefab;
 	public GameObject plantBtn;
+
+	public GameObject growth;
+	public GameObject product;
 		
 	public List<plantEnum> friends = new List<plantEnum>();
 	public List<plantEnum> foes = new List<plantEnum>();
 	
-	public void SetPlant(GameObject parcel, Plant plant){
-		plantType = plant.plantType;
-		plantPrefab = plant.plantPrefab;
-		if(plantPrefab != null){
-			GameObject newPlant = Instantiate(plantPrefab) as GameObject;
-			newPlant.transform.SetParent(parcel.transform, false);
-		}
-	}
+
 
 
 //	public void Water(){
