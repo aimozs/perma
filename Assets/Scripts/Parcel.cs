@@ -10,6 +10,10 @@ public class Parcel : MonoBehaviour {
 	public Text pHUI;
 	public Slider waterUI;
 	public float incrementValue = 0.1f;
+
+	public GameObject plantPrefab;
+	public GameObject parcelReady;
+	public GameObject waste;
 	  
 	void Start(){
 		SetpH();
@@ -22,9 +26,16 @@ public class Parcel : MonoBehaviour {
   	}
 
 	public void SetPlant(Plant plant){
-		GameObject newPlant = Instantiate(GameModel.Instance.plantPrefab) as GameObject;
-		newPlant.GetComponent<PlantPrefab>().plant = plant;
-		newPlant.transform.SetParent(transform, false);
+		parcelReady = transform.FindChild("parcelReady(Clone)") != null ? transform.FindChild("parcelReady(Clone)").gameObject : null;
+		waste = transform.FindChild("waste(Clone)") != null ? transform.FindChild("waste(Clone)").gameObject : null;
+		plantPrefab = Instantiate(GameModel.Instance.plantPrefab) as GameObject;
+		plantPrefab.GetComponent<PlantPrefab>().plant = plant;
+		plantPrefab.transform.SetParent(transform, false);
+
+		if(waste != null)
+			Destroy(waste);
+		if(parcelReady != null)
+			Destroy(parcelReady);
 	}
 
 	public void ReceivesWater(){
@@ -77,29 +88,19 @@ public class Parcel : MonoBehaviour {
 				plantPrefab.IncreaseSize(true);
 			}
 		}
-		UpdateColor();
+		UIManager.Instance.UpdateColor(waterUI);
 	}
 
-	void UpdateColor(){
-		if(BtnTemperature.Instance.temperature > 2){
-			waterUI.fillRect.GetComponent<Image>().color = Color.cyan;
-		} else {
-			waterUI.fillRect.GetComponent<Image>().color = Color.white;
-		}
 
-		if(BtnTemperature.Instance.temperature > 10){
-			waterUI.fillRect.GetComponent<Image>().color = Color.green;
-		}
-	}
 
 	public void UpdateLevel(bool up){
 		if(up) {
 			waterUI.value = waterUI.value + incrementValue;
 			if(GetComponentInChildren<PlantPrefab>() != null){
 				PlantPrefab plantPrefab = GetComponentInChildren<PlantPrefab>();
-				Debug.Log("Watering to " + waterUI.value.ToString("0.0") + " with a of " + plantPrefab.plant.pHAve);
+//				Debug.Log("Watering to " + waterUI.value.ToString("0.0") + " with a of " + plantPrefab.plant.pHAve);
 				if(plantPrefab.plant.pHAve > pH - 1f && plantPrefab.plant.pHAve < pH + 1f && waterUI.value > 0.6f){
-					Debug.Log("Increasing size of " + plantPrefab.plant.plantType.ToString());
+//					Debug.Log("Increasing size of " + plantPrefab.plant.plantType.ToString());
 					plantPrefab.IncreaseSize(true);
 				}
 			}
@@ -113,7 +114,7 @@ public class Parcel : MonoBehaviour {
 			}
 		}
 
-		UpdateColor();
+		UIManager.Instance.UpdateColor(waterUI);
 			
 	}
 

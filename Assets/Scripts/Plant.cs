@@ -27,6 +27,7 @@ public class Plant : MonoBehaviour {
 	public GameObject growth;
 	public GameObject pollination;
 	public GameObject product;
+
 		
 	public List<plantEnum> friends = new List<plantEnum>();
 	public List<plantEnum> foes = new List<plantEnum>();

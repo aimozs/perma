@@ -69,20 +69,9 @@ public class Well : MonoBehaviour {
 		}
 
 
-		UpdateColor();
+		UIManager.Instance.UpdateColor(levelUI);
 	}
-
-	void UpdateColor(){
-		if(BtnTemperature.Instance.temperature > 2){
-			levelUI.fillRect.GetComponent<Image>().color = Color.cyan;
-		} else {
-			levelUI.fillRect.GetComponent<Image>().color = Color.white;
-		}
-
-		if(BtnTemperature.Instance.temperature > 10){
-			levelUI.fillRect.GetComponent<Image>().color = Color.green;
-		}
-	}
+		
 
 	public void UpdateLevel(bool up){
 		if(up)

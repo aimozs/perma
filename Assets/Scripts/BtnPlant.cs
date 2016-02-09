@@ -9,13 +9,10 @@ public class BtnPlant : MonoBehaviour {
 	public void PlantThat(){
 		if(plant.seedNumber > 0 && GameManager.Instance.garden[GameManager.Instance.currentParcel].GetComponent<Parcel>().ready){
 			GameManager.Instance.GrowThatHere(plant);
-//			GameManager.Instance.Grow(GameManager.Instance.garden[GameManager.Instance.currentParcel], plant);
 			GardenManager.Instance.IncreaseSeedNumber(plant.plantType.ToString(), false);
 		} else {
 			UIManager.Notify("The parcel is not ready, use the shovel for that");
 		}
-
-
 	}
 
 	public void RefreshUI(){
@@ -40,7 +37,6 @@ public class BtnPlant : MonoBehaviour {
 			UIManager.Instance.SetCoinText(GameManager.Instance.coins.ToString());
 			Destroy(gameObject);
 		}
-			
 	}
 
 	public void SetPlantShop(){
@@ -48,6 +44,5 @@ public class BtnPlant : MonoBehaviour {
 			Debug.Log("Adding sprite to button");
 		transform.GetComponent<Image>().sprite = plant.plantIcon;
 		GetComponentInChildren<Text>().text = plant.price.ToString() + "$";
-
 	}
 }

@@ -9,6 +9,8 @@ public class GameModel : MonoBehaviour {
 
 	public GameObject plantPrefab;
 	public GameObject germination;
+	public GameObject parcelReady;
+	public GameObject waste;
 
 	private static GameModel instance;
 	public static GameModel Instance {

@@ -9,8 +9,27 @@ public class ClimateManager : MonoBehaviour {
 	public int days_forecast = 3;
 	public Climate.ClimateType previousWeather = Climate.ClimateType.sunny;
 	public Dictionary<string, Climate> climatesDict = new Dictionary<string, Climate>();
+	public Light sunLight;
+	public Flare sunFlare;
 
 	public List<Climate> forecast = new List<Climate>();
+
+	public GameObject direction;
+	public float dir = 0f;
+	public int strength = 5;
+	public GameObject windZone;
+
+	public GameObject snowFlake;
+	public GameObject cloud;
+	public GameObject rain;
+
+
+
+	void DisableAllParticles(){
+		cloud.GetComponent<ParticleSystem>().Stop();
+		snowFlake.GetComponent<ParticleSystem>().Stop();
+		rain.GetComponent<ParticleSystem>().Stop();
+	}
   
 	public delegate void EmitClimate(Climate climate);
 	public static event EmitClimate OnTriggerClimate;
@@ -48,12 +67,14 @@ public class ClimateManager : MonoBehaviour {
 		if(climate != null)
 			forecast.Add(climate);
 		UIManager.Instance.AddClimate(climate);
+		UpdateTemperature(forecast[0]);
 	}
 
 	public void RenewCLimate(){
 		Destroy(UIManager.Instance.climatePanel.transform.GetChild(0).gameObject);
 		previousWeather = forecast[0].climateType;
 		forecast.RemoveAt(0);
+
 		AddClimateToForecast();
 	}
 
@@ -97,5 +118,91 @@ public class ClimateManager : MonoBehaviour {
 		if(debugClimate)
 			Debug.Log(climatesDict.Count);
 
+	}
+
+//	void OnEnable(){
+//		OnTriggerClimate += UpdateTemperature;
+//	}
+//
+//	void OnDisable(){
+//		OnTriggerClimate -= UpdateTemperature;
+//	}
+
+	public void UpdateTemperature(Climate climate){
+		dir = UnityEngine.Random.Range(0f, 359f);
+		direction.transform.rotation = Quaternion.Euler(0f, 0f, dir);
+		windZone.transform.rotation = Quaternion.Euler(0f, -dir, 0f);
+
+
+		switch(climate.climateType){
+		case Climate.ClimateType.storm:
+			strength = UnityEngine.Random.Range(20, 50);
+			cloud.GetComponent<ParticleSystem>().Play();
+			rain.GetComponent<ParticleSystem>().Play();
+			snowFlake.GetComponent<ParticleSystem>().Stop();
+			StartCoroutine(SetSun(false));
+			break;
+		case Climate.ClimateType.rainy:
+			strength = UnityEngine.Random.Range(20, 50);
+			cloud.GetComponent<ParticleSystem>().Play();
+			rain.GetComponent<ParticleSystem>().Play();
+			snowFlake.GetComponent<ParticleSystem>().Stop();
+			StartCoroutine(SetSun(false));
+			break;
+		case Climate.ClimateType.cloudy:
+			strength = UnityEngine.Random.Range(5, 20);
+			cloud.GetComponent<ParticleSystem>().Play();
+			snowFlake.GetComponent<ParticleSystem>().Stop();
+			rain.GetComponent<ParticleSystem>().Stop();
+			StartCoroutine(SetSun(true));
+			break;
+		case Climate.ClimateType.snowy:
+			strength = UnityEngine.Random.Range(5, 30);
+			snowFlake.GetComponent<ParticleSystem>().Play();
+			cloud.GetComponent<ParticleSystem>().Play();
+			rain.GetComponent<ParticleSystem>().Stop();
+			StartCoroutine(SetSun(false));
+			break;
+		default:
+			DisableAllParticles();
+			StartCoroutine(SetSun(true));
+			strength = UnityEngine.Random.Range(1, 20);
+			break;
+		}
+		windZone.GetComponentInChildren<WindZone>().windMain = strength;
+		UIManager.Instance.SetWindUI(strength);
+
+	}
+
+	IEnumerator SetSun(bool on){
+		float elapsedTime = 0;
+
+		if(on){
+			while (elapsedTime < 3f)
+			{
+				sunLight.intensity = Mathf.Lerp(sunLight.intensity, 1f, elapsedTime / 3f);
+				elapsedTime += Time.deltaTime;
+				yield return new WaitForEndOfFrame();
+			}
+		} else {
+			while (elapsedTime < 3f)
+			{
+				sunLight.intensity = Mathf.Lerp(sunLight.intensity, 0f, elapsedTime / 3f);
+				elapsedTime += Time.deltaTime;
+				yield return new WaitForEndOfFrame();
+			}
+		}
+
+//		if(on)
+//			do{
+//				sunLight.intensity = Mathf.Lerp(0f, 1f, .1f);
+//			} while (sunLight.intensity < 1f);
+//		else
+//			do{
+//				sunLight.intensity = Mathf.Lerp(1f, 0f, .1f);
+//			} while (sunLight.intensity > 0f);
+//		
+//		yield return new WaitForSeconds(2f);
+		
 	}
 }

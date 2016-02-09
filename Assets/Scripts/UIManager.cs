@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour {
 	public GameObject plantSelectPanel;
 	public GameObject plantShopPanel;
 	public GameObject coinBtn;
+	public GameObject windBtn;
 	public GameObject climatePanel;
 	public GameObject infos;
 	public GameObject notifPanel;
@@ -96,6 +97,7 @@ public class UIManager : MonoBehaviour {
 			} else {
 				canvas.alpha = 0f;
 				canvas.blocksRaycasts = canvas.interactable = false;
+				UnityAdsButton.Instance.DisplayAd();
 			}
 		}
 	}
@@ -127,11 +129,29 @@ public class UIManager : MonoBehaviour {
 		if(currentClimate.timer > 0f){
 			currentClimate.timer--;
 			currentClimate.RefreshUI();
+
 		} else {
 			ClimateManager.Instance.RenewCLimate();
+
 		}
 		yield return new WaitForSeconds(1f);
 		StartCoroutine(UpdateTimer());
+	}
+
+	public void UpdateColor(Slider slider){
+		if(BtnTemperature.Instance.temperature > 2){
+			slider.fillRect.GetComponent<Image>().color = Color.cyan;
+		} else {
+			slider.fillRect.GetComponent<Image>().color = Color.white;
+		}
+
+		if(BtnTemperature.Instance.temperature > 10){
+			slider.fillRect.GetComponent<Image>().color = Color.green;
+		}
+	}
+
+	public void SetWindUI(int strength){
+		windBtn.GetComponentInChildren<Text>().text = strength.ToString() + "Km/h";
 	}
 
 }
