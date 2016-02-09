@@ -25,20 +25,63 @@ public class Well : MonoBehaviour {
 	}
 
 	void OnEnable(){
-		ClimateManager.OnTriggerClimate += UpdateWell;
+		ClimateManager.OnTriggerClimate += UpdateLevel;
 	}
 
 	void OnDisable(){
-		ClimateManager.OnTriggerClimate -= UpdateWell;
+		ClimateManager.OnTriggerClimate -= UpdateLevel;
 	}
 
-	void UpdateWell(Climate climate){
-		if(climate.climateType == Climate.ClimateType.sunny)
-			UpdateLevel(false);
+//	void UpdateWell(Climate climate){
+//		if(climate.climateType == Climate.ClimateType.sunny)
+//			UpdateLevel(false);
+//
+//		if(climate.climateType == Climate.ClimateType.rainy)
+//			UpdateLevel(true);
+//
+//	}
 
-		if(climate.climateType == Climate.ClimateType.rainy)
-			UpdateLevel(true);
+	public void UpdateLevel(Climate climate){
+		switch(climate.climateType){
 
+		case Climate.ClimateType.rainy:
+			levelUI.value = levelUI.value + incrementValue;
+			break;
+
+		case Climate.ClimateType.storm:
+			levelUI.value = levelUI.value + (incrementValue * 2);
+			break;
+
+		case Climate.ClimateType.sunny:
+
+			switch(ClimateManager.Instance.previousWeather){
+			case Climate.ClimateType.snowy:
+				levelUI.value = levelUI.value + incrementValue;
+				break;
+			default:
+				levelUI.value = levelUI.value - incrementValue;
+				break;
+			}
+			break;
+
+		default:
+			break;
+		}
+
+
+		UpdateColor();
+	}
+
+	void UpdateColor(){
+		if(BtnTemperature.Instance.temperature > 2){
+			levelUI.fillRect.GetComponent<Image>().color = Color.cyan;
+		} else {
+			levelUI.fillRect.GetComponent<Image>().color = Color.white;
+		}
+
+		if(BtnTemperature.Instance.temperature > 10){
+			levelUI.fillRect.GetComponent<Image>().color = Color.green;
+		}
 	}
 
 	public void UpdateLevel(bool up){

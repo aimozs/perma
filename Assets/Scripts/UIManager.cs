@@ -7,8 +7,12 @@ public class UIManager : MonoBehaviour {
 
 	public bool debugUI = true;
 	public GameObject plantSelectPanel;
+	public GameObject plantShopPanel;
+	public GameObject coinBtn;
 	public GameObject climatePanel;
 	public GameObject infos;
+	public GameObject notifPanel;
+	public GameObject notifPrefab;
 
 	public List<GameObject> btns = new List<GameObject>();
 
@@ -26,6 +30,13 @@ public class UIManager : MonoBehaviour {
 		DisplayScreen(infos, false);
 	}
 
+	public static void Notify(string message){
+		GameObject notif = Instantiate(Instance.notifPrefab);
+		notif.GetComponentInChildren<Text>().text = message;
+		notif.transform.SetParent(Instance.notifPanel.transform, false);
+		Destroy(notif, 5f);
+	}
+
 
 	public void AddBtnPlant(Plant plant){
 		GameObject btnPlant = Instantiate(GameModel.Instance.btnPlantPrefab);
@@ -37,6 +48,22 @@ public class UIManager : MonoBehaviour {
 
 		if(debugUI)
 			Debug.Log("Add a btn for " + plant.plantType.ToString());
+	}
+
+	public void AddBtnPlantToShop(Plant plant){
+		GameObject btnPlant = Instantiate(GameModel.Instance.btnPlantShop);
+		btnPlant.transform.SetParent(plantShopPanel.transform, false);
+		btnPlant.GetComponent<BtnPlant>().plant = plant;
+		btnPlant.GetComponent<BtnPlant>().plant.plantBtn = btnPlant;
+		btnPlant.GetComponent<BtnPlant>().SetPlantShop();
+		btns.Add(btnPlant);
+
+		if(debugUI)
+			Debug.Log("Add a btn for " + plant.plantType.ToString());
+	}
+
+	public void SetCoinText(string coin){
+		coinBtn.GetComponentInChildren<Text>().text = coin + "$";
 	}
 	
 	public void AddClimate(Climate climate){
@@ -50,12 +77,12 @@ public class UIManager : MonoBehaviour {
 		//btns.Add(btnPlant);
 	}
 
-	public void HighlightCurrentPlant(bool highlight){
-		if(highlight)
-			btns[GameManager.currentPlant].GetComponent<Image>().color = Color.green;
-		else
-			btns[GameManager.currentPlant].GetComponent<Image>().color = Color.white;
-	}
+//	public void HighlightCurrentPlant(bool highlight){
+//		if(highlight)
+//			btns[GameManager.currentPlant].GetComponent<Image>().color = Color.green;
+//		else
+//			btns[GameManager.currentPlant].GetComponent<Image>().color = Color.white;
+//	}
 
 	public void DisplayScreenInfos(){
 		CanvasGroup canvas = infos.GetComponent<CanvasGroup>();

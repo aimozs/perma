@@ -6,6 +6,7 @@ public class GardenManager : MonoBehaviour {
 
 	public bool debugGarden;
 	public Dictionary<string, Plant> AllPlants = new Dictionary<string, Plant>();
+	public int plantToGarden;
 	public static int numberOfPlants;
 
 	private static GardenManager instance;
@@ -23,9 +24,13 @@ public class GardenManager : MonoBehaviour {
 
 
 //		AllPlants[Plant.plantEnum.Tomato.ToString()].seedNumber = 1;
-
+		int index = 0;
 		foreach(KeyValuePair<string, Plant> plant in AllPlants){
-			UIManager.Instance.AddBtnPlant(plant.Value);
+			index++;
+			if(index < plantToGarden)
+				UIManager.Instance.AddBtnPlant(plant.Value);
+			else
+				UIManager.Instance.AddBtnPlantToShop(plant.Value);
 		}
 
 		if(GetCurrentPlant(GameManager.Instance.currentLevel) != null)
@@ -101,6 +106,7 @@ public class GardenManager : MonoBehaviour {
 		IncreaseSeedNumber(plantType.ToString(), true);
 		return;
 	}
+
 
 
 }

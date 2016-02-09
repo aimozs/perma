@@ -20,7 +20,7 @@ public class BtnClimate : MonoBehaviour {
 		if(UIManager.Instance.debugUI && ClimateManager.Instance.debugClimate)
 			Debug.Log("Setting climate for " + gameObject.name);
 		transform.GetComponent<Image>().sprite = climate.climateIcon;
-		timer = UnityEngine.Random.Range(10, 15);
+		timer = UnityEngine.Random.Range(3, 10);
 		RefreshUI();
 	}
 

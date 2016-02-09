@@ -8,11 +8,13 @@ public class GameManager : MonoBehaviour {
 	public int gardenSize;
 	public GameObject tile;
 
+	public int coins = 3;
+
 	public List<GameObject> garden = new List<GameObject>();
 
 	public Plant[] instancesPlant;
 
-	public GameObject camera;
+	public GameObject custCamera;
 	public int currentParcel = 0;
 	public int currentLevel = 0;
 	public static int currentPlant = 0;
@@ -37,26 +39,31 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-
+	void Awake(){
+		Load();
+	}
 	// Use this for initialization
 	void Start () {
-		Load();
+		
 		GenerateGarden();
-		SetCamera(currentParcel);
+
 		GetInstancesPlant();
+
+		SetCamera(garden[currentParcel]);
+
+		UIManager.Instance.SetCoinText(coins.ToString());
 	}
 
 //	void OnEnable(){
 //		OnClicked += GrowThat;
 //	}
 //
-//	void OnDisable(){
-//		OnClicked -= GrowThat;
-//		Save();
-//	}
+	void OnDisable(){
+		Save();
+	}
 
-	void SetCamera(int parcel){
-		camera.GetComponent<UnityStandardAssets.Cameras.AutoCam>().SetTarget(garden[parcel].transform);
+	void SetCamera(GameObject parcel){
+		custCamera.GetComponent<UnityStandardAssets.Cameras.AutoCam>().SetTarget(parcel.transform);
 	}
 
 	// Update is called once per frame
@@ -78,19 +85,19 @@ public class GameManager : MonoBehaviour {
 			SelectNextParcel(false);
 		}
 
-		_scroll = Input.GetAxis("Mouse ScrollWheel");
-		if(_scroll > 0.01f) {
-			SelectNextPlant(true);
-		} else if(_scroll < -0.01f) {
-			SelectNextPlant(false);
-		}
+//		_scroll = Input.GetAxis("Mouse ScrollWheel");
+//		if(_scroll > 0.01f) {
+//			SelectNextPlant(true);
+//		} else if(_scroll < -0.01f) {
+//			SelectNextPlant(false);
+//		}
 
-		if(Input.GetKeyDown(KeyCode.A)){
-			Plant[] instancesPlant = GameObject.FindObjectsOfType<Plant>();
+//		if(Input.GetKeyDown(KeyCode.A)){
+//			Plant[] instancesPlant = GameObject.FindObjectsOfType<Plant>();
 
 				
-			Debug.Log("There's a total of " + instancesPlant.Length + "plants");
-		}
+//			Debug.Log("There's a total of " + instancesPlant.Length + "plants");
+//		}
 	}
 
 
@@ -105,24 +112,24 @@ public class GameManager : MonoBehaviour {
 
 		currentParcel = Mathf.Clamp(currentParcel, 0, garden.Count-1);
 		HighlightCurrentParcel(garden[currentParcel], true);
-		SetCamera(currentParcel);
+		SetCamera(garden[currentParcel]);
 
 	}
 
-	public void SelectNextPlant(bool next){
-		if(next){
-			UIManager.Instance.HighlightCurrentPlant(false);
-			if(currentPlant < GardenManager.numberOfPlants-1)
-				currentPlant++;
-			UIManager.Instance.HighlightCurrentPlant(true);
-		} else {
-			UIManager.Instance.HighlightCurrentPlant(false);
-			if(currentPlant > 0)
-				currentPlant--;
-			UIManager.Instance.HighlightCurrentPlant(true);
-		}
-
-	}
+//	public void SelectNextPlant(bool next){
+//		if(next){
+//			UIManager.Instance.HighlightCurrentPlant(false);
+//			if(currentPlant < GardenManager.numberOfPlants-1)
+//				currentPlant++;
+//			UIManager.Instance.HighlightCurrentPlant(true);
+//		} else {
+//			UIManager.Instance.HighlightCurrentPlant(false);
+//			if(currentPlant > 0)
+//				currentPlant--;
+//			UIManager.Instance.HighlightCurrentPlant(true);
+//		}
+//
+//	}
 
 //	public void GrowThat(){
 //		if(GardenManager.Instance.GetCurrentPlant(currentPlant) != null)
@@ -149,14 +156,19 @@ public class GameManager : MonoBehaviour {
 //				currentLevel++;
 //				currentLevel = Mathf.Clamp(currentLevel, 0, GardenManager.numberOfPlants);
 //
-				if(GardenManager.Instance.GetCurrentPlant(currentLevel) != null)
-					GardenManager.Instance.IncreaseSeedNumber(GardenManager.Instance.GetCurrentPlant(currentLevel).plantType.ToString(), true);
+				
 //
 //				gardenSize++;
 //				CreateParcel(gardenSize);
 //			}
 		}
 
+	}
+
+
+
+	public void GetParcelReady(){
+		garden[currentParcel].GetComponent<Parcel>().ready = true;
 	}
 
 //	public void Grow(GameObject parcel, Plant plant){
@@ -201,7 +213,25 @@ public class GameManager : MonoBehaviour {
 	}
 
 
-	void Load(){}
+	void Load(){
+//		if(PlayerPrefs.GetInt("tuto") != null){
+//			if(PlayerPrefs.GetInt("tuto") == 1)
+//				TutorialManager.Instance.showTutorial = false;
+//		}
+			
+	}
 
-	void Save(){}
+	void Save(){
+//		if(TutorialManager.Instance.tipIndex > 1){
+//			PlayerPrefs.SetInt("tuto", 1);
+//		}
+//
+//		PlayerPrefs.Save();
+	}
+
+	public void DeletePlayerPrefs(){
+		PlayerPrefs.DeleteAll();
+		PlayerPrefs.Save();
+		Debug.Log("PlayerPrefs DELETED");
+	}
 }

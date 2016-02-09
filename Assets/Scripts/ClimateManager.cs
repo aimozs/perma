@@ -6,6 +6,8 @@ public class ClimateManager : MonoBehaviour {
 
 	public bool debugClimate = true;
 	public float climateInterval = 10f;
+	public int days_forecast = 3;
+	public Climate.ClimateType previousWeather = Climate.ClimateType.sunny;
 	public Dictionary<string, Climate> climatesDict = new Dictionary<string, Climate>();
 
 	public List<Climate> forecast = new List<Climate>();
@@ -27,7 +29,7 @@ public class ClimateManager : MonoBehaviour {
 		InitClimate();
 	
 
-		for(int f = 0; f < 5; f++){
+		for(int f = 0; f < days_forecast; f++){
 			AddClimateToForecast();
 
 //			if(f == 0)
@@ -50,6 +52,7 @@ public class ClimateManager : MonoBehaviour {
 
 	public void RenewCLimate(){
 		Destroy(UIManager.Instance.climatePanel.transform.GetChild(0).gameObject);
+		previousWeather = forecast[0].climateType;
 		forecast.RemoveAt(0);
 		AddClimateToForecast();
 	}

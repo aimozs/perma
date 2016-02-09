@@ -5,12 +5,12 @@ using System.Collections.Generic;
 
 public class Climate : MonoBehaviour {
   
-	public enum ClimateType {sunny, rainy, windy, snowy}
+	public enum ClimateType {sunny, rainy, storm, snowy, cloudy}
 	public ClimateType climateType;
 	  
 	public Sprite climateIcon;
 	public GameObject climateBtn;
-	public float duration = 0f;
+//	public float duration = 0f;
 
 
 //	public int GetDuration(){

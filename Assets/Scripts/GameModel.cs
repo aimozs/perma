@@ -4,6 +4,7 @@ using System.Collections;
 public class GameModel : MonoBehaviour {
 
 	public GameObject btnPlantPrefab;
+	public GameObject btnPlantShop;
 	public GameObject btnClimatePrefab;
 
 	public GameObject plantPrefab;
