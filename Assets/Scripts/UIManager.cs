@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour {
 	public bool debugUI = true;
 	public GameObject plantSelectPanel;
 	public GameObject plantShopPanel;
+	public GameObject toolPanel;
 	public GameObject coinBtn;
 	public GameObject windBtn;
 	public GameObject climatePanel;
@@ -15,7 +16,13 @@ public class UIManager : MonoBehaviour {
 	public GameObject notifPanel;
 	public GameObject notifPrefab;
 
-	public List<GameObject> btns = new List<GameObject>();
+	public GameObject wellGO;
+	public GameObject shovelGO;
+	public GameObject wateringGO;
+
+	private bool _linkedToolsToSeed = false;
+
+//	public List<GameObject> btns = new List<GameObject>();
 
 	private static UIManager instance;
 	public static UIManager Instance {
@@ -40,12 +47,20 @@ public class UIManager : MonoBehaviour {
 
 
 	public void AddBtnPlant(Plant plant){
+		
+
 		GameObject btnPlant = Instantiate(GameModel.Instance.btnPlantPrefab);
 		btnPlant.transform.SetParent(plantSelectPanel.transform, false);
 		btnPlant.GetComponent<BtnPlant>().plant = plant;
 		btnPlant.GetComponent<BtnPlant>().plant.plantBtn = btnPlant;
 		btnPlant.GetComponent<BtnPlant>().SetPlantUI();
-		btns.Add(btnPlant);
+
+		if(debugUI)
+			Debug.Log("linkToSeed " + _linkedToolsToSeed + " will link to " + btnPlant.name);
+		
+		if(!_linkedToolsToSeed)
+			LinkToolsToSeeds(btnPlant);
+//		btns.Add(btnPlant);
 
 		if(debugUI)
 			Debug.Log("Add a btn for " + plant.plantType.ToString());
@@ -54,13 +69,34 @@ public class UIManager : MonoBehaviour {
 	public void AddBtnPlantToShop(Plant plant){
 		GameObject btnPlant = Instantiate(GameModel.Instance.btnPlantShop);
 		btnPlant.transform.SetParent(plantShopPanel.transform, false);
+		btnPlant.transform.SetAsFirstSibling();
 		btnPlant.GetComponent<BtnPlant>().plant = plant;
 		btnPlant.GetComponent<BtnPlant>().plant.plantBtn = btnPlant;
 		btnPlant.GetComponent<BtnPlant>().SetPlantShop();
-		btns.Add(btnPlant);
+//		btns.Add(btnPlant);
 
 		if(debugUI)
 			Debug.Log("Add a btn for " + plant.plantType.ToString());
+	}
+
+	void LinkToolsToSeeds(GameObject firstSeed){
+		if(debugUI)
+			Debug.Log("Linking tools " + toolPanel.transform.GetChild(toolPanel.transform.childCount-1).name + "to seed " + firstSeed.name);
+
+		_linkedToolsToSeed = true;
+
+		Navigation custNav = new Navigation();
+		custNav.mode = Navigation.Mode.Explicit;
+		custNav.selectOnUp = wellGO.GetComponent<Selectable>();
+		custNav.selectOnLeft = (Selectable)wateringGO.GetComponent<Button>();
+		custNav.selectOnRight = (Selectable)firstSeed.GetComponent<Button>();
+		
+		shovelGO.GetComponent<Button>().navigation = custNav;
+//
+//		Navigation firstSeedNav = firstSeed.navigation;
+//		firstSeedNav.mode = Navigation.Mode.Explicit;
+//		firstSeedNav.selectOnLeft = (Selectable)toolPanel.transform.GetChild(toolPanel.transform.childCount).GetComponent<Button>();
+//		
 	}
 
 	public void SetCoinText(string coin){

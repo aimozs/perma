@@ -24,14 +24,14 @@ public class GardenManager : MonoBehaviour {
 
 
 //		AllPlants[Plant.plantEnum.Tomato.ToString()].seedNumber = 1;
-		int index = 0;
-		foreach(KeyValuePair<string, Plant> plant in AllPlants){
-			index++;
-			if(index < plantToGarden)
-				UIManager.Instance.AddBtnPlant(plant.Value);
-			else
-				UIManager.Instance.AddBtnPlantToShop(plant.Value);
-		}
+//		int index = 0;
+//		foreach(KeyValuePair<string, Plant> plant in AllPlants){
+//			index++;
+//			if(index < plantToGarden)
+//				UIManager.Instance.AddBtnPlant(plant.Value);
+//			else
+//				UIManager.Instance.AddBtnPlantToShop(plant.Value);
+//		}
 
 		if(GetCurrentPlant(GameManager.Instance.currentLevel) != null)
 			IncreaseSeedNumber(GetCurrentPlant(GameManager.Instance.currentLevel).plantType.ToString(), true);

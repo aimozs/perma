@@ -72,9 +72,9 @@ public class GameManager : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void FixedUpdate () {
-		GetInput();
-	}
+//	void FixedUpdate () {
+//		GetInput();
+//	}
 
 	void GetInstancesPlant(){
 		instancesPlant = GameObject.FindObjectsOfType<Plant>();
@@ -140,22 +140,26 @@ public class GameManager : MonoBehaviour {
 			if(!parcel.ready){
 				parcel.ready = true;
 
-//				if(parcel.GetComponentInChildren<Waste>() != null){
-//					GameObject waste = parcel.GetComponentInChildren<Waste>().gameObject;
-//					Destroy(waste);
-//				}
+				if(parcel.GetComponentInChildren<Waste>() != null){
+					GameObject waste = parcel.GetComponentInChildren<Waste>().gameObject;
+					Destroy(waste);
+				}
+
 				GameObject ready = (GameObject)Instantiate(GameModel.Instance.parcelReady, transform.position,  Quaternion.Euler(-90, 0, 0));
 				ready.transform.SetParent(garden[currentParcel].transform, false);
 			} else  {
 				parcel.ready = false;
-//				Debug.Log(parcel.GetComponentInChildren<PlantPrefab>().name);
-				if(parcel.GetComponentInChildren<PlantPrefab>() != null){
-					
-					GameObject pp = parcel.GetComponentInChildren<PlantPrefab>().gameObject;
-//					Debug.Log(pp.name);
-					Destroy(pp);
 
+				if(parcel.GetComponentInChildren<PlantPrefab>() != null){
+					GameObject pp = parcel.GetComponentInChildren<PlantPrefab>().gameObject;
+					Destroy(pp);
 				}
+
+				if(parcel.transform.FindChild("parcelReady(Clone)") != null){
+					GameObject pp = parcel.transform.FindChild("parcelReady(Clone)").gameObject;
+					Destroy(pp);
+				}
+
 				GameObject waste = (GameObject)Instantiate(GameModel.Instance.waste, transform.position,  Quaternion.Euler(-90, 0, 0));
 				waste.transform.SetParent(garden[currentParcel].transform, false);
 			}
