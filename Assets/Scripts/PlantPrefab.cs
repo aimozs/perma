@@ -97,9 +97,11 @@ public class PlantPrefab : MonoBehaviour {
 			pollinationPrefab.transform.SetParent(transform);
 			break;
 		case Plant.stageEnum.product:
-			if(plant.product != null)
+			if(plant.product != null){
 				productPrefab = (GameObject)Instantiate(plant.product, transform.position, Quaternion.Euler(-90, 0, 0));
-			productPrefab.transform.SetParent(transform);
+				productPrefab.transform.SetParent(transform);
+			}
+				
 			break;
 		default:
 			break;

@@ -84,8 +84,12 @@ public class Parcel : MonoBehaviour {
 
 		if(GetComponentInChildren<PlantPrefab>() != null){
 			PlantPrefab plantPrefab = GetComponentInChildren<PlantPrefab>();
-			if(plantPrefab.plant.pHAve > pH - 1f && plantPrefab.plant.pHAve < pH + 1f && waterUI.value >= 0.1f && BtnTemperature.Instance.temperature > 10){
-				plantPrefab.IncreaseSize(true);
+			if(BtnTemperature.Instance.temperature > 10 && waterUI.value >= 0.1f){
+				if(plantPrefab.plant.pHAve > pH - 1f && plantPrefab.plant.pHAve < pH + 1f){
+					plantPrefab.IncreaseSize(true);
+				} else {
+					UIManager.Notify(plantPrefab.plant.plantType + " will not grow on a pH not close to "+ plantPrefab.plant.pHAve.ToString()+ ", use the shovel to start fresh!");
+				}
 			}
 		}
 		UIManager.Instance.UpdateColor(waterUI);
@@ -120,5 +124,14 @@ public class Parcel : MonoBehaviour {
 
 	void SetLevel(float level){
 		waterUI.value = level;
+	}
+
+	void OnMouseDown(){
+		SetParcelSelected();
+		UIManager.Instance.DisplayMenu(true);
+	}
+
+	public void SetParcelSelected(){
+		GameManager.Instance.SetCamera(gameObject);
 	}
 }

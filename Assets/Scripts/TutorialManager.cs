@@ -27,6 +27,8 @@ public class TutorialManager : MonoBehaviour {
 			SetCanvasVisible(canvas, false);
 		}
 
+
+
 		if(showTutorial)
 			ShowNextTip();
 	}
@@ -34,10 +36,17 @@ public class TutorialManager : MonoBehaviour {
 	public void ShowNextTip(){
 		SetCanvasVisible(tips[tipIndex], false);
 		if(tipIndex < tips.Count-1){
+			if(tipIndex == 2)
+				UIManager.Instance.DisplayMenu(true);
+			
 			tipIndex++;
 			SetCanvasVisible(tips[tipIndex], true);
 			Debug.Log("Adding " + tips[tipIndex].GetComponentInChildren<Button>().gameObject.name + " from " + tips[tipIndex].name);
 			EventSystem.current.SetSelectedGameObject(tips[tipIndex].GetComponentInChildren<Button>().gameObject);
+		} else {
+			UIManager.Instance.DisplayMenu(false);
+			EventSystem.current.SetSelectedGameObject(GameManager.Instance.garden[0]);
+			showTutorial = false;
 		}
 	}
 

@@ -5,17 +5,11 @@ public class PickUp : MonoBehaviour {
 
 	public Plant.plantEnum plantType = Plant.plantEnum.Tomato;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+	void OnMouseDown(){
+		Harvest();
 	}
 
-	void OnMouseDown(){
+	public void Harvest(){
 		GameManager.Instance.AddCoin(1);
 		Destroy(gameObject);
 	}

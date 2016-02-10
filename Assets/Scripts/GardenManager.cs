@@ -33,8 +33,8 @@ public class GardenManager : MonoBehaviour {
 //				UIManager.Instance.AddBtnPlantToShop(plant.Value);
 //		}
 
-		if(GetCurrentPlant(GameManager.Instance.currentLevel) != null)
-			IncreaseSeedNumber(GetCurrentPlant(GameManager.Instance.currentLevel).plantType.ToString(), true);
+//		if(GetCurrentPlant(GameManager.Instance.currentLevel) != null)
+//			IncreaseSeedNumber(GetCurrentPlant(GameManager.Instance.currentLevel).plantType.ToString(), true);
 	}
 
 	// Use this for initialization

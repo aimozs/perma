@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -19,6 +20,9 @@ public class UIManager : MonoBehaviour {
 	public GameObject wellGO;
 	public GameObject shovelGO;
 	public GameObject wateringGO;
+	public GameObject cancelGO;
+
+	public GameObject circleMenu;
 
 	private bool _linkedToolsToSeed = false;
 
@@ -36,6 +40,26 @@ public class UIManager : MonoBehaviour {
 
 	void Start(){
 		DisplayScreen(infos, false);
+		DisplayMenu(false);
+	}
+
+	public void DisplayMenu(bool on){
+		DisplayScreen(circleMenu, on);
+		if(on){
+			ActivateGardenSelectable(false);
+			EventSystem.current.SetSelectedGameObject(wateringGO);
+		} else {
+			ActivateGardenSelectable(true);
+			EventSystem.current.SetSelectedGameObject(GameManager.Instance.currentParcelGO);
+		}
+			
+	}
+
+	void ActivateGardenSelectable(bool on){
+		foreach(GameObject parcel in GameManager.Instance.garden){
+			if(parcel.GetComponent<Selectable>() != null)
+				parcel.GetComponent<Selectable>().enabled = on;
+		}
 	}
 
 	public static void Notify(string message){
@@ -46,11 +70,9 @@ public class UIManager : MonoBehaviour {
 	}
 
 
-	public void AddBtnPlant(Plant plant){
-		
-
-		GameObject btnPlant = Instantiate(GameModel.Instance.btnPlantPrefab);
-		btnPlant.transform.SetParent(plantSelectPanel.transform, false);
+	public void AddBtnPlant(Plant plant, Vector3 position){
+		GameObject btnPlant = (GameObject)Instantiate(GameModel.Instance.btnPlantPrefab, position, Quaternion.identity);
+		btnPlant.transform.SetParent(circleMenu.transform, false);
 		btnPlant.GetComponent<BtnPlant>().plant = plant;
 		btnPlant.GetComponent<BtnPlant>().plant.plantBtn = btnPlant;
 		btnPlant.GetComponent<BtnPlant>().SetPlantUI();
@@ -100,6 +122,8 @@ public class UIManager : MonoBehaviour {
 	}
 
 	public void SetCoinText(string coin){
+		if(debugUI)
+			Debug.Log("Updating coin UI");
 		coinBtn.GetComponentInChildren<Text>().text = coin + "$";
 	}
 	
