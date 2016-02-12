@@ -73,9 +73,9 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void GetInput(){
-		if(Input.GetButtonDown("Submit") && !TutorialManager.Instance.showTutorial && !UIManager.Instance.circleMenu.GetComponent<CanvasGroup>().interactable)
+		if(Input.GetButtonDown("Submit") && !TutorialManager.Instance.showTutorial && !UIManager.Instance.menu.GetComponent<CanvasGroup>().interactable)
 			UIManager.Instance.DisplayMenu(true);
-		if(Input.GetButtonDown("Cancel") && !TutorialManager.Instance.showTutorial && UIManager.Instance.circleMenu.GetComponent<CanvasGroup>().interactable)
+		if(Input.GetButtonDown("Cancel") && !TutorialManager.Instance.showTutorial && UIManager.Instance.menu.GetComponent<CanvasGroup>().interactable)
 			UIManager.Instance.DisplayMenu(false);
 	}
 
@@ -170,6 +170,18 @@ public class GameManager : MonoBehaviour {
 	public void AddCoin(int change){
 		coins = coins + change;
 		UIManager.Instance.SetCoinText(coins.ToString());
+	}
+
+	public void BuyThat(){
+		Plant plant = UIManager.Instance.currenPlant;
+		if(debugGame)
+			Debug.Log("Buying plant " + plant.price + "$ with " + GameManager.Instance.coins);
+		if(plant.price <= GameManager.Instance.coins){
+			plant.seedNumber++;
+			GameManager.Instance.coins = GameManager.Instance.coins - plant.price;
+			UIManager.Instance.SetCoinText(GameManager.Instance.coins.ToString());
+			plant.plantBtn.GetComponent<BtnPlant>().RefreshUI();
+		}
 	}
 
 

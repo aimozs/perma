@@ -7,7 +7,7 @@ using System.Collections.Generic;
 public class UIManager : MonoBehaviour {
 
 	public bool debugUI = true;
-	public GameObject plantSelectPanel;
+	public GameObject shelf;
 	public GameObject plantShopPanel;
 	public GameObject toolPanel;
 	public GameObject coinBtn;
@@ -21,15 +21,18 @@ public class UIManager : MonoBehaviour {
 	public Text fcDetails;
 	public Text fcDescription;
 	public Text fcSource;
+	public Text fcBuy;
 
 	public GameObject wellGO;
 	public GameObject shovelGO;
 	public GameObject wateringGO;
 	public GameObject cancelGO;
 
-	public GameObject circleMenu;
+	public GameObject menu;
 
 	public Light thunder;
+
+	public Plant currenPlant;
 
 	private bool _linkedToolsToSeed = false;
 
@@ -48,10 +51,11 @@ public class UIManager : MonoBehaviour {
 	void Start(){
 		DisplayScreen(infos, false);
 		DisplayMenu(false);
+		SetPlantDetails(GardenManager.Instance.transform.GetChild(0).GetComponent<Plant>());
 	}
 
 	public void DisplayMenu(bool on){
-		DisplayScreen(circleMenu, on);
+		DisplayScreen(menu, on);
 		if(on){
 			ActivateGardenSelectable(false);
 			EventSystem.current.SetSelectedGameObject(wateringGO);
@@ -77,9 +81,9 @@ public class UIManager : MonoBehaviour {
 	}
 
 
-	public void AddBtnPlant(Plant plant, Vector3 position){
-		GameObject btnPlant = (GameObject)Instantiate(GameModel.Instance.btnPlantPrefab, position, Quaternion.identity);
-		btnPlant.transform.SetParent(circleMenu.transform, false);
+	public void AddBtnPlant(Plant plant/*, Vector3 position*/){
+		GameObject btnPlant = (GameObject)Instantiate(GameModel.Instance.btnPlantPrefab/*, position, Quaternion.identity*/);
+		btnPlant.transform.SetParent(shelf.transform, false);
 		btnPlant.GetComponent<BtnPlant>().plant = plant;
 		btnPlant.GetComponent<BtnPlant>().plant.plantBtn = btnPlant;
 		btnPlant.GetComponent<BtnPlant>().SetPlantUI();
@@ -202,8 +206,10 @@ public class UIManager : MonoBehaviour {
 
 	public void SetPlantDetails(Plant plant){
 		fcImage.sprite = plant.plantIcon;
-		fcDetails.text = "Ideal growth temperature range:\n" + plant.tempMin + "˚C - " + plant.tempMax + "˚C\n\npH average:" + plant.pHAve;
+		fcDetails.text = "Ideal growth temperature range:\n" + plant.tempMin + "˚C - " + plant.tempMax + "˚C\n\npH average:\n" + plant.pHAve + "+/-1";
 		fcDescription.text = plant.description;
 		fcSource.text = plant.source;
+		fcBuy.text = "Buy (" + plant.price + "$)";
+		currenPlant = plant;
 	}
 }

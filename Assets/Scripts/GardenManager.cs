@@ -25,13 +25,13 @@ public class GardenManager : MonoBehaviour {
 
 //		AllPlants[Plant.plantEnum.Tomato.ToString()].seedNumber = 1;
 //		int index = 0;
-//		foreach(KeyValuePair<string, Plant> plant in AllPlants){
+		foreach(KeyValuePair<string, Plant> plant in AllPlants){
 //			index++;
 //			if(index < plantToGarden)
-//				UIManager.Instance.AddBtnPlant(plant.Value);
+				UIManager.Instance.AddBtnPlant(plant.Value);
 //			else
 //				UIManager.Instance.AddBtnPlantToShop(plant.Value);
-//		}
+		}
 
 //		if(GetCurrentPlant(GameManager.Instance.currentLevel) != null)
 //			IncreaseSeedNumber(GetCurrentPlant(GameManager.Instance.currentLevel).plantType.ToString(), true);
@@ -39,41 +39,39 @@ public class GardenManager : MonoBehaviour {
 
 	// Use this for initialization
 	public void GetAllPlants () {
-		Plant[] plants = GameObject.FindObjectsOfType<Plant>();
-		numberOfPlants = plants.Length;
+		Plant[] plants = GetComponentsInChildren<Plant>();
+//		numberOfPlants = plants.Length;
 
 		foreach(Plant plant in plants){
-			if(debugGarden)
-				Debug.Log("Adding to all plants " + plant.plantType.ToString());
+//			if(debugGarden)
+//				Debug.Log("Adding to all plants " + plant.plantType.ToString());
 			AllPlants.Add(plant.plantType.ToString(), plant);
 
-			if(debugGarden)
-				Debug.Log(AllPlants[plant.plantType.ToString()].plantIcon.name);
+//			if(debugGarden)
+//				Debug.Log(AllPlants[plant.plantType.ToString()].plantIcon.name);
 		}
 
 		if(debugGarden)
 			Debug.Log("Found " + AllPlants.Count + " plants");
 	}
 
-	public Plant GetCurrentPlant(int index){
-		if(debugGarden)
-			Debug.Log("index asked: " + index);
-		int i = 0;
-
-		foreach(KeyValuePair<string, Plant> plant in AllPlants){
-			if(i == index){
-				if(debugGarden)
-					Debug.Log(i + " equal " + index + " for : " + plant.Value.plantPrefab.name);
-				
-				return plant.Value;
-			} else{
-				i++;
-				if(debugGarden)
-					Debug.Log("Not equal " + i);
-			}
-		}
-		return null;
-	}
+//	public Plant GetCurrentPlant(int index){
+//		if(debugGarden)
+//			Debug.Log("index asked: " + index);
+//		int i = 0;
+//
+//		foreach(KeyValuePair<string, Plant> plant in AllPlants){
+//			if(i == index){
+//				
+//				return plant.Value;
+//			} else{
+//				i++;
+//				if(debugGarden)
+//					Debug.Log("Not equal " + i);
+//			}
+//		}
+//		return null;
+//	}
 
 	public void IncreaseSeedNumber(string plantType, bool inc){
 		if(debugGarden)

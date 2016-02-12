@@ -27,7 +27,7 @@ public class Plant : MonoBehaviour {
 
 	
 	public Sprite plantIcon;
-	public GameObject plantPrefab;
+//	public GameObject plantPrefab;
 	public GameObject plantBtn;
 
 	public GameObject growth;
