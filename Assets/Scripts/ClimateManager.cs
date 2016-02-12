@@ -120,14 +120,6 @@ public class ClimateManager : MonoBehaviour {
 
 	}
 
-//	void OnEnable(){
-//		OnTriggerClimate += UpdateTemperature;
-//	}
-//
-//	void OnDisable(){
-//		OnTriggerClimate -= UpdateTemperature;
-//	}
-
 	public void UpdateTemperature(Climate climate){
 		dir = UnityEngine.Random.Range(0f, 359f);
 		direction.transform.rotation = Quaternion.Euler(0f, 0f, dir);
@@ -141,6 +133,9 @@ public class ClimateManager : MonoBehaviour {
 			rain.GetComponent<ParticleSystem>().Play();
 			snowFlake.GetComponent<ParticleSystem>().Stop();
 			StartCoroutine(SetSun(false));
+			SoundManager.Instance.PlayStorm();
+			SoundManager.Instance.PlayRain();
+			StartCoroutine(UIManager.Instance.FlashThunder());
 			break;
 		case Climate.ClimateType.rainy:
 			strength = UnityEngine.Random.Range(20, 50);
@@ -148,6 +143,7 @@ public class ClimateManager : MonoBehaviour {
 			rain.GetComponent<ParticleSystem>().Play();
 			snowFlake.GetComponent<ParticleSystem>().Stop();
 			StartCoroutine(SetSun(false));
+			SoundManager.Instance.PlayRain();
 			break;
 		case Climate.ClimateType.cloudy:
 			strength = UnityEngine.Random.Range(5, 20);
@@ -155,6 +151,7 @@ public class ClimateManager : MonoBehaviour {
 			snowFlake.GetComponent<ParticleSystem>().Stop();
 			rain.GetComponent<ParticleSystem>().Stop();
 			StartCoroutine(SetSun(true));
+			SoundManager.Instance.PlayBirds();
 			break;
 		case Climate.ClimateType.snowy:
 			strength = UnityEngine.Random.Range(5, 30);
@@ -167,9 +164,15 @@ public class ClimateManager : MonoBehaviour {
 			DisableAllParticles();
 			StartCoroutine(SetSun(true));
 			strength = UnityEngine.Random.Range(1, 20);
+			if(BtnTemperature.Instance.temperature > 22)
+				SoundManager.Instance.PlayCicadas();
+			else if(BtnTemperature.Instance.temperature > 10)
+				SoundManager.Instance.PlayBirds();
 			break;
 		}
 		windZone.GetComponentInChildren<WindZone>().windMain = strength;
+		StartCoroutine(SoundManager.Instance.TransitionToVolume(strength /50f));
+
 		UIManager.Instance.SetWindUI(strength);
 
 	}

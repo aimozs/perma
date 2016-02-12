@@ -46,18 +46,12 @@ public class GameManager : MonoBehaviour {
 
 		GetInstancesPlant();
 
-
-
 		UIManager.Instance.SetCoinText(coins.ToString());
 
 		if(garden[currentParcel] != null)
 			SetCamera(garden[currentParcel]);
 	}
-
-//	void OnEnable(){
-//		OnClicked += GrowThat;
-//	}
-//
+		
 	void OnDisable(){
 		Save();
 	}
@@ -78,56 +72,29 @@ public class GameManager : MonoBehaviour {
 		instancesPlant = GameObject.FindObjectsOfType<Plant>();
 	}
 
-
 	void GetInput(){
-//		_horizontal = Input.GetAxis("Horizontal");
-//		_horizontal = Mathf.Clamp(_horizontal, _horizontal - sensitivity, _horizontal + sensitivity);
-//		if(_horizontal > .2f && !_scroll){
-//			_scroll = true;
-//			SelectNextParcel(true);
-//		} else if(_horizontal < -.2f && !_scroll){
-//			_scroll = true;
-//			SelectNextParcel(false);
-//		}
-//
-//		if(_horizontal < .1f && _horizontal > -.1f)
-//			_scroll = false;
-
-//		_scroll = Input.GetAxis("Mouse ScrollWheel");
-//		if(_scroll > 0.01f) {
-//			SelectNextPlant(true);
-//		} else if(_scroll < -0.01f) {
-//			SelectNextPlant(false);
-//		}
-
 		if(Input.GetButtonDown("Submit") && !TutorialManager.Instance.showTutorial && !UIManager.Instance.circleMenu.GetComponent<CanvasGroup>().interactable)
 			UIManager.Instance.DisplayMenu(true);
-//			Plant[] instancesPlant = GameObject.FindObjectsOfType<Plant>();
-
-				
-//			Debug.Log("There's a total of " + instancesPlant.Length + "plants");
-//		}
+		if(Input.GetButtonDown("Cancel") && !TutorialManager.Instance.showTutorial && UIManager.Instance.circleMenu.GetComponent<CanvasGroup>().interactable)
+			UIManager.Instance.DisplayMenu(false);
 	}
-
-
-//	public void SelectNextParcel(bool next){
-//		if(next){
-//			currentParcel++;
-//		} else {
-//			currentParcel--;
-//		}
-//
-//		currentParcel = Mathf.Clamp(currentParcel, 0, garden.Count-1);
-//		SetCamera(garden[currentParcel]);
-//	}
 
 	public void WaterThat(){
 		if(Well.Instance.levelUI.value > .1f){
 			Well.Instance.UpdateLevel(false);
 
 			if(currentParcelGO.GetComponent<Parcel>() != null){
-				currentParcelGO.GetComponent<Parcel>().ReceivesWater();
+				currentParcelGO.GetComponent<Parcel>().UpdateLevel(true);
 			}
+		}
+	}
+
+	public void UseSecator(){
+		Parcel parcel = currentParcelGO.GetComponent<Parcel>();
+		if(parcel != null){
+			parcel.GetSeedOrProduct();
+		} else {
+			UIManager.Notify("No parcel");
 		}
 	}
 
@@ -136,35 +103,32 @@ public class GameManager : MonoBehaviour {
 		if(parcel != null){
 			if(debugGame)
 				Debug.Log(parcel.ready);
-			if(parcel.GetComponentInChildren<PickUp>() != null){
-				parcel.GetComponentInChildren<PickUp>().Harvest();
-			} else {
-				if(!parcel.ready){
-					parcel.ready = true;
+			
+			if(!parcel.ready){
+				parcel.ready = true;
 
-					if(parcel.GetComponentInChildren<Waste>() != null){
-						GameObject waste = parcel.GetComponentInChildren<Waste>().gameObject;
-						Destroy(waste);
-					}
-
-					GameObject ready = (GameObject)Instantiate(GameModel.Instance.parcelReady, transform.position,  Quaternion.Euler(-90, 0, 0));
-					ready.transform.SetParent(parcel.transform, false);
-				} else  {
-					parcel.ready = false;
-
-					if(parcel.GetComponentInChildren<PlantPrefab>() != null){
-						GameObject pp = parcel.GetComponentInChildren<PlantPrefab>().gameObject;
-						Destroy(pp);
-					}
-
-					if(parcel.transform.FindChild("parcelReady(Clone)") != null){
-						GameObject pp = parcel.transform.FindChild("parcelReady(Clone)").gameObject;
-						Destroy(pp);
-					}
-
-					GameObject waste = (GameObject)Instantiate(GameModel.Instance.waste, transform.position,  Quaternion.Euler(-90, 0, 0));
-					waste.transform.SetParent(parcel.transform, false);
+				if(parcel.GetComponentInChildren<Waste>() != null){
+					GameObject waste = parcel.GetComponentInChildren<Waste>().gameObject;
+					Destroy(waste);
 				}
+
+				GameObject ready = (GameObject)Instantiate(GameModel.Instance.parcelReady, transform.position,  Quaternion.Euler(-90, 0, 0));
+				ready.transform.SetParent(parcel.transform, false);
+			} else {
+				parcel.ready = false;
+
+				if(parcel.GetComponentInChildren<PlantPrefab>() != null){
+					GameObject pp = parcel.GetComponentInChildren<PlantPrefab>().gameObject;
+					Destroy(pp);
+				}
+
+				if(parcel.transform.FindChild("parcelReady(Clone)") != null){
+					GameObject pp = parcel.transform.FindChild("parcelReady(Clone)").gameObject;
+					Destroy(pp);
+				}
+
+				GameObject waste = (GameObject)Instantiate(GameModel.Instance.waste, transform.position,  Quaternion.Euler(-90, 0, 0));
+				waste.transform.SetParent(parcel.transform, false);
 			}
 		}
 	}
@@ -186,9 +150,10 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void AddParcel(){
-		if(coins > 5){
+		if(coins >= Parcel.price){
 			gardenSize++;
 			CreateParcel(gardenSize);
+			AddCoin(-Parcel.price);
 		} else {
 			UIManager.Notify("You don't have enough coins, harvest some products and sell them to get more coins!");
 		}
@@ -212,11 +177,8 @@ public class GameManager : MonoBehaviour {
 		if(PlayerPrefs.GetInt("tuto") != null){
 			if(PlayerPrefs.GetInt("tuto") == 1){
 				TutorialManager.Instance.showTutorial = false;
-
 			}
-				
 		}
-			
 	}
 
 	void Save(){

@@ -17,12 +17,19 @@ public class UIManager : MonoBehaviour {
 	public GameObject notifPanel;
 	public GameObject notifPrefab;
 
+	public Image fcImage;
+	public Text fcDetails;
+	public Text fcDescription;
+	public Text fcSource;
+
 	public GameObject wellGO;
 	public GameObject shovelGO;
 	public GameObject wateringGO;
 	public GameObject cancelGO;
 
 	public GameObject circleMenu;
+
+	public Light thunder;
 
 	private bool _linkedToolsToSeed = false;
 
@@ -82,20 +89,6 @@ public class UIManager : MonoBehaviour {
 		
 		if(!_linkedToolsToSeed)
 			LinkToolsToSeeds(btnPlant);
-//		btns.Add(btnPlant);
-
-		if(debugUI)
-			Debug.Log("Add a btn for " + plant.plantType.ToString());
-	}
-
-	public void AddBtnPlantToShop(Plant plant){
-		GameObject btnPlant = Instantiate(GameModel.Instance.btnPlantShop);
-		btnPlant.transform.SetParent(plantShopPanel.transform, false);
-		btnPlant.transform.SetAsFirstSibling();
-		btnPlant.GetComponent<BtnPlant>().plant = plant;
-		btnPlant.GetComponent<BtnPlant>().plant.plantBtn = btnPlant;
-		btnPlant.GetComponent<BtnPlant>().SetPlantShop();
-//		btns.Add(btnPlant);
 
 		if(debugUI)
 			Debug.Log("Add a btn for " + plant.plantType.ToString());
@@ -114,11 +107,6 @@ public class UIManager : MonoBehaviour {
 		custNav.selectOnRight = (Selectable)firstSeed.GetComponent<Button>();
 		
 		shovelGO.GetComponent<Button>().navigation = custNav;
-//
-//		Navigation firstSeedNav = firstSeed.navigation;
-//		firstSeedNav.mode = Navigation.Mode.Explicit;
-//		firstSeedNav.selectOnLeft = (Selectable)toolPanel.transform.GetChild(toolPanel.transform.childCount).GetComponent<Button>();
-//		
 	}
 
 	public void SetCoinText(string coin){
@@ -129,21 +117,11 @@ public class UIManager : MonoBehaviour {
 	
 	public void AddClimate(Climate climate){
 		GameObject btnClimate = Instantiate(GameModel.Instance.btnClimatePrefab);
-//		Debug.Log(btnClimate.name);
 		btnClimate.transform.SetParent(climatePanel.transform, false);
 		btnClimate.name = btnClimate.name + climatePanel.transform.childCount.ToString();
 		btnClimate.GetComponent<BtnClimate>().climate = climate;
-//		btnClimate.GetComponent<BtnClimate>().climate.climateBtn = btnClimate;
 		btnClimate.GetComponent<BtnClimate>().SetClimateUI();
-		//btns.Add(btnPlant);
 	}
-
-//	public void HighlightCurrentPlant(bool highlight){
-//		if(highlight)
-//			btns[GameManager.currentPlant].GetComponent<Image>().color = Color.green;
-//		else
-//			btns[GameManager.currentPlant].GetComponent<Image>().color = Color.white;
-//	}
 
 	public void DisplayScreenInfos(){
 		CanvasGroup canvas = infos.GetComponent<CanvasGroup>();
@@ -174,11 +152,6 @@ public class UIManager : MonoBehaviour {
 			}
 		}
 	}
-
-//	public void SetDuration(){
-//		climatePanel.transform.GetChild(0).GetComponent<BtnClimate>().climate.duration = UnityEngine.Random.Range(10f, 60f);
-//
-//	}
 
 	public void StartTimerForecast(){
 		StartCoroutine(UpdateTimer());
@@ -214,4 +187,23 @@ public class UIManager : MonoBehaviour {
 		windBtn.GetComponentInChildren<Text>().text = strength.ToString() + "Km/h";
 	}
 
+	public IEnumerator FlashThunder(){
+
+		thunder.intensity = 8f;
+		yield return new WaitForSeconds(.1f);
+		thunder.intensity = 0f;
+		yield return new WaitForSeconds(.1f);
+		thunder.intensity = 8f;
+		yield return new WaitForSeconds(.1f);
+		thunder.intensity = 0f;
+		yield return new WaitForSeconds(.1f);
+
+	}
+
+	public void SetPlantDetails(Plant plant){
+		fcImage.sprite = plant.plantIcon;
+		fcDetails.text = "Ideal growth temperature range:\n" + plant.tempMin + "˚C - " + plant.tempMax + "˚C\n\npH average:" + plant.pHAve;
+		fcDescription.text = plant.description;
+		fcSource.text = plant.source;
+	}
 }

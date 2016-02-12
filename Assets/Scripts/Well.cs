@@ -6,7 +6,7 @@ public class Well : MonoBehaviour {
 
 	public Slider levelUI;
 	public float level = 0.75f;
-	public float incrementValue = .1f;
+	public float incrementValue = .05f;
 
 
 	private static Well instance;
@@ -69,7 +69,7 @@ public class Well : MonoBehaviour {
 		}
 
 
-		UIManager.Instance.UpdateColor(levelUI);
+//		UIManager.Instance.UpdateColor(levelUI);
 	}
 		
 

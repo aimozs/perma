@@ -16,6 +16,12 @@ public class Plant : MonoBehaviour {
 	public float growthSize = 10;
 	public float pollinationSize = 15;
 	public float productSize = 20;
+	public float maxSize = 20;
+	public int tempMin = 10;
+	public int tempMax = 25;
+
+	public string description;
+	public string source;
 
 	public plantEnum plantType = plantEnum.Tomato;
 

@@ -7,6 +7,8 @@ public class Climate : MonoBehaviour {
   
 	public enum ClimateType {sunny, rainy, storm, snowy, cloudy}
 	public ClimateType climateType;
+	public int tempMod = 0;
+	public int tempTarget = 20;
 	  
 	public Sprite climateIcon;
 	public GameObject climateBtn;

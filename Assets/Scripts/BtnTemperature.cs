@@ -4,7 +4,7 @@ using System.Collections;
 
 public class BtnTemperature : MonoBehaviour {
 
-	public int temperature = 15;
+	public int temperature = 20;
 
 	private static BtnTemperature instance;
 	public static BtnTemperature Instance {
@@ -25,31 +25,41 @@ public class BtnTemperature : MonoBehaviour {
 	}
 
 	void UpdateTemperature(Climate climate){
-		switch(climate.climateType){
-		case Climate.ClimateType.sunny:
-			temperature++;
-			temperature++;
-			break;
-		case Climate.ClimateType.rainy:
-			if(temperature > 10)
-				temperature--;
-			break;
-		case Climate.ClimateType.storm:
-			if(temperature > 8)
-				temperature--;
-			break;
-		case Climate.ClimateType.cloudy:
-				temperature++;
-			break;
-		case Climate.ClimateType.snowy:
-			if(temperature > 1){
-				temperature--;
-				temperature--;
-			}
-			break;
-		default:
-			break;
-		}
+		if(temperature < climate.tempTarget)
+			temperature = temperature + climate.tempMod;
+		else
+			temperature = temperature - climate.tempMod;
+//		switch(climate.climateType){
+//		case Climate.ClimateType.sunny:
+//			if(temperature < 45){
+//				temperature++;
+//				temperature++;
+//			}
+//			break;
+//		case Climate.ClimateType.rainy:
+//			if(temperature > 10)
+//				temperature--;
+//			else
+//				temperature++;
+//			break;
+//		case Climate.ClimateType.storm:
+//			if(temperature > 8)
+//				temperature--;
+//			else
+//				temperature++;
+//			break;
+//		case Climate.ClimateType.cloudy:
+//				temperature++;
+//			break;
+//		case Climate.ClimateType.snowy:
+//			if(temperature > 1){
+//				temperature--;
+//				temperature--;
+//			}
+//			break;
+//		default:
+//			break;
+//		}
 		GetComponentInChildren<Text>().text = temperature.ToString() + "˚C";
 	}
 }
