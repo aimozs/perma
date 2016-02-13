@@ -8,7 +8,8 @@ public class BtnPlant : MonoBehaviour {
 	public Plant plant;
 
 	void Start(){
-		RefreshUI();
+//		RefreshUI();
+		SetPrice();
 	}
 
 	public void PlantThat(){
@@ -16,7 +17,8 @@ public class BtnPlant : MonoBehaviour {
 			if(GameManager.Instance.currentParcelGO.GetComponent<Parcel>().ready){
 				GameManager.Instance.GrowThatHere(plant);
 				GardenManager.Instance.IncreaseSeedNumber(plant.plantType.ToString(), false);
-					
+				if(plant.seedNumber == 0)
+					SetPrice();
 			} else {
 				UIManager.Notify("The parcel is not ready, use the shovel so you can plant something.");
 			}
@@ -48,9 +50,9 @@ public class BtnPlant : MonoBehaviour {
 //		SetPrice();
 //	}
 
-//	void SetPrice(){
-//		GetComponentInChildren<Text>().text = plant.price.ToString() + "$";
-//	}
+	void SetPrice(){
+		GetComponentInChildren<Text>().text = plant.price.ToString() + "$";
+	}
 
 	public void SetPlantDetails(){
 		UIManager.Instance.SetPlantDetails(plant);

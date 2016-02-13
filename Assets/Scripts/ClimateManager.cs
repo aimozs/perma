@@ -170,11 +170,25 @@ public class ClimateManager : MonoBehaviour {
 				SoundManager.Instance.PlayBirds();
 			break;
 		}
-		windZone.GetComponentInChildren<WindZone>().windMain = strength;
+//		windZone.GetComponentInChildren<WindZone>().windMain = strength;
+		StartCoroutine(SetWindStrength(strength * .9f));
 		StartCoroutine(SoundManager.Instance.TransitionToVolume(strength /50f));
 
 		UIManager.Instance.SetWindUI(strength);
 
+	}
+
+	IEnumerator SetWindStrength(float newStrength){
+//		Debug.Log(newStrength);
+//		float windStrength = windZone.GetComponentInChildren<WindZone>().windMain;
+
+		float elapsedTime = 0;
+
+		while (elapsedTime < 3f) {
+			windZone.GetComponentInChildren<WindZone>().windMain = Mathf.Lerp(windZone.GetComponentInChildren<WindZone>().windMain, newStrength, elapsedTime / 3f);
+			elapsedTime += Time.deltaTime;
+			yield return new WaitForEndOfFrame();
+		}
 	}
 
 	IEnumerator SetSun(bool on){

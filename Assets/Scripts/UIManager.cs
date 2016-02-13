@@ -23,9 +23,9 @@ public class UIManager : MonoBehaviour {
 	public Text fcSource;
 	public Text fcBuy;
 
-	public GameObject wellGO;
-	public GameObject shovelGO;
-	public GameObject wateringGO;
+//	public GameObject wellGO;
+//	public GameObject shovelGO;
+//	public GameObject wateringGO;
 	public GameObject cancelGO;
 
 	public GameObject menu;
@@ -56,14 +56,22 @@ public class UIManager : MonoBehaviour {
 
 	public void DisplayMenu(bool on){
 		DisplayScreen(menu, on);
+
 		if(on){
 			ActivateGardenSelectable(false);
-			EventSystem.current.SetSelectedGameObject(wateringGO);
+			EventSystem.current.SetSelectedGameObject(cancelGO);
 		} else {
 			ActivateGardenSelectable(true);
 			EventSystem.current.SetSelectedGameObject(GameManager.Instance.currentParcelGO);
 		}
+		StartCoroutine(SetButtonInteractable(on));
 			
+	}
+
+
+	IEnumerator SetButtonInteractable(bool on){
+		yield return new WaitForSeconds(.1f);
+		cancelGO.GetComponent<Button>().interactable = on;
 	}
 
 	void ActivateGardenSelectable(bool on){
@@ -91,27 +99,27 @@ public class UIManager : MonoBehaviour {
 		if(debugUI)
 			Debug.Log("linkToSeed " + _linkedToolsToSeed + " will link to " + btnPlant.name);
 		
-		if(!_linkedToolsToSeed)
-			LinkToolsToSeeds(btnPlant);
+//		if(!_linkedToolsToSeed)
+//			LinkToolsToSeeds(btnPlant);
 
 		if(debugUI)
 			Debug.Log("Add a btn for " + plant.plantType.ToString());
 	}
 
-	void LinkToolsToSeeds(GameObject firstSeed){
-		if(debugUI)
-			Debug.Log("Linking tools " + toolPanel.transform.GetChild(toolPanel.transform.childCount-1).name + "to seed " + firstSeed.name);
-
-		_linkedToolsToSeed = true;
-
-		Navigation custNav = new Navigation();
-		custNav.mode = Navigation.Mode.Explicit;
-		custNav.selectOnUp = wellGO.GetComponent<Selectable>();
-		custNav.selectOnLeft = (Selectable)wateringGO.GetComponent<Button>();
-		custNav.selectOnRight = (Selectable)firstSeed.GetComponent<Button>();
-		
-		shovelGO.GetComponent<Button>().navigation = custNav;
-	}
+//	void LinkToolsToSeeds(GameObject firstSeed){
+//		if(debugUI)
+//			Debug.Log("Linking tools " + toolPanel.transform.GetChild(toolPanel.transform.childCount-1).name + "to seed " + firstSeed.name);
+//
+//		_linkedToolsToSeed = true;
+//
+//		Navigation custNav = new Navigation();
+//		custNav.mode = Navigation.Mode.Explicit;
+//		custNav.selectOnUp = wellGO.GetComponent<Selectable>();
+//		custNav.selectOnLeft = (Selectable)wateringGO.GetComponent<Button>();
+//		custNav.selectOnRight = (Selectable)firstSeed.GetComponent<Button>();
+//		
+//		shovelGO.GetComponent<Button>().navigation = custNav;
+//	}
 
 	public void SetCoinText(string coin){
 		if(debugUI)
