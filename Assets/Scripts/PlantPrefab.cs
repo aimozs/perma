@@ -49,8 +49,7 @@ public class PlantPrefab : MonoBehaviour {
 
 	void IncreaseModelScale(GameObject go){
 		Vector3 scale = go.transform.localScale;
-		go.transform.localScale = new Vector3(1+size/10, 1+size/10, 1+size/10);
-//		go.transform.localScale = go.transform.localScale * 1.1f;
+		go.transform.localScale = new Vector3(1+size/10f, 1+size/10f, 1+size/10f);
 			
 		if(GameManager.Instance.debugGame)
 			Debug.Log("And increasing the scale of " + plant.plantType.ToString() + " to " + scale);

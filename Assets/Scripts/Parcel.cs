@@ -9,6 +9,7 @@ public class Parcel : MonoBehaviour {
 	public bool ready = false;
 	public Text pHUI;
 	public Slider waterUI;
+	public Image plantedIcon;
 	public float incrementValue = 0.1f;
 	public static int price = 5;
 
@@ -17,10 +18,10 @@ public class Parcel : MonoBehaviour {
 	public GameObject waste;
 	  
 	void Start(){
-		SetpH();
+		SetRandompH();
 	}
   
-	void SetpH(){
+	void SetRandompH(){
 		pH = UnityEngine.Random.Range(5f, 9f);
 		pHUI.text = "pH: " + pH.ToString("0.0");
 		SetWaterLevel(0.1f);
@@ -36,6 +37,8 @@ public class Parcel : MonoBehaviour {
 		parcelReadyGO = transform.FindChild("parcelReady(Clone)") != null ? transform.FindChild("parcelReady(Clone)").gameObject : null;
 		waste = transform.FindChild("waste(Clone)") != null ? transform.FindChild("waste(Clone)").gameObject : null;
 
+		plantedIcon.sprite = plant.plantIcon;
+
 		if(waste != null)
 			Destroy(waste);
 		if(parcelReadyGO != null)
@@ -49,14 +52,8 @@ public class Parcel : MonoBehaviour {
 
 	public void GetSeedOrProduct(){
 		PlantPrefab pp = GetComponentInChildren<PlantPrefab>();
-		if(pp != null){
-			if(pp.plantStage == Plant.stageEnum.pollination && pp.pollinationPrefab != null){
-				GardenManager.Instance.IncreaseSeedNumber(pp.plant.plantType.ToString(), true);
-				UIManager.Notify("+1 seed for " + pp.plant.plantType.ToString());
-				Destroy(pp.pollinationPrefab);
-			} else if(GetComponentInChildren<PickUp>() != null){
-				GetComponentInChildren<PickUp>().Harvest();
-			}
+		if(pp != null && pp.pollinationPrefab != null){
+			pp.pollinationPrefab.GetComponent<PickUp>().Harvest();
 		} else {
 			UIManager.Notify("You try to look for results, but you havent started yet. Use the shovel and plant a seed first!");
 		}
@@ -102,9 +99,9 @@ public class Parcel : MonoBehaviour {
 
 		if(GetComponentInChildren<PlantPrefab>() != null){
 			PlantPrefab plantPrefab = GetComponentInChildren<PlantPrefab>();
-			if(BtnTemperature.Instance.temperature >= plantPrefab.plant.tempMin && BtnTemperature.Instance.temperature <= plantPrefab.plant.tempMax){
+			if(BtnTemperature.Instance.temperature >= plantPrefab.plant.tempMin - 3 && BtnTemperature.Instance.temperature <= plantPrefab.plant.tempMax + 3){
 				if(waterUI.value > 0.1f){
-					if(plantPrefab.plant.pHAve > pH - 1f && plantPrefab.plant.pHAve < pH + 1f){
+					if(plantPrefab.plant.pHAve >= pH - 1f && plantPrefab.plant.pHAve <= pH + 1f){
 						plantPrefab.IncreaseSize(true);
 					} else {
 						UIManager.Notify(plantPrefab.plant.plantType + " will not grow on a pH not close to "+ plantPrefab.plant.pHAve.ToString()+ ", use the shovel to start fresh!");
@@ -113,11 +110,28 @@ public class Parcel : MonoBehaviour {
 					UIManager.Notify("Some parcelles are a bit too dry, think about watering your plants on sunny days!");
 				}
 			}
+			UIManager.Instance.UpdateFriendColor(waterUI, plantPrefab.plant);
 		}
-		UIManager.Instance.UpdateColor(waterUI);
+
+		Waste waste = GetComponentInChildren<Waste>();
+		if(waste != null){
+			IncreasepH(false);
+		}
+
+
 	}
 
+	void IncreasepH(bool up){
+		if(up){
+			if(pH <= 6f)
+				pH = pH + 0.1f;
+		} else {
+			if(pH >= 8f)
+				pH = pH - 0.1f;
+		}
 
+		pHUI.text = "pH: " + pH.ToString("0.0");
+	}
 
 	public void UpdateLevel(bool up){
 //		if(GetComponentInChildren<PlantPrefab>() != null){
@@ -146,7 +160,7 @@ public class Parcel : MonoBehaviour {
 //			}
 //		}
 
-		UIManager.Instance.UpdateColor(waterUI);
+//		UIManager.Instance.UpdateColor(waterUI);
 			
 	}
 

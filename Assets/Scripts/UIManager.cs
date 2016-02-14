@@ -183,15 +183,37 @@ public class UIManager : MonoBehaviour {
 		StartCoroutine(UpdateTimer());
 	}
 
-	public void UpdateColor(Slider slider){
-		if(BtnTemperature.Instance.temperature > 2){
-			slider.fillRect.GetComponent<Image>().color = Color.cyan;
+	public void UpdateTempColor(Slider slider){
+		if(BtnTemperature.Instance.temperature > 35){
+			slider.fillRect.GetComponent<Image>().color = GameModel.Instance.tooWarm;
 		} else {
-			slider.fillRect.GetComponent<Image>().color = Color.white;
+			if(BtnTemperature.Instance.temperature > 2){
+				slider.fillRect.GetComponent<Image>().color = GameModel.Instance.onHold;
+			} else {
+				slider.fillRect.GetComponent<Image>().color = GameModel.Instance.frozen;
+			}
 		}
 
-		if(BtnTemperature.Instance.temperature > 10){
-			slider.fillRect.GetComponent<Image>().color = Color.green;
+	}
+
+	public void UpdateFriendColor(Slider slider, Plant plant, bool? friend = null){
+		if(friend == null){
+			if(BtnTemperature.Instance.temperature >= plant.tempMin - 3 && BtnTemperature.Instance.temperature <= plant.tempMax + 3)
+				slider.fillRect.GetComponent<Image>().color = GameModel.Instance.growing;
+			else{
+				UpdateTempColor(slider);
+			}
+		} else {
+			if(BtnTemperature.Instance.temperature >= plant.tempMin - 3 && BtnTemperature.Instance.temperature <= plant.tempMax + 3){
+				if((bool)friend){
+					slider.fillRect.GetComponent<Image>().color = GameModel.Instance.gold;
+				} else {
+					slider.fillRect.GetComponent<Image>().color = GameModel.Instance.bronze;
+				}
+			} else {
+				UpdateTempColor(slider);
+			}
+
 		}
 	}
 
@@ -217,7 +239,18 @@ public class UIManager : MonoBehaviour {
 		fcDetails.text = "Ideal growth temperature range:\n" + plant.tempMin + "˚C - " + plant.tempMax + "˚C\n\npH average:\n" + plant.pHAve + "+/-1";
 		fcDescription.text = plant.description;
 		fcSource.text = plant.source;
+		fcBuy.GetComponentInParent<Button>().interactable = true;
 		fcBuy.text = "Buy (" + plant.price + "$)";
 		currenPlant = plant;
+	}
+
+	public void SetToolDescription(Tool tool){
+		fcImage.sprite = tool.toolIcon;
+		fcDetails.text = "";
+		fcDescription.text = tool.toolDescription;
+		fcSource.text = "N/A";
+		fcBuy.text = "";
+		fcBuy.GetComponentInParent<Button>().interactable = false;
+		currenPlant = null;
 	}
 }

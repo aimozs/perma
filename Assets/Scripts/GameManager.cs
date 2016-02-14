@@ -173,14 +173,19 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void BuyThat(){
-		Plant plant = UIManager.Instance.currenPlant;
-		if(debugGame)
-			Debug.Log("Buying plant " + plant.price + "$ with " + GameManager.Instance.coins);
-		if(plant.price <= GameManager.Instance.coins){
-			plant.seedNumber++;
-			GameManager.Instance.coins = GameManager.Instance.coins - plant.price;
-			UIManager.Instance.SetCoinText(GameManager.Instance.coins.ToString());
-			plant.plantBtn.GetComponent<BtnPlant>().RefreshUI();
+		Plant plant = null;
+		if(UIManager.Instance.currenPlant != null)
+			plant = UIManager.Instance.currenPlant;
+		
+		if(plant != null){
+			if(debugGame)
+				Debug.Log("Buying plant " + plant.price + "$ with " + GameManager.Instance.coins);
+			if(plant.price <= GameManager.Instance.coins){
+				plant.seedNumber++;
+				GameManager.Instance.coins = GameManager.Instance.coins - plant.price;
+				UIManager.Instance.SetCoinText(GameManager.Instance.coins.ToString());
+				plant.plantBtn.GetComponent<BtnPlant>().RefreshUI();
+			}
 		}
 	}
 

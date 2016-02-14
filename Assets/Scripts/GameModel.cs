@@ -12,6 +12,13 @@ public class GameModel : MonoBehaviour {
 	public GameObject parcelReady;
 	public GameObject waste;
 
+	public Color frozen;
+	public Color onHold;
+	public Color growing;
+	public Color tooWarm;
+	public Color gold;
+	public Color bronze;
+
 	private static GameModel instance;
 	public static GameModel Instance {
 		get {
