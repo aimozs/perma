@@ -1853,7 +1853,7 @@ MonoBehaviour:
   plantBtn: {fileID: 0}
   growth: {fileID: 100000, guid: 4182b7bde22384e07aef1359008af5ea, type: 3}
   pollination: {fileID: 120394, guid: 20005cb64f122441483b6a3bd4895bf6, type: 2}
-  product: {fileID: 0}
+  product: {fileID: 122164, guid: 4c660dbcb2db54664bcba615f78c9a38, type: 2}
   friends: 00000000
   foes: 
 --- !u!1 &403482167

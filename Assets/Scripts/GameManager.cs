@@ -25,6 +25,9 @@ public class GameManager : MonoBehaviour {
 	private float _horizontal;
 	private bool _scroll;
 
+	public delegate void Planting(Parcel parcel, Plant plant);
+	public static event Planting PlantingThat;
+
 
 	private static GameManager instance;
 	public static GameManager Instance {
@@ -135,6 +138,8 @@ public class GameManager : MonoBehaviour {
 
 	public void GrowThatHere(Plant plant){
 		currentParcelGO.GetComponent<Parcel>().SetPlant(plant);
+		if(PlantingThat != null)
+			PlantingThat(currentParcelGO.GetComponent<Parcel>(), plant);
 	}
 
 	void SetColor(GameObject parcel, Color color){

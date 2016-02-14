@@ -3,6 +3,7 @@ using System.Collections;
 
 public class PlantPrefab : MonoBehaviour {
 
+	public enum FriendStatus {none, friend, foe}
 	public Plant plant;
 	public Plant.stageEnum plantStage = Plant.stageEnum.seedling;
 	public GameObject germinationPrefab;
@@ -10,6 +11,46 @@ public class PlantPrefab : MonoBehaviour {
 	public GameObject pollinationPrefab;
 	public GameObject productPrefab;
 	public int size = 1;
+	public FriendStatus friendStatus = FriendStatus.none;
+
+	void OnEnable(){
+		GameManager.PlantingThat += UpdateFF;
+	}
+
+	void OnDisable(){
+		GameManager.PlantingThat -= UpdateFF;
+	}
+
+	void UpdateFF(Parcel parcel, Plant newPlant){
+		Parcel thisParcel = GetComponentInParent<Parcel>();
+		if(parcel != null) {
+			Debug.Log(Vector3.Distance(parcel.transform.position, thisParcel.transform.position));
+			float distance = Vector3.Distance(parcel.transform.position, thisParcel.transform.position);
+			if(0.1f < distance && distance <= 1.1f){
+				if(plant.friends.Contains(newPlant.plantType)){
+					Debug.Log("contains new plant as friend for " + plant.plantType);
+					friendStatus = FriendStatus.friend;
+					parcel.GetComponentInChildren<PlantPrefab>().friendStatus = FriendStatus.friend;
+					Debug.Log("current parcel friend status for " + parcel.GetComponentInChildren<PlantPrefab>().plant.plantType + ": " + parcel.GetComponentInChildren<PlantPrefab>().friendStatus);
+
+				} else {
+					if(plant.foes.Contains(newPlant.plantType)){
+						Debug.Log("contains new plant as friend");
+						friendStatus = FriendStatus.foe;
+					} else {
+						friendStatus = FriendStatus.none;
+						Debug.Log("DOESNT contains new plant as friend");
+					}
+				}
+
+
+			}
+		} else {
+			UIManager.Notify("Couldn't load parcel");
+		}
+	}
+
+//	IEnumerator SetFriendDelayed
 	
 	public void IncreaseSize(bool up){
 		if(up && size < plant.maxSize){
@@ -105,14 +146,15 @@ public class PlantPrefab : MonoBehaviour {
 				productPrefab.transform.SetParent(transform);
 				plantStage = stage;
 			}
-			if(pollinationPrefab != null)
-				Destroy(pollinationPrefab);
+
+//			if(pollinationPrefab != null)
+//				Destroy(pollinationPrefab);
 			break;
 		default:
 			break;
 		}
 
-
-		Debug.Log("raising the stage of " + plant.plantType.ToString() + " to " + stage);
+		if(GameManager.Instance.debugGame)
+			Debug.Log("raising the stage of " + plant.plantType.ToString() + " to " + stage);
 	}
 }

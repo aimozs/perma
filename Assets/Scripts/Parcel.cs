@@ -110,7 +110,7 @@ public class Parcel : MonoBehaviour {
 					UIManager.Notify("Some parcelles are a bit too dry, think about watering your plants on sunny days!");
 				}
 			}
-			UIManager.Instance.UpdateFriendColor(waterUI, plantPrefab.plant);
+			UIManager.Instance.UpdateFriendColor(waterUI, plantPrefab.plant, plantPrefab.friendStatus);
 		}
 
 		Waste waste = GetComponentInChildren<Waste>();

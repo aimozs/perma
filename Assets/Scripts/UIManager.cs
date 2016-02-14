@@ -196,8 +196,11 @@ public class UIManager : MonoBehaviour {
 
 	}
 
-	public void UpdateFriendColor(Slider slider, Plant plant, bool? friend = null){
-		if(friend == null){
+	public void UpdateFriendColor(Slider slider, Plant plant, PlantPrefab.FriendStatus friendStatus){
+		if(debugUI)
+			Debug.Log("Trying to change slider color for " + slider.name + "with plant " + plant.plantType.ToString() + " as friend " + friendStatus.ToString());
+		
+		if(friendStatus == PlantPrefab.FriendStatus.none){
 			if(BtnTemperature.Instance.temperature >= plant.tempMin - 3 && BtnTemperature.Instance.temperature <= plant.tempMax + 3)
 				slider.fillRect.GetComponent<Image>().color = GameModel.Instance.growing;
 			else{
@@ -205,9 +208,11 @@ public class UIManager : MonoBehaviour {
 			}
 		} else {
 			if(BtnTemperature.Instance.temperature >= plant.tempMin - 3 && BtnTemperature.Instance.temperature <= plant.tempMax + 3){
-				if((bool)friend){
+				if(friendStatus == PlantPrefab.FriendStatus.friend){
 					slider.fillRect.GetComponent<Image>().color = GameModel.Instance.gold;
-				} else {
+				}
+
+				if(friendStatus == PlantPrefab.FriendStatus.foe){
 					slider.fillRect.GetComponent<Image>().color = GameModel.Instance.bronze;
 				}
 			} else {
