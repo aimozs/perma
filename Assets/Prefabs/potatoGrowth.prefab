@@ -63,7 +63,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 176998}
-  m_Mesh: {fileID: 4300002, guid: cf57e29019a624e579a7f32c38fb0d91, type: 3}
+  m_Mesh: {fileID: 4300004, guid: cf57e29019a624e579a7f32c38fb0d91, type: 3}
 --- !u!95 &9502412
 Animator:
   serializedVersion: 3
@@ -87,7 +87,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300004, guid: cf57e29019a624e579a7f32c38fb0d91, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 176998}

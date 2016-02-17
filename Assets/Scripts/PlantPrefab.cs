@@ -24,22 +24,22 @@ public class PlantPrefab : MonoBehaviour {
 	void UpdateFF(Parcel parcel, Plant newPlant){
 		Parcel thisParcel = GetComponentInParent<Parcel>();
 		if(parcel != null) {
-			Debug.Log(Vector3.Distance(parcel.transform.position, thisParcel.transform.position));
+//			Debug.Log(Vector3.Distance(parcel.transform.position, thisParcel.transform.position));
 			float distance = Vector3.Distance(parcel.transform.position, thisParcel.transform.position);
 			if(0.1f < distance && distance <= 1.1f){
 				if(plant.friends.Contains(newPlant.plantType)){
-					Debug.Log("contains new plant as friend for " + plant.plantType);
+//					Debug.Log("contains new plant as friend for " + plant.plantType);
 					friendStatus = FriendStatus.friend;
 					parcel.GetComponentInChildren<PlantPrefab>().friendStatus = FriendStatus.friend;
-					Debug.Log("current parcel friend status for " + parcel.GetComponentInChildren<PlantPrefab>().plant.plantType + ": " + parcel.GetComponentInChildren<PlantPrefab>().friendStatus);
+//					Debug.Log("current parcel friend status for " + parcel.GetComponentInChildren<PlantPrefab>().plant.plantType + ": " + parcel.GetComponentInChildren<PlantPrefab>().friendStatus);
 
 				} else {
 					if(plant.foes.Contains(newPlant.plantType)){
-						Debug.Log("contains new plant as friend");
+//						Debug.Log("contains new plant as friend");
 						friendStatus = FriendStatus.foe;
 					} else {
 						friendStatus = FriendStatus.none;
-						Debug.Log("DOESNT contains new plant as friend");
+//						Debug.Log("DOESNT contains new plant as friend");
 					}
 				}
 

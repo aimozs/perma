@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class Plant : MonoBehaviour {
 
-	public enum plantEnum {Tomato, Potato, Basil, Corn}
+	public enum plantEnum {Tomato, Potato, Basil, Corn, Pumpkin}
 	public enum stageEnum {seedling, germination, pollination, product, growth}
 
 	public int seedNumber = 0;
@@ -13,10 +13,10 @@ public class Plant : MonoBehaviour {
 	public int price = 0;
 	public float pHAve = 7f;
 	public float germinationSize = 3;
-	public float growthSize = 10;
-	public float pollinationSize = 15;
-	public float productSize = 20;
-	public float maxSize = 20;
+	public float growthSize = 10; 
+	public float pollinationSize = 15; // halfway between growth and product
+	public float productSize = 20; //time to product / 3
+	public float maxSize = 20; // product size + 10%
 	public int tempMin = 10;
 	public int tempMax = 25;
 

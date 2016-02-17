@@ -18,6 +18,7 @@ public class UIManager : MonoBehaviour {
 	public GameObject notifPrefab;
 
 	public Image fcImage;
+	public Image toolsExplain;
 	public Text fcDetails;
 	public Text fcDescription;
 	public Text fcSource;
@@ -124,7 +125,7 @@ public class UIManager : MonoBehaviour {
 	public void SetCoinText(string coin){
 		if(debugUI)
 			Debug.Log("Updating coin UI");
-		coinBtn.GetComponentInChildren<Text>().text = coin + "$";
+		coinBtn.GetComponentInChildren<Text>().text = coin;
 	}
 	
 	public void AddClimate(Climate climate){
@@ -240,22 +241,24 @@ public class UIManager : MonoBehaviour {
 	}
 
 	public void SetPlantDetails(Plant plant){
+		fcBuy.transform.parent.gameObject.SetActive(true);
+		toolsExplain.color = new Color(1f,1f,1f,0f);
 		fcImage.sprite = plant.plantIcon;
 		fcDetails.text = "Ideal growth temperature range:\n" + plant.tempMin + "˚C - " + plant.tempMax + "˚C\n\npH average:\n" + plant.pHAve + "+/-1";
 		fcDescription.text = plant.description;
 		fcSource.text = plant.source;
-		fcBuy.GetComponentInParent<Button>().interactable = true;
 		fcBuy.text = "Buy (" + plant.price + "$)";
 		currenPlant = plant;
 	}
 
 	public void SetToolDescription(Tool tool){
+		fcBuy.transform.parent.gameObject.SetActive(false);
+		toolsExplain.sprite = tool.graphic;
+		toolsExplain.color = new Color(1f,1f,1f,1f);
 		fcImage.sprite = tool.toolIcon;
 		fcDetails.text = "";
 		fcDescription.text = tool.toolDescription;
 		fcSource.text = "N/A";
-		fcBuy.text = "";
-		fcBuy.GetComponentInParent<Button>().interactable = false;
 		currenPlant = null;
 	}
 }

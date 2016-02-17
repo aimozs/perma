@@ -6,6 +6,7 @@ public class Tool : MonoBehaviour {
 
 	public Sprite toolIcon;
 	public string toolDescription;
+	public Sprite graphic;
 
 
 	public void SetToolDescription(){

@@ -23,12 +23,16 @@ public class TutorialManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		foreach(CanvasGroup canvas in tips){
-			SetCanvasVisible(canvas, false);
-		}
+		HideAllTutoPanels();
 
 		if(showTutorial)
 			ShowNextTip();
+	}
+
+	public void HideAllTutoPanels(){
+		foreach(CanvasGroup canvas in tips){
+			SetCanvasVisible(canvas, false);
+		}
 	}
 
 	public void ShowNextTip(){
@@ -42,9 +46,7 @@ public class TutorialManager : MonoBehaviour {
 //			Debug.Log("Adding " + tips[tipIndex].GetComponentInChildren<Button>().gameObject.name + " from " + tips[tipIndex].name);
 			EventSystem.current.SetSelectedGameObject(tips[tipIndex].GetComponentInChildren<Button>().gameObject);
 		} else {
-			UIManager.Instance.DisplayMenu(false);
-			EventSystem.current.SetSelectedGameObject(GameManager.Instance.garden[0]);
-			showTutorial = false;
+			FinishTutorial();
 		}
 	}
 
@@ -57,5 +59,12 @@ public class TutorialManager : MonoBehaviour {
 			canvas.interactable = canvas.blocksRaycasts = false;
 		}
 			
+	}
+
+	public void FinishTutorial(){
+		HideAllTutoPanels();
+		UIManager.Instance.DisplayMenu(false);
+		EventSystem.current.SetSelectedGameObject(GameManager.Instance.garden[0]);
+		showTutorial = false;
 	}
 }

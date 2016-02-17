@@ -52,8 +52,21 @@ public class Parcel : MonoBehaviour {
 
 	public void GetSeedOrProduct(){
 		PlantPrefab pp = GetComponentInChildren<PlantPrefab>();
-		if(pp != null && pp.pollinationPrefab != null){
-			pp.pollinationPrefab.GetComponent<PickUp>().Harvest();
+		if(pp != null){
+			switch(pp.plantStage){
+			case Plant.stageEnum.pollination:
+				if(pp.pollinationPrefab != null)
+					pp.pollinationPrefab.GetComponent<PickUp>().Harvest();
+				break;
+			case Plant.stageEnum.product:
+				if(pp.productPrefab != null)
+					pp.productPrefab.GetComponent<PickUp>().Harvest();
+				break;
+			default:
+				UIManager.Notify("There's nothing to harvest at that stage.");
+				break;
+			}
+
 		} else {
 			UIManager.Notify("You try to look for results, but you havent started yet. Use the shovel and plant a seed first!");
 		}
@@ -168,7 +181,7 @@ public class Parcel : MonoBehaviour {
 		waterUI.value = level;
 	}
 
-	void OnMouseDown(){
+	public void OnMouseDown(){
 		SetParcelSelected();
 		UIManager.Instance.DisplayMenu(true);
 	}

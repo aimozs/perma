@@ -97,7 +97,7 @@ PlayerSettings:
   xboxOneDisableKinectGpuReservation: 0
   virtualRealitySupported: 0
   productGUID: b7bb301cd3c6f413981b4db3cd2402af
-  AndroidBundleVersionCode: 28
+  AndroidBundleVersionCode: 33
   AndroidMinSdkVersion: 19
   AndroidPreferredInstallLocation: 1
   aotOptions: 
@@ -166,14 +166,14 @@ PlayerSettings:
   m_AndroidBanners:
   - width: 320
     height: 180
-    banner: {fileID: 2800000, guid: 03d827d4ce7c34fd6a1184976f3104a3, type: 3}
+    banner: {fileID: 2800000, guid: 454ab884bd3c645d79a78bc3854fce96, type: 3}
   androidGamepadSupportLevel: 0
   resolutionDialogBanner: {fileID: 0}
   m_BuildTargetIcons:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: 1982ae32e4505496c8a2ea9628c6fc28, type: 3}
+      m_Icon: {fileID: 2800000, guid: c92cb54df572040328c975d0748a9703, type: 3}
       m_Width: 128
       m_Height: 128
   m_BuildTargetBatching: []

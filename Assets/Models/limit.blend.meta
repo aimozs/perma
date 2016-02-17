@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: eac8a9ad5a8d14d2b8b92db14de692c9
-timeCreated: 1454313982
+guid: 706a79217887b4e3da4d4560f06e6393
+timeCreated: 1455569914
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -9,8 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: potatoPlant
-    4300002: cornProduct
+    4300000: limit
     7400000: Default Take
     9500000: //RootNode
   materials:

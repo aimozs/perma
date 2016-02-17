@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour {
 	public int gardenSize;
 	public GameObject tile;
 
-	public int coins = 3;
+	public int coins = 5;
 
 	public List<GameObject> garden = new List<GameObject>();
 
@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour {
 
 	public float sensitivity = .01f;
 
+	private bool reset = false;
 	private float _horizontal;
 	private bool _scroll;
 
@@ -40,6 +41,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void Awake(){
+		Application.targetFrameRate = 30;
 		Load();
 	}
 	// Use this for initialization
@@ -56,7 +58,8 @@ public class GameManager : MonoBehaviour {
 	}
 		
 	void OnDisable(){
-		Save();
+		if(reset == false)
+			Save();
 	}
 
 	public void SetCamera(GameObject parcel){
@@ -184,11 +187,11 @@ public class GameManager : MonoBehaviour {
 		
 		if(plant != null){
 			if(debugGame)
-				Debug.Log("Buying plant " + plant.price + "$ with " + GameManager.Instance.coins);
-			if(plant.price <= GameManager.Instance.coins){
+				Debug.Log("Buying plant " + plant.price + "$ with " + coins);
+			if(plant.price <= coins){
 				plant.seedNumber++;
-				GameManager.Instance.coins = GameManager.Instance.coins - plant.price;
-				UIManager.Instance.SetCoinText(GameManager.Instance.coins.ToString());
+				coins = coins - plant.price;
+				UIManager.Instance.SetCoinText(coins.ToString());
 				plant.plantBtn.GetComponent<BtnPlant>().RefreshUI();
 			}
 		}
@@ -196,24 +199,32 @@ public class GameManager : MonoBehaviour {
 
 
 	void Load(){
-		if(PlayerPrefs.GetInt("tuto") != null){
-			if(PlayerPrefs.GetInt("tuto") == 1){
-				TutorialManager.Instance.showTutorial = false;
-			}
+//		if(PlayerPrefs.GetInt("tuto") != null){
+//			if(PlayerPrefs.GetInt("tuto") == 1){
+//				TutorialManager.Instance.showTutorial = false;
+//			}
+//		}
+
+		if(PlayerPrefs.GetInt("coins") != null && PlayerPrefs.GetInt("coins") != 0){
+			coins = PlayerPrefs.GetInt("coins");
+			UIManager.Instance.SetCoinText(coins.ToString());
 		}
 	}
 
 	void Save(){
-//		if(TutorialManager.Instance.tipIndex > 1){
-//			PlayerPrefs.SetInt("tuto", 1);
-//		}
-//
-//		PlayerPrefs.Save();
+		PlayerPrefs.SetInt("coins", coins);
+
+		foreach(GameObject soil in garden){
+			
+		}
+
+		PlayerPrefs.Save();
 	}
 
 	public void DeletePlayerPrefs(){
 		PlayerPrefs.DeleteAll();
 		PlayerPrefs.Save();
 		Debug.Log("PlayerPrefs DELETED");
+		reset = true;
 	}
 }

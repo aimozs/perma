@@ -11,6 +11,7 @@ ModelImporter:
     3300000: //RootNode
     4300000: tomatoPlant
     4300002: potatoPlant
+    4300004: potatoGrowth
     7400000: Default Take
     9500000: //RootNode
   materials:
