@@ -17,7 +17,7 @@ public class Parcel : MonoBehaviour {
 	public GameObject parcelReadyGO;
 	public GameObject waste;
 	  
-	void Start(){
+	void Awake(){
 		SetRandompH();
 	}
   
@@ -26,6 +26,11 @@ public class Parcel : MonoBehaviour {
 		pHUI.text = "pH: " + pH.ToString("0.0");
 		SetWaterLevel(0.1f);
   	}
+
+	public void SetpH(float ph){
+		pH = ph;
+		pHUI.text = "pH: " + pH.ToString("0.0");
+	}
 
 	public void SetPlant(Plant plant){
 		//plant the prefab

@@ -6,8 +6,6 @@ public class GardenManager : MonoBehaviour {
 
 	public bool debugGarden;
 	public Dictionary<string, Plant> AllPlants = new Dictionary<string, Plant>();
-	public int plantToGarden;
-	public static int numberOfPlants;
 
 	private static GardenManager instance;
 	public static GardenManager Instance {
@@ -22,33 +20,21 @@ public class GardenManager : MonoBehaviour {
 	public void InitPlants(){
 		GetAllPlants();
 
-
-//		AllPlants[Plant.plantEnum.Tomato.ToString()].seedNumber = 1;
-//		int index = 0;
 		foreach(KeyValuePair<string, Plant> plant in AllPlants){
-//			index++;
-//			if(index < plantToGarden)
 				UIManager.Instance.AddBtnPlant(plant.Value);
-//			else
-//				UIManager.Instance.AddBtnPlantToShop(plant.Value);
 		}
 
-//		if(GetCurrentPlant(GameManager.Instance.currentLevel) != null)
-//			IncreaseSeedNumber(GetCurrentPlant(GameManager.Instance.currentLevel).plantType.ToString(), true);
 	}
 
 	// Use this for initialization
 	public void GetAllPlants () {
 		Plant[] plants = GetComponentsInChildren<Plant>();
-//		numberOfPlants = plants.Length;
 
 		foreach(Plant plant in plants){
-//			if(debugGarden)
-//				Debug.Log("Adding to all plants " + plant.plantType.ToString());
+			if(debugGarden)
+				Debug.Log("Adding to all plants " + plant.plantType.ToString());
 			AllPlants.Add(plant.plantType.ToString(), plant);
 
-//			if(debugGarden)
-//				Debug.Log(AllPlants[plant.plantType.ToString()].plantIcon.name);
 		}
 
 		if(debugGarden)
@@ -89,21 +75,36 @@ public class GardenManager : MonoBehaviour {
 		plant.plantBtn.GetComponent<BtnPlant>().RefreshUI();
 	}
 
-	public void WaterThis(string plantType){
-
-			
-		if(debugGarden)
-			Debug.Log("Watering plant  " + plantType.ToString());
-		
+	public Plant PlantFromString(string plantType){
 		Plant plant = AllPlants[plantType.ToString()];
 
 		if(debugGarden)
-			Debug.Log("on GO " + plant.name);
-
-
-		IncreaseSeedNumber(plantType.ToString(), true);
-		return;
+			Debug.Log("Returning " + plant.name);
+		return plant;
 	}
+
+	public void ResetCycle(Parcel thisParcel, Plant plant){
+		GameManager.Instance.ResetParcel(thisParcel);
+		GameManager.Instance.ResetParcel(thisParcel);
+		GameManager.Instance.currentParcelGO = thisParcel.gameObject;
+		GameManager.Instance.GrowThatHere(plant);
+	}
+
+//	public void WaterThis(string plantType){
+//
+//			
+//		if(debugGarden)
+//			Debug.Log("Watering plant  " + plantType.ToString());
+//		
+//		Plant plant = AllPlants[plantType.ToString()];
+//
+//		if(debugGarden)
+//			Debug.Log("on GO " + plant.name);
+//
+//
+//		IncreaseSeedNumber(plantType.ToString(), true);
+//		return;
+//	}
 
 
 

@@ -53,37 +53,53 @@ public class PlantPrefab : MonoBehaviour {
 //	IEnumerator SetFriendDelayed
 	
 	public void IncreaseSize(bool up){
-		if(up && size < plant.maxSize){
-			size++;
+		if(up){
+			if(size <= plant.maxSize){
+				size++;
 
-			if(size >= plant.germinationSize) {
-				if(size == plant.germinationSize) {
-					IncreaseToSpecificStage(Plant.stageEnum.germination);
+				if(size >= plant.germinationSize) {
+					if(size == plant.germinationSize) {
+						IncreaseToSpecificStage(Plant.stageEnum.germination);
+					}
+					if(germinationPrefab != null){
+						IncreaseModelScale(germinationPrefab);
+					}
 				}
-				if(germinationPrefab != null){
-					IncreaseModelScale(germinationPrefab);
+
+				if(size >= plant.growthSize) {
+					if(size == plant.growthSize)
+						IncreaseToSpecificStage(Plant.stageEnum.growth);
+					if(growthPrefab != null)
+						IncreaseModelScale(growthPrefab);
 				}
-			}
 
-			if(size >= plant.growthSize) {
-				if(size == plant.growthSize)
-					IncreaseToSpecificStage(Plant.stageEnum.growth);
-				if(growthPrefab != null)
-					IncreaseModelScale(growthPrefab);
-			}
+				if(size >= plant.pollinationSize) {
+					if(size == plant.pollinationSize)
+						IncreaseToSpecificStage(Plant.stageEnum.pollination);
+					if(pollinationPrefab != null)
+						IncreaseModelScale(pollinationPrefab);
+				}
 
-			if(size >= plant.pollinationSize) {
-				if(size == plant.pollinationSize)
-					IncreaseToSpecificStage(Plant.stageEnum.pollination);
-				if(pollinationPrefab != null)
-					IncreaseModelScale(pollinationPrefab);
-			}
-
-			if(size >= plant.productSize) {
-				if(size == plant.productSize)
-					IncreaseToSpecificStage(Plant.stageEnum.product);
-				if(productPrefab != null)
-					IncreaseModelScale(productPrefab);
+				if(size >= plant.productSize) {
+					if(size == plant.productSize)
+						IncreaseToSpecificStage(Plant.stageEnum.product);
+					if(productPrefab != null)
+						IncreaseModelScale(productPrefab);
+				}
+			} else {
+				if(productPrefab == null){
+					Parcel thisParcel = GetComponentInParent<Parcel>();
+					if(thisParcel != null) {
+						Debug.Log(thisParcel.name);
+						if(pollinationPrefab != null){
+							GardenManager.Instance.ResetCycle(thisParcel, plant);
+						} else {
+							GameManager.Instance.ResetParcel(thisParcel);
+						}
+					} else {
+						UIManager.Notify("Could not get PP's parcel");
+					}
+				}
 			}
 		}
 	}
