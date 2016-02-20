@@ -148,7 +148,7 @@ public class UIManager : MonoBehaviour {
 			} else {
 				canvas.alpha = 0f;
 				canvas.blocksRaycasts = canvas.interactable = false;
-				UnityAdsButton.Instance.DisplayAd();
+
 			}
 		}
 	}
@@ -200,27 +200,40 @@ public class UIManager : MonoBehaviour {
 	public void UpdateFriendColor(Slider slider, Plant plant, PlantPrefab.FriendStatus friendStatus){
 		if(debugUI)
 			Debug.Log("Trying to change slider color for " + slider.name + "with plant " + plant.plantType.ToString() + " as friend " + friendStatus.ToString());
-		
-		if(friendStatus == PlantPrefab.FriendStatus.none){
-			if(BtnTemperature.Instance.temperature >= plant.tempMin - 3 && BtnTemperature.Instance.temperature <= plant.tempMax + 3)
+
+		if(BtnTemperature.Instance.temperature >= plant.tempMin - 3 && BtnTemperature.Instance.temperature <= plant.tempMax + 3){
+			switch (friendStatus){
+			case PlantPrefab.FriendStatus.friend:
+				slider.fillRect.GetComponent<Image>().color = GameModel.Instance.gold;
+				break;
+			default:
 				slider.fillRect.GetComponent<Image>().color = GameModel.Instance.growing;
-			else{
-				UpdateTempColor(slider);
+				break;
 			}
 		} else {
-			if(BtnTemperature.Instance.temperature >= plant.tempMin - 3 && BtnTemperature.Instance.temperature <= plant.tempMax + 3){
-				if(friendStatus == PlantPrefab.FriendStatus.friend){
-					slider.fillRect.GetComponent<Image>().color = GameModel.Instance.gold;
-				}
-
-				if(friendStatus == PlantPrefab.FriendStatus.foe){
-					slider.fillRect.GetComponent<Image>().color = GameModel.Instance.bronze;
-				}
-			} else {
-				UpdateTempColor(slider);
-			}
-
+			slider.fillRect.GetComponent<Image>().color = GameModel.Instance.onHold;
 		}
+			
+//		if(friendStatus == PlantPrefab.FriendStatus.none){
+//			if(BtnTemperature.Instance.temperature >= plant.tempMin - 3 && BtnTemperature.Instance.temperature <= plant.tempMax + 3)
+//				slider.fillRect.GetComponent<Image>().color = GameModel.Instance.growing;
+//			else{
+//				UpdateTempColor(slider);
+//			}
+//		} else {
+//			if(BtnTemperature.Instance.temperature >= plant.tempMin - 3 && BtnTemperature.Instance.temperature <= plant.tempMax + 3){
+//				if(friendStatus == PlantPrefab.FriendStatus.friend){
+//					slider.fillRect.GetComponent<Image>().color = GameModel.Instance.gold;
+//				}
+//
+////				if(friendStatus == PlantPrefab.FriendStatus.foe){
+////					slider.fillRect.GetComponent<Image>().color = GameModel.Instance.bronze;
+////				}
+//			} else {
+//				UpdateTempColor(slider);
+//			}
+//
+//		}
 	}
 
 	public void SetWindUI(int strength){

@@ -13,17 +13,17 @@ public class PlantPrefab : MonoBehaviour {
 	public int size = 1;
 	public FriendStatus friendStatus = FriendStatus.none;
 
-	void OnEnable(){
-		GameManager.PlantingThat += UpdateFF;
-	}
+//	void OnEnable(){
+//		GameManager.PlantingThat += UpdateFF;
+//	}
+//
+//	void OnDisable(){
+//		GameManager.PlantingThat -= UpdateFF;
+//	}
 
-	void OnDisable(){
-		GameManager.PlantingThat -= UpdateFF;
-	}
-
-	void UpdateFF(Parcel parcel, Plant newPlant){
+	public void UpdateFF(Parcel parcel, Plant newPlant){
 		Parcel thisParcel = GetComponentInParent<Parcel>();
-		if(parcel != null) {
+		if(parcel != null && thisParcel != null) {
 //			Debug.Log(Vector3.Distance(parcel.transform.position, thisParcel.transform.position));
 			float distance = Vector3.Distance(parcel.transform.position, thisParcel.transform.position);
 			if(0.1f < distance && distance <= 1.1f){
@@ -36,11 +36,14 @@ public class PlantPrefab : MonoBehaviour {
 				} else {
 					if(plant.foes.Contains(newPlant.plantType)){
 //						Debug.Log("contains new plant as friend");
-						friendStatus = FriendStatus.foe;
-					} else {
-						friendStatus = FriendStatus.none;
-//						Debug.Log("DOESNT contains new plant as friend");
+//						friendStatus = FriendStatus.foe;
+						if(GameManager.Instance.loadFinished)
+							StartCoroutine(PlantedFoe());
 					}
+//					} else {
+//						friendStatus = FriendStatus.none;
+////						Debug.Log("DOESNT contains new plant as friend");
+//					}
 				}
 
 
@@ -50,7 +53,11 @@ public class PlantPrefab : MonoBehaviour {
 		}
 	}
 
-//	IEnumerator SetFriendDelayed
+	IEnumerator PlantedFoe(){
+		UIManager.Notify("One of the plant nearby is not happy with your choice!");
+		yield return new WaitForSeconds(1f);
+		UnityAdsButton.Instance.DisplayAd();
+	}
 	
 	public void IncreaseSize(bool up){
 		if(up){

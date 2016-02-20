@@ -75,8 +75,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.082178, y: 0.057389013, z: 0.12755303}
-  m_Center: {x: -0.0026510004, y: -0.012971504, z: 0.24761057}
+  m_Size: {x: 0.076068, y: 0.09186202, z: 0.105093025}
+  m_Center: {x: -0.0062539987, y: 0.006715001, z: 0.20363955}
 --- !u!95 &9508756
 Animator:
   serializedVersion: 3
@@ -105,6 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33d4c7376d45d4c0a9c571e5c3e16573, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  plantPrefab: {fileID: 0}
   plant: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:

@@ -36,6 +36,10 @@ public class Parcel : MonoBehaviour {
 		//plant the prefab
 		plantPrefabGO = Instantiate(GameModel.Instance.plantPrefab) as GameObject;
 		plantPrefabGO.GetComponent<PlantPrefab>().plant = plant;
+
+		if(plant != null)
+			plantPrefabGO.GetComponent<PlantPrefab>().UpdateFF(this, plant);
+		
 		plantPrefabGO.transform.SetParent(transform, false);
 
 		//clean any waste or parcelReady model if any
@@ -48,6 +52,8 @@ public class Parcel : MonoBehaviour {
 			Destroy(waste);
 		if(parcelReadyGO != null)
 			Destroy(parcelReadyGO);
+
+
 	}
 
 	//

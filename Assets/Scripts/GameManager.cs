@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour {
 
 	public bool debugGame;
 	public bool saveLocally = true;
+	public bool loadFinished = false;
 	public int gardenSize;
 	public GameObject tile;
 
@@ -34,14 +35,13 @@ public class GameManager : MonoBehaviour {
 	private float _horizontal;
 	private bool _scroll;
 
-	public delegate void Planting(Parcel parcel, Plant plant);
-	public static event Planting PlantingThat;
+//	public delegate void Planting(Parcel parcel, Plant plant);
+//	public static event Planting PlantingThat;
 
 	//SAVING DATA
+	private TimeSpan previousTotalTime;
 	private DateTime gameStart;
 	private ISavedGameMetadata gameMetaData;
-
-
 
 	private static GameManager instance;
 	public static GameManager Instance {
@@ -67,6 +67,8 @@ public class GameManager : MonoBehaviour {
 		GenerateGarden();
 
 		GetInstancesPlant();
+
+		StartCoroutine(SaveRegularly());
 
 		UIManager.Instance.SetCoinText(coins.ToString());
 
@@ -112,48 +114,49 @@ public class GameManager : MonoBehaviour {
 
 	}
 
-//	void ShowSelectUI() {
-//		uint maxNumToDisplay = 5;
-//		bool allowCreateNew = false;
-//		bool allowDelete = true;
-//
-//		ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
-//		savedGameClient.ShowSelectSavedGameUI("Select saved game",
-//			maxNumToDisplay,
-//			allowCreateNew,
-//			allowDelete,
-//			OnSavedGameSelected);
-//	}
-//
-//
-//	public void OnSavedGameSelected (SelectUIStatus status, ISavedGameMetadata game) {
-//		if (status == SelectUIStatus.SavedGameSelected) {
-//			// handle selected game save
-////			gameMetaData = game;
-////			OpenSavedGame("garden");
-//		} else {
-//			// handle cancel or error
-//		}
-//	}
+	void ShowSelectUI() {
+		uint maxNumToDisplay = 5;
+		bool allowCreateNew = false;
+		bool allowDelete = true;
+
+		ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
+		savedGameClient.ShowSelectSavedGameUI("Select saved game",
+			maxNumToDisplay,
+			allowCreateNew,
+			allowDelete,
+			OnSavedGameSelected);
+	}
+
+
+	public void OnSavedGameSelected (SelectUIStatus status, ISavedGameMetadata game) {
+		if (status == SelectUIStatus.SavedGameSelected) {
+			// handle selected game save
+			gameMetaData = game;
+			OpenSavedGame("garden");
+		} else {
+			// handle cancel or error
+		}
+	}
 
 	void OpenSavedGame(string filename) {
 		ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
 		savedGameClient.OpenWithAutomaticConflictResolution(filename, DataSource.ReadCacheOrNetwork,
-			ConflictResolutionStrategy.UseLongestPlaytime, OnSavedGameOpened);
+			ConflictResolutionStrategy.UseOriginal, OnSavedGameOpened);
 	}
 
 	public void OnSavedGameOpened(SavedGameRequestStatus status, ISavedGameMetadata game) {
 		if (status == SavedGameRequestStatus.Success) {
 			gameMetaData = game;
-			UIManager.Notify("Save was retreived properly");
-
+			UIManager.Notify("Save was retreived properly at last totalPlayedTime " + game.TotalTimePlayed);
 			LoadGameData(gameMetaData);
 		} else {
+			
 			UIManager.Notify("Save couldn't be opened");
 		}
 	}
 
 	void LoadGameData (ISavedGameMetadata game) {
+		UIManager.Notify("Loading game data");
 		ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
 		savedGameClient.ReadBinaryData(game, OnSavedGameDataRead);
 	}
@@ -161,7 +164,9 @@ public class GameManager : MonoBehaviour {
 	public void OnSavedGameDataRead (SavedGameRequestStatus status, byte[] data) {
 		if (status == SavedGameRequestStatus.Success) {
 			// handle processing the byte array data
-			LoadData(ByteToString(data));
+			UIManager.Notify("Loading bytes");
+			if(data != null)
+				LoadData(ByteToString(data));
 		} else {
 			// handle error
 			UIManager.Notify("Could not read saved data");
@@ -170,24 +175,28 @@ public class GameManager : MonoBehaviour {
 
 	public void SaveGameToCloud(){
 		string inventory = "$" + coins.ToString();
+		UIManager.Notify(inventory);
 		foreach(GameObject parcelGO in garden){
 			inventory += "@" + parcelGO.name.Substring(parcelGO.name.Length-1, 1);
 			inventory += "ph:" + parcelGO.GetComponent<Parcel>().pH.ToString("0.0");
 			PlantPrefab pp = parcelGO.GetComponentInChildren<PlantPrefab>();
 			if(pp != null)
 				inventory+= "pt:" + pp.plant.plantType.ToString();
+			UIManager.Notify(inventory);
 		}
 
-		Debug.Log(inventory);
+		if(debugGame)
+			Debug.Log(inventory);
 
 		if(saveLocally){
 			Save(inventory);
-			
+			UIManager.Notify("Game saved locally");
 		} else {
 			byte[] savedData = StringToBytes(inventory);
-			TimeSpan totalPlaytime = DateTime.Now - gameStart;
-			Debug.Log(totalPlaytime.TotalMilliseconds);
+			TimeSpan totalPlaytime = DateTime.Now - gameStart + gameMetaData.TotalTimePlayed;
+			UIManager.Notify("send data with totalPlayTime" + totalPlaytime);
 			SaveGame(gameMetaData, savedData, totalPlaytime);
+
 		}
 
 	}
@@ -211,6 +220,7 @@ public class GameManager : MonoBehaviour {
 		}
 		SavedGameMetadataUpdate updatedMetadata = builder.Build();
 		savedGameClient.CommitUpdate(game, updatedMetadata, savedData, OnSavedGameWritten);
+		UIManager.Notify("Game Cloud Saved" + totalPlaytime);
 	}
 
 	public void OnSavedGameWritten (SavedGameRequestStatus status, ISavedGameMetadata game) {
@@ -329,8 +339,15 @@ public class GameManager : MonoBehaviour {
 
 	public void GrowThatHere(Plant plant){
 		currentParcelGO.GetComponent<Parcel>().SetPlant(plant);
-		if(PlantingThat != null)
-			PlantingThat(currentParcelGO.GetComponent<Parcel>(), plant);
+//		if(PlantingThat != null)
+//			PlantingThat(currentParcelGO.GetComponent<Parcel>(), plant);
+
+	}
+
+	IEnumerator SaveRegularly(){
+		yield return new WaitForSeconds(120f);
+		SaveGameToCloud();
+		StartCoroutine(SaveRegularly());
 	}
 
 	void SetColor(GameObject parcel, Color color){
@@ -426,6 +443,8 @@ public class GameManager : MonoBehaviour {
 			}
 
 		}
+		loadFinished = true;
+		UIManager.Notify("Loaded garden");
 	}
 
 	void Save(string inventory){
