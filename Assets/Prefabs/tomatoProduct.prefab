@@ -10,7 +10,6 @@ GameObject:
   - 4: {fileID: 483140}
   - 33: {fileID: 3397032}
   - 23: {fileID: 2312804}
-  - 95: {fileID: 9549654}
   - 65: {fileID: 6565230}
   - 114: {fileID: 11439296}
   m_Layer: 0
@@ -42,7 +41,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: ebe4161ed8d9c4cf2934b740b3014244, type: 2}
+  - {fileID: 2100000, guid: 96b496996922442b88f2791a083ff4e0, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -77,23 +76,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.14916301, y: 0.14187004, z: 0.27043208}
   m_Center: {x: 0.00083650276, y: 0.012341005, z: 0.3806081}
---- !u!95 &9549654
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 151468}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 11489f9367f5b4a38bca081e63095ffb, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11439296
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -105,6 +87,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33d4c7376d45d4c0a9c571e5c3e16573, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  plantPrefab: {fileID: 0}
   plant: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:

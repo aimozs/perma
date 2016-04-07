@@ -10,7 +10,6 @@ GameObject:
   - 4: {fileID: 419222}
   - 33: {fileID: 3399672}
   - 23: {fileID: 2381288}
-  - 95: {fileID: 9565278}
   - 114: {fileID: 11457060}
   - 65: {fileID: 6529646}
   m_Layer: 0
@@ -42,7 +41,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 2350c4d42405b4116aaae25ae8bccd28, type: 2}
+  - {fileID: 2100000, guid: 96b496996922442b88f2791a083ff4e0, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -77,23 +76,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.140539, y: 0.26713607, z: 0.05813201}
   m_Center: {x: -0.014710503, y: 0.063878015, z: 0.05452201}
---- !u!95 &9565278
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 150988}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 43f9ab16193f74e00bcc87ed80f60272, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11457060
 MonoBehaviour:
   m_ObjectHideFlags: 1

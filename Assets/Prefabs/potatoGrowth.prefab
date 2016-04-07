@@ -10,7 +10,6 @@ GameObject:
   - 4: {fileID: 457158}
   - 33: {fileID: 3399970}
   - 23: {fileID: 2362762}
-  - 95: {fileID: 9502412}
   m_Layer: 0
   m_Name: potatoGrowth
   m_TagString: Untagged
@@ -25,7 +24,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 176998}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -3.5326343, y: -5.1337295, z: 5.0509515}
+  m_LocalPosition: {x: 2.8197021, y: 0.004760742, z: 0.24472046}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -40,7 +39,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 356474173f3c04920acd29deff258aa7, type: 2}
+  - {fileID: 2100000, guid: 96b496996922442b88f2791a083ff4e0, type: 2}
   - {fileID: 2100000, guid: 63f4bccc7dbb849b39bd04ce01c4c503, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
@@ -64,23 +63,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 176998}
   m_Mesh: {fileID: 4300004, guid: cf57e29019a624e579a7f32c38fb0d91, type: 3}
---- !u!95 &9502412
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 176998}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: cf57e29019a624e579a7f32c38fb0d91, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

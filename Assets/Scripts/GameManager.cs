@@ -11,9 +11,10 @@ using System.Text;
 
 public class GameManager : MonoBehaviour {
 
+
+
 	public bool debugGame;
-	public bool saveLocally = true;
-	public bool loadFinished = false;
+
 	public int gardenSize;
 	public GameObject tile;
 
@@ -31,17 +32,11 @@ public class GameManager : MonoBehaviour {
 
 	public float sensitivity = .01f;
 
-	private bool reset = false;
 	private float _horizontal;
 	private bool _scroll;
 
-//	public delegate void Planting(Parcel parcel, Plant plant);
-//	public static event Planting PlantingThat;
-
-	//SAVING DATA
-	private TimeSpan previousTotalTime;
-	private DateTime gameStart;
-	private ISavedGameMetadata gameMetaData;
+	public delegate void Planting(Parcel parcel, Plant plant);
+	public static event Planting PlantingThat;
 
 	private static GameManager instance;
 	public static GameManager Instance {
@@ -54,207 +49,33 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void Awake(){
-		Application.targetFrameRate = 30;
+		Application.targetFrameRate = 25;
 
 	}
 	// Use this for initialization
 	void Start () {
 
-		ActivateGPGS();
-
-		gameStart = DateTime.Now;
-		
 		GenerateGarden();
 
 		GetInstancesPlant();
 
-		StartCoroutine(SaveRegularly());
-
 		UIManager.Instance.SetCoinText(coins.ToString());
+		SoundManager.Instance.SetVolume(0f);
 
 		if(garden[currentParcel] != null)
 			SetCamera(garden[currentParcel]);
 
-		if(saveLocally)
-			LoadLocally();
-	}
+		GPGSIds.ActivateGPGS();
 
-	void ActivateGPGS(){
-		PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder()
-			// enables saving game progress.
-			.EnableSavedGames()
-			// registers a callback to handle game invitations received while the game is not running.
-//			.WithInvitationDelegate(<callback method>)
-			// registers a callback for turn based match notifications received while the
-			// game is not running.
-//			.WithMatchDelegate(<callback method>)
-			// require access to a player's Google+ social graph to sign in
-			.RequireGooglePlus()
-			.Build();
-
-		PlayGamesPlatform.InitializeInstance(config);
-		// recommended for debugging:
-		PlayGamesPlatform.DebugLogEnabled = true;
-		// Activate the Google Play Games platform
-		PlayGamesPlatform.Activate();
-		SignIn();
 
 	}
 
-	void SignIn(){
-			// authenticate user:
-			Social.localUser.Authenticate((bool success) => {
-				if(success){
-					OpenSavedGame("garden");
-				} else {
-					UIManager.Notify("Could not sign in. The game will be saved locally.");
-					saveLocally = true;
-				}
-			});
-
-	}
-
-	void ShowSelectUI() {
-		uint maxNumToDisplay = 5;
-		bool allowCreateNew = false;
-		bool allowDelete = true;
-
-		ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
-		savedGameClient.ShowSelectSavedGameUI("Select saved game",
-			maxNumToDisplay,
-			allowCreateNew,
-			allowDelete,
-			OnSavedGameSelected);
-	}
 
 
-	public void OnSavedGameSelected (SelectUIStatus status, ISavedGameMetadata game) {
-		if (status == SelectUIStatus.SavedGameSelected) {
-			// handle selected game save
-			gameMetaData = game;
-			OpenSavedGame("garden");
-		} else {
-			// handle cancel or error
-		}
-	}
-
-	void OpenSavedGame(string filename) {
-		ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
-		savedGameClient.OpenWithAutomaticConflictResolution(filename, DataSource.ReadCacheOrNetwork,
-			ConflictResolutionStrategy.UseOriginal, OnSavedGameOpened);
-	}
-
-	public void OnSavedGameOpened(SavedGameRequestStatus status, ISavedGameMetadata game) {
-		if (status == SavedGameRequestStatus.Success) {
-			gameMetaData = game;
-			UIManager.Notify("Save was retreived properly at last totalPlayedTime " + game.TotalTimePlayed);
-			LoadGameData(gameMetaData);
-		} else {
-			
-			UIManager.Notify("Save couldn't be opened");
-		}
-	}
-
-	void LoadGameData (ISavedGameMetadata game) {
-		UIManager.Notify("Loading game data");
-		ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
-		savedGameClient.ReadBinaryData(game, OnSavedGameDataRead);
-	}
-
-	public void OnSavedGameDataRead (SavedGameRequestStatus status, byte[] data) {
-		if (status == SavedGameRequestStatus.Success) {
-			// handle processing the byte array data
-			UIManager.Notify("Loading bytes");
-			if(data != null)
-				LoadData(ByteToString(data));
-		} else {
-			// handle error
-			UIManager.Notify("Could not read saved data");
-		}
-	}
-
-	public void SaveGameToCloud(){
-		string inventory = "$" + coins.ToString();
-		UIManager.Notify(inventory);
-		foreach(GameObject parcelGO in garden){
-			inventory += "@" + parcelGO.name.Substring(parcelGO.name.Length-1, 1);
-			inventory += "ph:" + parcelGO.GetComponent<Parcel>().pH.ToString("0.0");
-			PlantPrefab pp = parcelGO.GetComponentInChildren<PlantPrefab>();
-			if(pp != null)
-				inventory+= "pt:" + pp.plant.plantType.ToString();
-			UIManager.Notify(inventory);
-		}
-
-		if(debugGame)
-			Debug.Log(inventory);
-
-		if(saveLocally){
-			Save(inventory);
-			UIManager.Notify("Game saved locally");
-		} else {
-			byte[] savedData = StringToBytes(inventory);
-			TimeSpan totalPlaytime = DateTime.Now - gameStart + gameMetaData.TotalTimePlayed;
-			UIManager.Notify("send data with totalPlayTime" + totalPlaytime);
-			SaveGame(gameMetaData, savedData, totalPlaytime);
-
-		}
-
-	}
-
-	void SaveGame (ISavedGameMetadata game, byte[] savedData, TimeSpan totalPlaytime) {
-		ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
-
-		Texture2D savedImage = getScreenshot();
-
-		SavedGameMetadataUpdate.Builder builder = new SavedGameMetadataUpdate.Builder();
-		builder = builder
-			.WithUpdatedPlayedTime(totalPlaytime)
-			.WithUpdatedDescription("Saved game at " + DateTime.Now);
-		if (savedImage != null) {
-			// This assumes that savedImage is an instance of Texture2D
-			// and that you have already called a function equivalent to
-			// getScreenshot() to set savedImage
-			// NOTE: see sample definition of getScreenshot() method below
-			byte[] pngData = savedImage.EncodeToPNG();
-			builder = builder.WithUpdatedPngCoverImage(pngData);
-		}
-		SavedGameMetadataUpdate updatedMetadata = builder.Build();
-		savedGameClient.CommitUpdate(game, updatedMetadata, savedData, OnSavedGameWritten);
-		UIManager.Notify("Game Cloud Saved" + totalPlaytime);
-	}
-
-	public void OnSavedGameWritten (SavedGameRequestStatus status, ISavedGameMetadata game) {
-		if (status == SavedGameRequestStatus.Success) {
-			// handle reading or writing of saved game.
-		} else {
-			// handle error
-		}
-	}
-
-	public Texture2D getScreenshot() {
-		// Create a 2D texture that is 1024x700 pixels from which the PNG will be
-		// extracted
-		Texture2D screenShot = new Texture2D(1024, 700);
-
-		// Takes the screenshot from top left hand corner of screen and maps to top
-		// left hand corner of screenShot texture
-		screenShot.ReadPixels(
-			new Rect(0, 0, Screen.width, (Screen.width/1024)*700), 0, 0);
-		return screenShot;
-	}
-
-	byte[] StringToBytes(string text){
-		return Encoding.UTF8.GetBytes(text);
-	}
-
-	string ByteToString(byte[] bytes){
-		return Encoding.UTF8.GetString(bytes);
-	}
-		
-//	void OnDisable(){
-//		if(reset == false)
-//			Save();
-//	}
+	//	void OnDisable(){
+	//		if(reset == false)
+	//			Save();
+	//	}
 
 	public void SetCamera(GameObject parcel){
 		if(debugGame)
@@ -339,15 +160,8 @@ public class GameManager : MonoBehaviour {
 
 	public void GrowThatHere(Plant plant){
 		currentParcelGO.GetComponent<Parcel>().SetPlant(plant);
-//		if(PlantingThat != null)
-//			PlantingThat(currentParcelGO.GetComponent<Parcel>(), plant);
-
-	}
-
-	IEnumerator SaveRegularly(){
-		yield return new WaitForSeconds(120f);
-		SaveGameToCloud();
-		StartCoroutine(SaveRegularly());
+		if(PlantingThat != null)
+			PlantingThat(currentParcelGO.GetComponent<Parcel>(), plant);
 	}
 
 	void SetColor(GameObject parcel, Color color){
@@ -373,7 +187,7 @@ public class GameManager : MonoBehaviour {
 
 	}
 
-	void CreateParcel(int arrayPos){
+	public void CreateParcel(int arrayPos){
 		Vector3 position = new Vector3(arrayPos, 0, 0);
 		GameObject parcel = Instantiate(tile, position, Quaternion.identity) as GameObject;
 		parcel.name = parcel.name + arrayPos;
@@ -383,14 +197,14 @@ public class GameManager : MonoBehaviour {
 	public void AddCoin(int change){
 		coins = coins + change;
 		UIManager.Instance.SetCoinText(coins.ToString());
-		GPGSIds.coins = coins;
+//		GPGSIds.coins = coins;
 	}
 
 	public void BuyThat(){
 		Plant plant = null;
 		if(UIManager.Instance.currenPlant != null)
 			plant = UIManager.Instance.currenPlant;
-		
+
 		if(plant != null){
 			if(debugGame)
 				Debug.Log("Buying plant " + plant.price + "$ with " + coins);
@@ -401,64 +215,15 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	void UnlockAchivement(string achievement, float completion = 100f){
-		Social.ReportProgress(achievement, completion, (bool success) => {
-			if(success){
-				UIManager.Notify("Achievement unlocked: " + achievement);
-			}
-		});
-	}
-	void LoadLocally(){
-		if(PlayerPrefs.GetString("inventory") != null){
-			LoadData(PlayerPrefs.GetString("inventory"));
-		}
+	public IEnumerator Save(){
+		Debug.Log("gonna save");
+		yield return new WaitForSeconds(60f);
+		GPGSIds.Save();
+		StartCoroutine(Save());
 	}
 
-	void LoadData(string data){
-		string[] listParcel;
-		listParcel = data.Split("@"[0]);
+//	public void ShowSavedGame(){
+//		GPGSIds.ShowSelectUI();
+//	}
 
-		string coin = listParcel[0].Substring(1);
-		coins = 0;
-		AddCoin(int.Parse(coin));
-
-		for(int s = 1; s < listParcel.Length; s++){
-			Debug.Log(listParcel[s]);
-			if(listParcel[s] != null && listParcel[s] != ""){
-				string ph = listParcel[s].Substring(4, 3);
-
-				if(s-1 >= garden.Count){
-					gardenSize++;
-					CreateParcel(gardenSize);
-				}
-
-					
-				garden[s-1].GetComponent<Parcel>().SetpH(float.Parse(ph));
-
-				if(listParcel[s].Contains("pt:")){
-
-					currentParcelGO = garden[s-1];
-					GrowThatHere(GardenManager.Instance.PlantFromString(listParcel[s].Substring(10)));
-				}
-			}
-
-		}
-		loadFinished = true;
-		UIManager.Notify("Loaded garden");
-	}
-
-	void Save(string inventory){
-		if(!reset){
-			Debug.Log("saving locally");
-			PlayerPrefs.SetString("inventory", inventory);
-			PlayerPrefs.Save();
-		}
-	}
-
-	public void DeletePlayerPrefs(){
-		PlayerPrefs.DeleteAll();
-		PlayerPrefs.Save();
-		Debug.Log("PlayerPrefs DELETED");
-		reset = true;
-	}
 }

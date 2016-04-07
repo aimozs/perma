@@ -25,8 +25,7 @@ public class TutorialManager : MonoBehaviour {
 	void Start () {
 		HideAllTutoPanels();
 
-		if(showTutorial)
-			ShowNextTip();
+		StartTutorial();
 	}
 
 	public void HideAllTutoPanels(){
@@ -35,9 +34,14 @@ public class TutorialManager : MonoBehaviour {
 		}
 	}
 
+	void StartTutorial(){
+		SetCanvasVisible(tips[tipIndex], true);
+	}
+
+
 	public void ShowNextTip(){
 		SetCanvasVisible(tips[tipIndex], false);
-		if(tipIndex < tips.Count-1){
+		if(tipIndex < tips.Count-1 && showTutorial){
 			if(tipIndex == 2)
 				UIManager.Instance.DisplayMenu(true);
 			
@@ -66,5 +70,6 @@ public class TutorialManager : MonoBehaviour {
 		UIManager.Instance.DisplayMenu(false);
 		EventSystem.current.SetSelectedGameObject(GameManager.Instance.garden[0]);
 		showTutorial = false;
+		StartCoroutine(GameManager.Instance.Save());
 	}
 }

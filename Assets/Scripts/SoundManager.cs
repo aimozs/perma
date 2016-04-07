@@ -40,6 +40,10 @@ public class SoundManager : MonoBehaviour
 			}
 	}
 
+	public void SetVolume(float vol){
+		audioSource.volume = vol;
+	}
+
 	public void PlayRain(){
 		if(rain != null)
 			PlaySound(rain);

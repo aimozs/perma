@@ -21,6 +21,15 @@
 /// Resources.
 ///
 
+using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using GooglePlayGames;
+using GooglePlayGames.BasicApi;
+using GooglePlayGames.BasicApi.SavedGame;
+using UnityEngine.SocialPlatforms;
+using System;
+using System.Text;
 
 public static class GPGSIds
 {
@@ -30,7 +39,272 @@ public static class GPGSIds
         public const string achievement_saver = "CgkIvIWD99sFEAIQAQ"; // <GPGSID>
         public const string achievement_herbalist = "CgkIvIWD99sFEAIQAg"; // <GPGSID>
 
-	public static int coins;
+//	public static int coins;
+
+	public static bool saveLocally = false;
+	public static bool loadFinished = false;
+
+	//SAVING DATA
+	private static DateTime gameStart;
+	private static ISavedGameMetadata gameMetaData;
+
+	public static void ActivateGPGS(){
+		PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder()
+			// enables saving game progress.
+			.EnableSavedGames()
+			// registers a callback to handle game invitations received while the game is not running.
+			//			.WithInvitationDelegate(<callback method>)
+			// registers a callback for turn based match notifications received while the
+			// game is not running.
+			//			.WithMatchDelegate(<callback method>)
+			// require access to a player's Google+ social graph to sign in
+			.RequireGooglePlus()
+			.Build();
+
+		PlayGamesPlatform.InitializeInstance(config);
+		// recommended for debugging:
+		PlayGamesPlatform.DebugLogEnabled = true;
+		// Activate the Google Play Games platform
+		PlayGamesPlatform.Activate();
+
+		SignIn();
+
+	}
+
+	static void SetGameStart(){
+		gameStart = DateTime.Now;
+//		UIManager.Notify(gameStart.ToString());
+	}
+
+	static void SignIn(){
+		SetGameStart();
+
+//		UIManager.Notify("Signing");
+		// authenticate user:
+		Social.localUser.Authenticate((bool success) => {
+			if(success){
+//				if(PlayerPrefs.GetString("inventory") != null){
+//					UIManager.Notify("inventory found local");
+//					LoadLocally();
+//					DeletePlayerPrefs();
+//
+//				} else {
+//					UIManager.Notify("loading online");
+					OpenSavedGame("garden");
+//				}
+			} else {
+				UIManager.DisplaySaveState(UIManager.SaveState.error);
+				saveLocally = true;
+				if(PlayerPrefs.GetString("inventory") != null)
+					LoadLocally();
+				else
+					TutorialManager.Instance.ShowNextTip();
+			}
+		});
+
+	}
+
+//	public static void ShowSelectUI() {
+//		uint maxNumToDisplay = 5;
+//		bool allowCreateNew = false;
+//		bool allowDelete = true;
+//
+//		ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
+//		savedGameClient.ShowSelectSavedGameUI("Select saved game",
+//			maxNumToDisplay,
+//			allowCreateNew,
+//			allowDelete,
+//			OnSavedGameSelected);
+//	}
+
+
+//	public static void OnSavedGameSelected (SelectUIStatus status, ISavedGameMetadata game) {
+//		if (status == SelectUIStatus.SavedGameSelected) {
+//			// handle selected game save
+//			gameMetaData = game;
+//			OpenSavedGame("garden");
+//		} else {
+//			// handle cancel or error
+//		}
+//	}
+
+	static void OpenSavedGame(string filename) {
+		UIManager.DisplaySaveState(UIManager.SaveState.open);
+//		UIManager.Notify("Opening save game");
+		ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
+		savedGameClient.OpenWithAutomaticConflictResolution(filename, DataSource.ReadCacheOrNetwork,
+			ConflictResolutionStrategy.UseLongestPlaytime, OnSavedGameOpened);
+	}
+
+	public static void OnSavedGameOpened(SavedGameRequestStatus status, ISavedGameMetadata game) {
+		if (status == SavedGameRequestStatus.Success) {
+			gameMetaData = game;
+
+			if(!loadFinished)
+				LoadGameData(gameMetaData);
+		} else {
+			UIManager.DisplaySaveState(UIManager.SaveState.error);
+		}
+	}
+
+	static void LoadGameData (ISavedGameMetadata game) {
+		
+		ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
+		savedGameClient.ReadBinaryData(game, OnSavedGameDataRead);
+	}
+
+	public static void OnSavedGameDataRead (SavedGameRequestStatus status, byte[] data) {
+
+		if (status == SavedGameRequestStatus.Success) {
+			// handle processing the byte array data
+			LoadData(ByteToString(data));
+		} else {
+			// handle error
+			UIManager.DisplaySaveState(UIManager.SaveState.error);
+		}
+	}
+
+	public static void Save(){
+//		UIManager.Notify("preping save");
+		string inventory = "$" + GameManager.Instance.coins.ToString();
+		foreach(GameObject parcelGO in GameManager.Instance.garden){
+			inventory += "@" + parcelGO.name.Substring(parcelGO.name.Length-1, 1);
+			inventory += "ph:" + parcelGO.GetComponent<Parcel>().pH.ToString("0.0");
+			PlantPrefab pp = parcelGO.GetComponentInChildren<PlantPrefab>();
+			if(pp != null)
+				inventory+= "pt:" + pp.plant.plantType.ToString();
+		}
+
+//		UIManager.Notify(saveLocally.ToString());
+		if(saveLocally){
+			SaveLocally(inventory);
+		} else {
+			OpenSavedGame("garden");
+			byte[] savedData = StringToBytes(inventory);
+//			UIManager.Notify("\n\n" + gameMetaData.TotalTimePlayed.ToString());
+//			UIManager.Notify("\n Difference: \n" + DateTime.Now.ToString() + "vs" + gameStart.ToString());
+			TimeSpan totalPlaytime = (DateTime.Now - gameStart) + gameMetaData.TotalTimePlayed;
+			SetGameStart();
+//			UIManager.Notify("updated played time\n" + totalPlaytime.ToString());
+			CloudSaveGame(gameMetaData, savedData, totalPlaytime);
+
+		}
+
+	}
+
+	static void CloudSaveGame (ISavedGameMetadata gameMetaData, byte[] savedData, TimeSpan totalPlaytime) {
+//		UIManager.Notify("Saving to cloud");
+		ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
+
+		Texture2D savedImage = getScreenshot();
+
+		SavedGameMetadataUpdate.Builder builder = new SavedGameMetadataUpdate.Builder();
+		builder = builder
+			.WithUpdatedPlayedTime(totalPlaytime)
+			.WithUpdatedDescription("Saved game at " + DateTime.Now);
+		if (savedImage != null) {
+			// This assumes that savedImage is an instance of Texture2D
+			// and that you have already called a function equivalent to
+			// getScreenshot() to set savedImage
+			// NOTE: see sample definition of getScreenshot() method below
+			byte[] pngData = savedImage.EncodeToPNG();
+			builder = builder.WithUpdatedPngCoverImage(pngData);
+		}
+		SavedGameMetadataUpdate updatedMetadata = builder.Build();
+		savedGameClient.CommitUpdate(gameMetaData, updatedMetadata, savedData, OnSavedGameWritten);
+	}
+
+	public static void OnSavedGameWritten (SavedGameRequestStatus status, ISavedGameMetadata game) {
+		if (status == SavedGameRequestStatus.Success) {
+//			gameMetaData = game;
+			UIManager.DisplaySaveState(UIManager.SaveState.saved);
+		} else {
+			UIManager.DisplaySaveState(UIManager.SaveState.error);
+		}
+	}
+
+	public static Texture2D getScreenshot() {
+		// Create a 2D texture that is 1024x700 pixels from which the PNG will be
+		// extracted
+		Texture2D screenShot = new Texture2D(1024, 700);
+
+		// Takes the screenshot from top left hand corner of screen and maps to top
+		// left hand corner of screenShot texture
+		screenShot.ReadPixels(
+			new Rect(0, 0, Screen.width, (Screen.width/1024)*700), 0, 0);
+		return screenShot;
+	}
+
+	static byte[] StringToBytes(string text){
+		return Encoding.UTF8.GetBytes(text);
+	}
+
+	static string ByteToString(byte[] bytes){
+		return Encoding.UTF8.GetString(bytes);
+	}
+
+	static void UnlockAchivement(string achievement, float completion = 100f){
+		Social.ReportProgress(achievement, completion, (bool success) => {
+			if(success){
+				UIManager.Notify("Achievement unlocked: " + achievement);
+			}
+		});
+	}
+
+	public static void LoadLocally(){
+		Debug.Log("Load locally");
+		LoadData(PlayerPrefs.GetString("inventory"));
+	}
+
+	static void LoadData(string data){
+//		Debug.Log("Load Data");
+		string[] listParcel;
+		listParcel = data.Split("@"[0]);
+
+		string coin = listParcel[0].Substring(1);
+		GameManager.Instance.coins = 0;
+		GameManager.Instance.AddCoin(int.Parse(coin));
+
+		for(int s = 1; s < listParcel.Length; s++){
+//			Debug.Log(listParcel[s]);
+			if(listParcel[s] != null && listParcel[s] != ""){
+				string ph = listParcel[s].Substring(4, 3);
+
+				if(s-1 >= GameManager.Instance.garden.Count){
+					GameManager.Instance.gardenSize++;
+					GameManager.Instance.CreateParcel(GameManager.Instance.gardenSize);
+				}
+
+
+				GameManager.Instance.garden[s-1].GetComponent<Parcel>().SetpH(float.Parse(ph));
+
+				if(listParcel[s].Contains("pt:")){
+
+					GameManager.Instance.currentParcelGO = GameManager.Instance.garden[s-1];
+					GameManager.Instance.currentParcelGO.GetComponent<Parcel>().SetPlant(GardenManager.Instance.PlantFromString(listParcel[s].Substring(10)));
+				}
+			}
+
+		}
+		loadFinished = true;
+		UIManager.DisplaySaveState(UIManager.SaveState.loaded);
+		SoundManager.Instance.SetVolume(1f);
+		TutorialManager.Instance.ShowNextTip();
+
+	}
+
+	static void SaveLocally(string inventory){
+		
+		PlayerPrefs.SetString("inventory", inventory);
+		PlayerPrefs.Save();
+		UIManager.DisplaySaveState(UIManager.SaveState.saved);
+	}
+
+	public static void DeletePlayerPrefs(){
+		PlayerPrefs.DeleteAll();
+		PlayerPrefs.Save();
+		Debug.Log("PlayerPrefs DELETED");
+	}
 
 }
 

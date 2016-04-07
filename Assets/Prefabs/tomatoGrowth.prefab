@@ -10,7 +10,6 @@ GameObject:
   - 4: {fileID: 478138}
   - 33: {fileID: 3363288}
   - 23: {fileID: 2382020}
-  - 95: {fileID: 9577334}
   m_Layer: 0
   m_Name: tomatoGrowth
   m_TagString: Untagged
@@ -39,8 +38,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 168732}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.581299, y: -0.050174713, z: 4.4891663}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071067}
+  m_LocalPosition: {x: 2.5479736, y: 0.004760742, z: 0.25894165}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 478138}
@@ -68,8 +67,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 356474173f3c04920acd29deff258aa7, type: 2}
-  - {fileID: 2100000, guid: 63f4bccc7dbb849b39bd04ce01c4c503, type: 2}
+  - {fileID: 2100000, guid: 96b496996922442b88f2791a083ff4e0, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -91,24 +89,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 146612}
-  m_Mesh: {fileID: 4300000, guid: a8a323eae91c248098346b314cd6ca3a, type: 3}
---- !u!95 &9577334
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 146612}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: a8a323eae91c248098346b314cd6ca3a, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
+  m_Mesh: {fileID: 4300002, guid: a8a323eae91c248098346b314cd6ca3a, type: 3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

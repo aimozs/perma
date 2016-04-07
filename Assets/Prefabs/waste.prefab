@@ -10,8 +10,7 @@ GameObject:
   - 4: {fileID: 453464}
   - 33: {fileID: 3300342}
   - 23: {fileID: 2326474}
-  - 95: {fileID: 9553408}
-  - 114: {fileID: 11482688}
+  - 95: {fileID: 9520612}
   m_Layer: 0
   m_Name: waste
   m_TagString: Untagged
@@ -41,8 +40,8 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 356474173f3c04920acd29deff258aa7, type: 2}
-  - {fileID: 2100000, guid: 63f4bccc7dbb849b39bd04ce01c4c503, type: 2}
+  - {fileID: 2100000, guid: 96b496996922442b88f2791a083ff4e0, type: 2}
+  - {fileID: 2100000, guid: 96b496996922442b88f2791a083ff4e0, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -65,7 +64,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 136856}
   m_Mesh: {fileID: 4300000, guid: 9ff278b6d70da489691a1e3ee5c4e6d1, type: 3}
---- !u!95 &9553408
+--- !u!95 &9520612
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
@@ -82,17 +81,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &11482688
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 136856}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6c0dce32a6bd4bbf883d2afabdf81bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

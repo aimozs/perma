@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
@@ -36,9 +37,6 @@ public class Parcel : MonoBehaviour {
 		//plant the prefab
 		plantPrefabGO = Instantiate(GameModel.Instance.plantPrefab) as GameObject;
 		plantPrefabGO.GetComponent<PlantPrefab>().plant = plant;
-
-		if(plant != null)
-			plantPrefabGO.GetComponent<PlantPrefab>().UpdateFF(this, plant);
 		
 		plantPrefabGO.transform.SetParent(transform, false);
 
@@ -53,7 +51,8 @@ public class Parcel : MonoBehaviour {
 		if(parcelReadyGO != null)
 			Destroy(parcelReadyGO);
 
-
+//		if(plant != null)
+//			plantPrefabGO.GetComponent<PlantPrefab>().UpdateFF(this, plant);
 	}
 
 	//
@@ -130,9 +129,10 @@ public class Parcel : MonoBehaviour {
 					} else {
 						UIManager.Notify(plantPrefab.plant.plantType + " will not grow on a pH not close to "+ plantPrefab.plant.pHAve.ToString()+ ", use the shovel to start fresh!");
 					}
-				} else {
-					UIManager.Notify("Some parcelles are a bit too dry, think about watering your plants on sunny days!");
 				}
+//				else {
+//					UIManager.Notify("Some parcelles are a bit too dry, think about watering your plants on sunny days!");
+//				}
 			}
 			UIManager.Instance.UpdateFriendColor(waterUI, plantPrefab.plant, plantPrefab.friendStatus);
 		}
@@ -195,6 +195,12 @@ public class Parcel : MonoBehaviour {
 	public void OnMouseDown(){
 		SetParcelSelected();
 		UIManager.Instance.DisplayMenu(true);
+//		if(EventSystem.current.currentSelectedGameObject != null)
+//			Debug.Log("4" + EventSystem.current.currentSelectedGameObject.name);
+	}
+
+	public void OnMouseUp(){
+		EventSystem.current.SetSelectedGameObject(UIManager.Instance.cancelGO);
 	}
 
 	public void SetParcelSelected(){

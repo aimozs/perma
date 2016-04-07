@@ -6,6 +6,8 @@ using System.Collections.Generic;
 
 public class UIManager : MonoBehaviour {
 
+	public enum SaveState {open, saved, loaded, error}
+
 	public bool debugUI = true;
 	public GameObject shelf;
 	public GameObject plantShopPanel;
@@ -23,6 +25,13 @@ public class UIManager : MonoBehaviour {
 	public Text fcDescription;
 	public Text fcSource;
 	public Text fcBuy;
+
+	[Header ("SaveState")]
+	public GameObject currentState;
+	public Sprite SSopen;
+	public Sprite SSsaved;
+	public Sprite SSloaded;
+	public Sprite SSerror;
 
 //	public GameObject wellGO;
 //	public GameObject shovelGO;
@@ -55,17 +64,37 @@ public class UIManager : MonoBehaviour {
 		SetPlantDetails(GardenManager.Instance.transform.GetChild(0).GetComponent<Plant>());
 	}
 
+	void Update(){
+		if(Input.GetKeyDown(KeyCode.A)){
+			EventSystem.current.SetSelectedGameObject(cancelGO);
+			Debug.Log(EventSystem.current.currentSelectedGameObject.name);
+		}
+	}
+
+	public static void Notify(string message){
+		GameObject notif = Instantiate(Instance.notifPrefab);
+		notif.GetComponentInChildren<Text>().text = message;
+		notif.transform.SetParent(Instance.notifPanel.transform, false);
+		Destroy(notif, 5f);
+	}
+
 	public void DisplayMenu(bool on){
+//		if(EventSystem.current.currentSelectedGameObject != null)
+//			Debug.Log("1" + EventSystem.current.currentSelectedGameObject.name);
 		DisplayScreen(menu, on);
 
 		if(on){
 			ActivateGardenSelectable(false);
-			EventSystem.current.SetSelectedGameObject(cancelGO);
+//			if(EventSystem.current.currentSelectedGameObject != null)
+//				Debug.Log("2" + EventSystem.current.currentSelectedGameObject.name);
+//			EventSystem.current.SetSelectedGameObject(cancelGO);
+//			if(EventSystem.current.currentSelectedGameObject != null)
+//				Debug.Log("3" + EventSystem.current.currentSelectedGameObject.name);
 		} else {
 			ActivateGardenSelectable(true);
 			EventSystem.current.SetSelectedGameObject(GameManager.Instance.currentParcelGO);
 		}
-		StartCoroutine(SetButtonInteractable(on));
+//		StartCoroutine(SetButtonInteractable(on));
 			
 	}
 
@@ -82,13 +111,29 @@ public class UIManager : MonoBehaviour {
 		}
 	}
 
-	public static void Notify(string message){
-		GameObject notif = Instantiate(Instance.notifPrefab);
-		notif.GetComponentInChildren<Text>().text = message;
-		notif.transform.SetParent(Instance.notifPanel.transform, false);
-		Destroy(notif, 5f);
+
+
+	public static void DisplaySaveState(SaveState state){
+		Instance.ShowCanvas(Instance.currentState.GetComponent<CanvasGroup>(), true);
+		switch(state){
+		case SaveState.open:
+			Instance.currentState.GetComponent<Image>().sprite = instance.SSopen;
+			break;
+		case SaveState.saved:
+			Instance.currentState.GetComponent<Image>().sprite = instance.SSsaved;
+			break;
+		case SaveState.loaded:
+			Instance.currentState.GetComponent<Image>().sprite = instance.SSloaded;
+			break;
+		}
+
 	}
 
+	IEnumerator HideSaveState(){
+		yield return new WaitForSeconds(3f);
+		Instance.ShowCanvas(Instance.currentState.GetComponent<CanvasGroup>(), false);
+	}
+		
 
 	public void AddBtnPlant(Plant plant/*, Vector3 position*/){
 		GameObject btnPlant = (GameObject)Instantiate(GameModel.Instance.btnPlantPrefab/*, position, Quaternion.identity*/);
@@ -137,33 +182,34 @@ public class UIManager : MonoBehaviour {
 	}
 
 	public void DisplayScreenInfos(){
+		
 		CanvasGroup canvas = infos.GetComponent<CanvasGroup>();
-		bool display = !canvas.interactable;
-		if(debugUI)
-			Debug.Log(display);
-		if(canvas != null){
-			if(display){
-				canvas.alpha = 1f;
-				canvas.blocksRaycasts = canvas.interactable = true;
-			} else {
-				canvas.alpha = 0f;
-				canvas.blocksRaycasts = canvas.interactable = false;
-
-			}
-		}
+		ShowCanvas(canvas, !canvas.interactable);
+//		bool display = !canvas.interactable;
+//		if(debugUI)
+//			Debug.Log(display);
+//		if(canvas != null){
+//			if(display){
+//				ShowCanvas(canvas, true);
+//			} else {
+//				ShowCanvas(canvas, false);
+//				canvas.alpha = 0f;
+//				canvas.blocksRaycasts = canvas.interactable = false;
+//
+//			}
+//		}
 	}
 
 	public void DisplayScreen(GameObject screen, bool display){
 		CanvasGroup canvas = screen.GetComponent<CanvasGroup>();
 		if(canvas != null){
-			if(display){
-				canvas.alpha = 1f;
-				canvas.blocksRaycasts = canvas.interactable = true;
-			} else {
-				canvas.alpha = 0f;
-				canvas.blocksRaycasts = canvas.interactable = false;
-			}
+			ShowCanvas(canvas, display);
 		}
+	}
+
+	void ShowCanvas(CanvasGroup canvas, bool on){
+		canvas.alpha = on ? 1f : 0f;
+		canvas.blocksRaycasts = canvas.interactable = on;
 	}
 
 	public void StartTimerForecast(){

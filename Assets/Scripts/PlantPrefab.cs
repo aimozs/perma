@@ -13,43 +13,48 @@ public class PlantPrefab : MonoBehaviour {
 	public int size = 1;
 	public FriendStatus friendStatus = FriendStatus.none;
 
-//	void OnEnable(){
-//		GameManager.PlantingThat += UpdateFF;
-//	}
-//
-//	void OnDisable(){
-//		GameManager.PlantingThat -= UpdateFF;
-//	}
+	void OnEnable(){
+		GameManager.PlantingThat += UpdateFF;
+	}
+
+	void OnDisable(){
+		GameManager.PlantingThat -= UpdateFF;
+	}
 
 	public void UpdateFF(Parcel parcel, Plant newPlant){
-		Parcel thisParcel = GetComponentInParent<Parcel>();
-		if(parcel != null && thisParcel != null) {
-//			Debug.Log(Vector3.Distance(parcel.transform.position, thisParcel.transform.position));
-			float distance = Vector3.Distance(parcel.transform.position, thisParcel.transform.position);
-			if(0.1f < distance && distance <= 1.1f){
-				if(plant.friends.Contains(newPlant.plantType)){
-//					Debug.Log("contains new plant as friend for " + plant.plantType);
-					friendStatus = FriendStatus.friend;
-					parcel.GetComponentInChildren<PlantPrefab>().friendStatus = FriendStatus.friend;
-//					Debug.Log("current parcel friend status for " + parcel.GetComponentInChildren<PlantPrefab>().plant.plantType + ": " + parcel.GetComponentInChildren<PlantPrefab>().friendStatus);
+		
+		if(parcel != null) {
+//			Debug.Log(transform.parent.gameObject.name);
+			Parcel thisParcel = GetComponentInParent<Parcel>();
+			if(thisParcel != null){
+	//			Debug.Log(Vector3.Distance(parcel.transform.position, thisParcel.transform.position));
+				float distance = Vector3.Distance(parcel.transform.position, thisParcel.transform.position);
+				if(0.1f < distance && distance <= 1.1f){
+					if(plant.friends.Contains(newPlant.plantType)){
+	//					Debug.Log("contains new plant as friend for " + plant.plantType);
+						friendStatus = FriendStatus.friend;
+						parcel.GetComponentInChildren<PlantPrefab>().friendStatus = FriendStatus.friend;
+	//					Debug.Log("current parcel friend status for " + parcel.GetComponentInChildren<PlantPrefab>().plant.plantType + ": " + parcel.GetComponentInChildren<PlantPrefab>().friendStatus);
 
-				} else {
-					if(plant.foes.Contains(newPlant.plantType)){
-//						Debug.Log("contains new plant as friend");
-//						friendStatus = FriendStatus.foe;
-						if(GameManager.Instance.loadFinished)
-							StartCoroutine(PlantedFoe());
+					} else {
+						if(plant.foes.Contains(newPlant.plantType)){
+	//						Debug.Log("contains new plant as friend");
+	//						friendStatus = FriendStatus.foe;
+							if(GPGSIds.loadFinished)
+								StartCoroutine(PlantedFoe());
+						}
+	//					} else {
+	//						friendStatus = FriendStatus.none;
+	////						Debug.Log("DOESNT contains new plant as friend");
+	//					}
 					}
-//					} else {
-//						friendStatus = FriendStatus.none;
-////						Debug.Log("DOESNT contains new plant as friend");
-//					}
+
 				}
-
-
+			} else {
+				UIManager.Notify("could not get parcel in parent");
 			}
 		} else {
-			UIManager.Notify("Couldn't load parcel");
+			UIManager.Notify("Passed parcel is null");
 		}
 	}
 

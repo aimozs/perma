@@ -10,7 +10,6 @@ GameObject:
   - 4: {fileID: 410724}
   - 33: {fileID: 3314166}
   - 23: {fileID: 2353288}
-  - 95: {fileID: 9505654}
   - 114: {fileID: 11475890}
   m_Layer: 0
   m_Name: parcelReady
@@ -41,7 +40,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 356474173f3c04920acd29deff258aa7, type: 2}
+  - {fileID: 2100000, guid: 96b496996922442b88f2791a083ff4e0, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -64,23 +63,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 127360}
   m_Mesh: {fileID: 4300002, guid: 4786017ddd590421b8efdb548cb31059, type: 3}
---- !u!95 &9505654
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 127360}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 4786017ddd590421b8efdb548cb31059, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11475890
 MonoBehaviour:
   m_ObjectHideFlags: 1
