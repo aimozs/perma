@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Thermal Vision
+  m_Shader: {fileID: 4800000, guid: 0690e5dc6a3db7c4a88442f0842e5f9d, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 5
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  m_SavedProperties:
+    serializedVersion: 2
+    m_TexEnvs:
+    - first:
+        name: _HeatLookupTex
+      second:
+        m_Texture: {fileID: 2800000, guid: 204002357ea18554c9f548685a3e628d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _MainTex
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _NoiseTex
+      second:
+        m_Texture: {fileID: 2800000, guid: 0b20d0ae77e7c184b8abe949f9e89fed, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - first:
+        name: _Amplitude
+      second: 0.8
+    - first:
+        name: _BlurAmount
+      second: 0.2
+    - first:
+        name: _DepthModulator
+      second: 0.559
+    - first:
+        name: _Gap
+      second: 0.1
+    - first:
+        name: _HotLight
+      second: 0.8
+    - first:
+        name: _Param1
+      second: 7.04
+    - first:
+        name: _Param2
+      second: 1.889
+    - first:
+        name: _Param3
+      second: 0.0933
+    - first:
+        name: _Progress
+      second: 2.7599993
+    - first:
+        name: _Spread
+      second: 0.3
+    m_Colors:
+    - first:
+        name: _Center
+      second: {r: 0.651751, g: 0.625969, b: 0, a: 0}
+    - first:
+        name: _Color
+      second: {r: 1, g: 1, b: 1, a: 1}
+    - first:
+        name: _Dimensions
+      second: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - first:
+        name: _RandomFractions
+      second: {r: 0.78637993, g: 0.74210846, b: 0, a: 0}
+    - first:
+        name: _Rnd
+      second: {r: 0.14502132, g: 0.52707964, b: 0, a: 0}
