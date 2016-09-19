@@ -8,6 +8,7 @@ public class GameModel : MonoBehaviour {
 	public GameObject btnClimatePrefab;
 
 	public GameObject plantPrefab;
+	public Mesh seedling;
 	public GameObject germination;
 	public GameObject parcelReady;
 	public GameObject waste;

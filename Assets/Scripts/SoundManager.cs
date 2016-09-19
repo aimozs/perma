@@ -5,7 +5,7 @@ public class SoundManager : MonoBehaviour
 {
 	public bool debugAudio;
 
-	public AudioSource audioSource;
+
 
 	public AudioClip rain;
 	public AudioClip thunder;
@@ -13,7 +13,7 @@ public class SoundManager : MonoBehaviour
 	public AudioClip cicadas;
 	public AudioClip birds;
 
-
+	private static AudioSource audioSource;
 	// Use this for initialization
 
 	private static SoundManager instance;
@@ -26,9 +26,57 @@ public class SoundManager : MonoBehaviour
 		}
 	}
 
-	public void PlaySound(AudioClip sound) {
-		audioSource.PlayOneShot(sound);
+	#region 0.Basics
+
+	void Awake(){
+		audioSource = GetComponent<AudioSource>();
 	}
+
+//	void Start(){}
+
+//	void Update(){}
+
+	#endregion
+
+	#region 1.Statics
+		public static void PlaySound(AudioClip sound) {
+			audioSource.PlayOneShot(sound);
+		}
+
+	public static void SetVolume(float vol){
+			audioSource.volume = vol;
+		}
+
+	public static void PlayRain(){
+			if(Instance.rain != null)
+			PlaySound(Instance.rain);
+		}
+
+	public static void PlayStorm(){
+		if(Instance.thunder != null)
+			PlaySound(Instance.thunder);
+		}
+
+	public static void PlayCicadas(){
+		if(Instance.cicadas != null)
+			PlaySound(Instance.cicadas);
+		}
+
+	public static void PlayBirds(){
+		if(Instance.birds != null)
+			PlaySound(Instance.birds);
+		}
+	#endregion
+
+	#region 2.Publics
+
+	#endregion
+
+	#region 3.Privates
+
+	#endregion
+
+
 
 	public IEnumerator TransitionToVolume(float volume){
 		float elapsedTime = 0;
@@ -40,27 +88,5 @@ public class SoundManager : MonoBehaviour
 			}
 	}
 
-	public void SetVolume(float vol){
-		audioSource.volume = vol;
-	}
 
-	public void PlayRain(){
-		if(rain != null)
-			PlaySound(rain);
-	}
-
-	public void PlayStorm(){
-		if(thunder != null)
-			PlaySound(thunder);
-	}
-
-	public void PlayCicadas(){
-		if(cicadas != null)
-			PlaySound(cicadas);
-	}
-
-	public void PlayBirds(){
-		if(birds != null)
-			PlaySound(birds);
-	}
 }

@@ -1,4 +1,4 @@
-lastUpgrade=00931
+lastUpgrade=00934
 proj.AppId=196475929276
 and.BundleId=com.asmpgame.permanagement
 proj.classDir=Assets
@@ -7,3 +7,4 @@ and.ResourceData=%3c%3fxml+version%3d%221.0%22+encoding%3d%22utf-8%22%3f%3e%0a%3
 and.ClientId=
 proj.requireGPlus=false
 android.SetupDone=true
+proj.pluginVersion=0.9.34

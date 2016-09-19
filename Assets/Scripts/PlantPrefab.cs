@@ -13,176 +13,158 @@ public class PlantPrefab : MonoBehaviour {
 	public int size = 1;
 	public FriendStatus friendStatus = FriendStatus.none;
 
+
+	private bool alreadyProduced = false;
+
+	#region 0.Basics
 	void OnEnable(){
-		GameManager.PlantingThat += UpdateFF;
+//		GardenManager.PlantingThat += UpdateFF;
+		ClimateManager.OnTriggerClimate += TestGrowth;
 	}
 
 	void OnDisable(){
-		GameManager.PlantingThat -= UpdateFF;
+//		GardenManager.PlantingThat -= UpdateFF;
+		ClimateManager.OnTriggerClimate -= TestGrowth;
 	}
 
-	public void UpdateFF(Parcel parcel, Plant newPlant){
-		
-		if(parcel != null) {
-//			Debug.Log(transform.parent.gameObject.name);
-			Parcel thisParcel = GetComponentInParent<Parcel>();
-			if(thisParcel != null){
-	//			Debug.Log(Vector3.Distance(parcel.transform.position, thisParcel.transform.position));
-				float distance = Vector3.Distance(parcel.transform.position, thisParcel.transform.position);
-				if(0.1f < distance && distance <= 1.1f){
-					if(plant.friends.Contains(newPlant.plantType)){
-	//					Debug.Log("contains new plant as friend for " + plant.plantType);
-						friendStatus = FriendStatus.friend;
-						parcel.GetComponentInChildren<PlantPrefab>().friendStatus = FriendStatus.friend;
-	//					Debug.Log("current parcel friend status for " + parcel.GetComponentInChildren<PlantPrefab>().plant.plantType + ": " + parcel.GetComponentInChildren<PlantPrefab>().friendStatus);
+	#endregion
 
-					} else {
-						if(plant.foes.Contains(newPlant.plantType)){
-	//						Debug.Log("contains new plant as friend");
-	//						friendStatus = FriendStatus.foe;
-							if(GPGSIds.loadFinished)
-								StartCoroutine(PlantedFoe());
-						}
-	//					} else {
-	//						friendStatus = FriendStatus.none;
-	////						Debug.Log("DOESNT contains new plant as friend");
-	//					}
-					}
+	#region 1.Statics
 
-				}
-			} else {
-				UIManager.Notify("could not get parcel in parent");
-			}
-		} else {
-			UIManager.Notify("Passed parcel is null");
-		}
-	}
+	#endregion
 
-	IEnumerator PlantedFoe(){
-		UIManager.Notify("One of the plant nearby is not happy with your choice!");
-		yield return new WaitForSeconds(1f);
-		UnityAdsButton.Instance.DisplayAd();
-	}
-	
+	#region 2.Publics
 	public void IncreaseSize(bool up){
-		if(up){
-			if(size <= plant.maxSize){
-				size++;
+		if(plant != null){
+			if(up){
+				if(size <= plant.maxSize){
+					size++;
 
-				if(size >= plant.germinationSize) {
-					if(size == plant.germinationSize) {
-						IncreaseToSpecificStage(Plant.stageEnum.germination);
-					}
-					if(germinationPrefab != null){
-						IncreaseModelScale(germinationPrefab);
-					}
-				}
-
-				if(size >= plant.growthSize) {
-					if(size == plant.growthSize)
-						IncreaseToSpecificStage(Plant.stageEnum.growth);
-					if(growthPrefab != null)
-						IncreaseModelScale(growthPrefab);
-				}
-
-				if(size >= plant.pollinationSize) {
-					if(size == plant.pollinationSize)
-						IncreaseToSpecificStage(Plant.stageEnum.pollination);
-					if(pollinationPrefab != null)
-						IncreaseModelScale(pollinationPrefab);
-				}
-
-				if(size >= plant.productSize) {
-					if(size == plant.productSize)
-						IncreaseToSpecificStage(Plant.stageEnum.product);
-					if(productPrefab != null)
-						IncreaseModelScale(productPrefab);
-				}
-			} else {
-				if(productPrefab == null){
-					Parcel thisParcel = GetComponentInParent<Parcel>();
-					if(thisParcel != null) {
-						Debug.Log(thisParcel.name);
-						if(pollinationPrefab != null){
-							GardenManager.Instance.ResetCycle(thisParcel, plant);
-						} else {
-							GameManager.Instance.ResetParcel(thisParcel);
+					if(size >= plant.productSize){
+						if(!alreadyProduced){
+							IncreaseToSpecificStage(Plant.stageEnum.product, false, true);
+							alreadyProduced = true;
 						}
 					} else {
-						UIManager.Notify("Could not get PP's parcel");
+						if(size >= plant.pollinationSize)
+							IncreaseToSpecificStage(Plant.stageEnum.pollination,true, false);
+						else {
+							if(size >= plant.growthSize){
+								IncreaseToSpecificStage(Plant.stageEnum.growth);
+							} else {
+								if(size == plant.germinationSize)
+									IncreaseToSpecificStage(Plant.stageEnum.germination);
+							}
+						}
+					}
+
+				} else {
+					if(productPrefab == null){
+						Parcel thisParcel = GetComponentInParent<Parcel>();
+						if(thisParcel != null) {
+							if(pollinationPrefab != null){
+								GardenManager.Instance.ResetCycle(thisParcel, plant);
+							} else {
+								GardenManager.Instance.ResetParcel(thisParcel);
+							}
+						} else {
+							UIManager.Notify("Could not get PP's parcel");
+						}
 					}
 				}
+				transform.localScale = new Vector3(1+size/10f, 1+size/10f, 1+size/10f);
+
 			}
 		}
 	}
 
-	void IncreaseModelScale(GameObject go){
-		Vector3 scale = go.transform.localScale;
-		go.transform.localScale = new Vector3(1+size/10f, 1+size/10f, 1+size/10f);
-			
-		if(GameManager.Instance.debugGame)
-			Debug.Log("And increasing the scale of " + plant.plantType.ToString() + " to " + scale);
-	}
+	public void IncreaseToSpecificStage(Plant.stageEnum stage, bool hasFlowers = false, bool hasProducts = false){
+		plantStage = stage;
 
-//	public void IncreaseStage(){
-//		switch(plantStage){
-//		case Plant.stageEnum.seedling:
-//			plantStage = Plant.stageEnum.germination;
-//			GameObject germinatation = (GameObject)Instantiate(GameModel.Instance.germination, transform.position,  Quaternion.Euler(-90, 0, 0));
-//			germinatation.transform.SetParent(transform);
-//			break;
-//		case Plant.stageEnum.germination:
-//			plantStage = Plant.stageEnum.pollination;
-//			GameObject growth = (GameObject)Instantiate(plant.growth, transform.position, Quaternion.Euler(-90, 0, 0));
-//			growth.transform.SetParent(transform);
-//			break;
-//		case Plant.stageEnum.pollination:
-//			plantStage = Plant.stageEnum.product;
-//			GameObject product = (GameObject)Instantiate(plant.product, transform.position, Quaternion.Euler(-90, 0, 0));
-//			product.transform.SetParent(transform);
-//			break;
-//		default:
-//			break;
-
-	public void IncreaseToSpecificStage(Plant.stageEnum stage){
-		
 		switch(stage){
 		case Plant.stageEnum.germination:
 			germinationPrefab = (GameObject)Instantiate(GameModel.Instance.germination, transform.position,  Quaternion.Euler(-90, 0, 0));
 			germinationPrefab.transform.SetParent(transform);
-			plantStage = stage;
 			break;
 		case Plant.stageEnum.growth:
-			if(plant.growth != null) {
-				growthPrefab = (GameObject)Instantiate(plant.growth, transform.position, Quaternion.Euler(-90, 0, 0));
-				growthPrefab.transform.SetParent(transform);
-				plantStage = stage;
-			}
-			if(germinationPrefab != null)
-				Destroy(germinationPrefab);
+			AddGrowth();
 			break;
 		case Plant.stageEnum.pollination:
-			if(plant.pollination != null) {
-				pollinationPrefab = (GameObject)Instantiate(plant.pollination, transform.position, Quaternion.Euler(-90, 0, 0));
-				pollinationPrefab.transform.SetParent(transform);
-				plantStage = stage;
-			}
+			if(hasFlowers)
+				AddPollination();
 			break;
 		case Plant.stageEnum.product:
-			if(plant.product != null) {
-				productPrefab = (GameObject)Instantiate(plant.product, transform.position, Quaternion.Euler(-90, 0, 0));
-				productPrefab.transform.SetParent(transform);
-				plantStage = stage;
-			}
-
-//			if(pollinationPrefab != null)
-//				Destroy(pollinationPrefab);
+			if(hasFlowers)
+				AddPollination();
+			if(hasProducts)
+				AddProduct();
 			break;
 		default:
 			break;
 		}
-
-		if(GameManager.Instance.debugGame)
-			Debug.Log("raising the stage of " + plant.plantType.ToString() + " to " + stage);
 	}
+
+//	public void UpdateFF(Parcel parcel, Plant newPlant){
+//		
+//		if(parcel != null) {
+//			Parcel thisParcel = GetComponentInParent<Parcel>();
+//
+//			if(thisParcel != null){
+//				float distance = Vector3.Distance(parcel.transform.position, thisParcel.transform.position);
+//
+//				if(0.1f < distance && distance <= 1.1f){
+//					if(plant.friends.Contains(newPlant.plantName)){
+//						friendStatus = FriendStatus.friend;
+//						parcel.GetComponentInChildren<PlantPrefab>().friendStatus = FriendStatus.friend;
+//
+//					} else {
+//						if(plant.foes.Contains(newPlant.plantName)){
+//							StartCoroutine(PlantedFoe());
+//						}
+//					}
+//				}
+//			}
+//		}
+//	}
+
+	#endregion
+
+	#region 3.Privates
+
+	void TestGrowth(Climate climate){
+		IncreaseSize(true);
+	}
+	
+	void AddGrowth(){
+		if(plant.growth != null && growthPrefab == null) {
+			growthPrefab = (GameObject)Instantiate(plant.growth, transform.position, Quaternion.Euler(-90, 0, 0));
+			growthPrefab.transform.SetParent(transform);
+			growthPrefab.transform.localScale = Vector3.one;
+		}
+
+		if(germinationPrefab != null)
+			Destroy(germinationPrefab);
+	}
+
+	void AddPollination(){
+		if(plant.pollination != null && pollinationPrefab == null) {
+			pollinationPrefab = (GameObject)Instantiate(plant.pollination, transform.position, Quaternion.Euler(-90, 0, 0));
+			pollinationPrefab.transform.SetParent(transform);
+			pollinationPrefab.transform.localScale = Vector3.one;
+		}
+
+		AddGrowth();
+	}
+
+	void AddProduct(){
+		if(plant.product != null && productPrefab == null) {
+			productPrefab = (GameObject)Instantiate(plant.product, transform.position, Quaternion.Euler(-90, 0, 0));
+			productPrefab.transform.SetParent(transform);
+			productPrefab.transform.localScale = Vector3.one;
+		}
+
+		AddGrowth();
+	}
+
+	#endregion
 }

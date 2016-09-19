@@ -22,18 +22,14 @@ public class ClimateManager : MonoBehaviour {
 	public GameObject snowFlake;
 	public GameObject cloud;
 	public GameObject rain;
+	public Light thunder;
 
 
-
-	void DisableAllParticles(){
-		cloud.GetComponent<ParticleSystem>().Stop();
-		snowFlake.GetComponent<ParticleSystem>().Stop();
-		rain.GetComponent<ParticleSystem>().Stop();
-	}
   
 	public delegate void EmitClimate(Climate climate);
 	public static event EmitClimate OnTriggerClimate;
-  
+	private bool _initialized = false;
+
 	private static ClimateManager instance;
 	public static ClimateManager Instance {
 		get {
@@ -46,7 +42,6 @@ public class ClimateManager : MonoBehaviour {
 	
 	void Start(){
 		InitClimate();
-	
 
 		for(int f = 0; f < days_forecast; f++){
 			AddClimateToForecast();
@@ -56,18 +51,33 @@ public class ClimateManager : MonoBehaviour {
 //			else
 //				forecast[f].climateBtn.GetComponent<BtnClimate>().RefreshUI("?");
 		}
+		_initialized = true;
 
-		StartCoroutine(UpdateClimate());
+		InvokeRepeating("UpdateClimate", 2f, climateInterval);
 
 		UIManager.Instance.StartTimerForecast();
 	}
 
-	void AddClimateToForecast(){
-		Climate climate = GetRandomClimate();
-		if(climate != null)
-			forecast.Add(climate);
+
+	void DisableAllParticles(){
+		cloud.GetComponent<ParticleSystem>().Stop();
+		snowFlake.GetComponent<ParticleSystem>().Stop();
+		rain.GetComponent<ParticleSystem>().Stop();
+	}
+
+	void AddClimateToForecast(Climate climate = null){
+		
+		if(climate == null)
+			climate = GetRandomClimate();
+
+		forecast.Add(climate);
+		
 		UIManager.Instance.AddClimate(climate);
-		UpdateTemperature(forecast[0]);
+
+//		Debug.Log(_initialized);
+
+		if(_initialized)
+			UpdateTemperature(forecast[0]);
 	}
 
 	public void RenewCLimate(){
@@ -78,13 +88,11 @@ public class ClimateManager : MonoBehaviour {
 		AddClimateToForecast();
 	}
 
-	IEnumerator UpdateClimate(){
+	void UpdateClimate(){
 
 		if(OnTriggerClimate != null)
 			OnTriggerClimate(forecast[0]);
 
-		yield return new WaitForSeconds(climateInterval);
-		StartCoroutine(UpdateClimate());
 	}
 
 	public Climate GetRandomClimate(){
@@ -115,59 +123,60 @@ public class ClimateManager : MonoBehaviour {
 			climatesDict.Add(climate.climateType.ToString(), climate);
 		}
 
-		if(debugClimate)
-			Debug.Log(climatesDict.Count);
+//		if(debugClimate)
+//			Debug.Log(climatesDict.Count);
 
 	}
 
 	public void UpdateTemperature(Climate climate){
+//		Debug.Log(climate.climateType.ToString());
 		dir = UnityEngine.Random.Range(0f, 359f);
 		direction.transform.rotation = Quaternion.Euler(0f, 0f, dir);
-		windZone.transform.rotation = Quaternion.Euler(0f, -dir, 0f);
+//		windZone.transform.rotation = Quaternion.Euler(0f, -dir, 0f);
 
 
 		switch(climate.climateType){
 		case Climate.ClimateType.storm:
 			strength = UnityEngine.Random.Range(20, 50);
-			cloud.GetComponent<ParticleSystem>().Play();
-			rain.GetComponent<ParticleSystem>().Play();
-			snowFlake.GetComponent<ParticleSystem>().Stop();
+//			cloud.GetComponent<ParticleSystem>().Play();
+//			rain.GetComponent<ParticleSystem>().Play();
+//			snowFlake.GetComponent<ParticleSystem>().Stop();
 			StartCoroutine(SetSun(false));
-			SoundManager.Instance.PlayStorm();
-			SoundManager.Instance.PlayRain();
-			StartCoroutine(UIManager.Instance.FlashThunder());
+			SoundManager.PlayStorm();
+			SoundManager.PlayRain();
+			StartCoroutine(FlashThunder());
 			break;
 		case Climate.ClimateType.rainy:
 			strength = UnityEngine.Random.Range(20, 50);
-			cloud.GetComponent<ParticleSystem>().Play();
-			rain.GetComponent<ParticleSystem>().Play();
-			snowFlake.GetComponent<ParticleSystem>().Stop();
+//			cloud.GetComponent<ParticleSystem>().Play();
+//			rain.GetComponent<ParticleSystem>().Play();
+//			snowFlake.GetComponent<ParticleSystem>().Stop();
 			StartCoroutine(SetSun(false));
-			SoundManager.Instance.PlayRain();
+			SoundManager.PlayRain();
 			break;
 		case Climate.ClimateType.cloudy:
 			strength = UnityEngine.Random.Range(5, 20);
-			cloud.GetComponent<ParticleSystem>().Play();
-			snowFlake.GetComponent<ParticleSystem>().Stop();
-			rain.GetComponent<ParticleSystem>().Stop();
+//			cloud.GetComponent<ParticleSystem>().Play();
+//			snowFlake.GetComponent<ParticleSystem>().Stop();
+//			rain.GetComponent<ParticleSystem>().Stop();
 			StartCoroutine(SetSun(true));
-			SoundManager.Instance.PlayBirds();
+			SoundManager.PlayBirds();
 			break;
 		case Climate.ClimateType.snowy:
 			strength = UnityEngine.Random.Range(5, 30);
-			snowFlake.GetComponent<ParticleSystem>().Play();
-			cloud.GetComponent<ParticleSystem>().Play();
-			rain.GetComponent<ParticleSystem>().Stop();
+//			snowFlake.GetComponent<ParticleSystem>().Play();
+//			cloud.GetComponent<ParticleSystem>().Play();
+//			rain.GetComponent<ParticleSystem>().Stop();
 			StartCoroutine(SetSun(false));
 			break;
 		default:
-			DisableAllParticles();
+			//DisableAllParticles();
 			StartCoroutine(SetSun(true));
 			strength = UnityEngine.Random.Range(1, 20);
 			if(BtnTemperature.Instance.temperature > 22)
-				SoundManager.Instance.PlayCicadas();
+				SoundManager.PlayCicadas();
 			else if(BtnTemperature.Instance.temperature > 10)
-				SoundManager.Instance.PlayBirds();
+				SoundManager.PlayBirds();
 			break;
 		}
 //		windZone.GetComponentInChildren<WindZone>().windMain = strength;
@@ -178,6 +187,19 @@ public class ClimateManager : MonoBehaviour {
 
 	}
 
+	public IEnumerator FlashThunder(){
+
+		thunder.intensity = 8f;
+		yield return new WaitForSeconds(.1f);
+		thunder.intensity = 0f;
+		yield return new WaitForSeconds(.1f);
+		thunder.intensity = 8f;
+		yield return new WaitForSeconds(.1f);
+		thunder.intensity = 0f;
+		yield return new WaitForSeconds(.1f);
+
+	}
+
 	IEnumerator SetWindStrength(float newStrength){
 //		Debug.Log(newStrength);
 //		float windStrength = windZone.GetComponentInChildren<WindZone>().windMain;
@@ -185,7 +207,7 @@ public class ClimateManager : MonoBehaviour {
 		float elapsedTime = 0;
 
 		while (elapsedTime < 3f) {
-			windZone.GetComponentInChildren<WindZone>().windMain = Mathf.Lerp(windZone.GetComponentInChildren<WindZone>().windMain, newStrength, elapsedTime / 3f);
+//			windZone.GetComponentInChildren<WindZone>().windMain = Mathf.Lerp(windZone.GetComponentInChildren<WindZone>().windMain, newStrength, elapsedTime / 3f);
 			elapsedTime += Time.deltaTime;
 			yield return new WaitForEndOfFrame();
 		}
@@ -204,7 +226,7 @@ public class ClimateManager : MonoBehaviour {
 		} else {
 			while (elapsedTime < 3f)
 			{
-				sunLight.intensity = Mathf.Lerp(sunLight.intensity, 0f, elapsedTime / 3f);
+				sunLight.intensity = Mathf.Lerp(sunLight.intensity, .7f, elapsedTime / 3f);
 				elapsedTime += Time.deltaTime;
 				yield return new WaitForEndOfFrame();
 			}

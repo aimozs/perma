@@ -5,12 +5,20 @@ using System.Collections.Generic;
 
 public class Plant : MonoBehaviour {
 
-	public enum plantEnum {Tomato, Potato, Basil, Corn, Pumpkin, Beetroot}
+	public enum plantEnum {Tomato, Potato, Basil, Corn, Pumpkin, Beetroot, Raspeberries, Rosemary, Onion, Mushroom, Banana}
+	public enum plantTypeEnum {herb, vegie, fruit}
 	public enum stageEnum {seedling, germination, pollination, product, growth}
+
+	public plantEnum plantName = plantEnum.Tomato;
+	public plantTypeEnum plantType = plantTypeEnum.herb;
+	public ConditionTrigger.Condition condition;
+	public Color color;
 
 	public int seedNumber = 0;
 	public int productNumber = 0;
+
 	public int price = 0;
+	public float calories = .1f;
 	public float pHAve = 7f;
 	public float germinationSize = 3;
 	public float growthSize = 10; 
@@ -23,7 +31,7 @@ public class Plant : MonoBehaviour {
 	public string description;
 	public string source;
 
-	public plantEnum plantType = plantEnum.Tomato;
+
 
 	
 	public Sprite plantIcon;

@@ -32,15 +32,6 @@ public class Well : MonoBehaviour {
 		ClimateManager.OnTriggerClimate -= UpdateLevel;
 	}
 
-//	void UpdateWell(Climate climate){
-//		if(climate.climateType == Climate.ClimateType.sunny)
-//			UpdateLevel(false);
-//
-//		if(climate.climateType == Climate.ClimateType.rainy)
-//			UpdateLevel(true);
-//
-//	}
-
 	public void UpdateLevel(Climate climate){
 		switch(climate.climateType){
 
@@ -67,9 +58,6 @@ public class Well : MonoBehaviour {
 		default:
 			break;
 		}
-
-
-//		UIManager.Instance.UpdateColor(levelUI);
 	}
 		
 
@@ -81,7 +69,11 @@ public class Well : MonoBehaviour {
 	}
 
 	void SetLevel(float level){
-		levelUI.value = level;
+		if(levelUI == null)
+			levelUI = GetComponentInChildren<Slider>();
+
+		if(level != null)
+			levelUI.value = level;
 	}
 
 }
