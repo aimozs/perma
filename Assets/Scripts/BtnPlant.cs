@@ -18,17 +18,19 @@ public class BtnPlant : MonoBehaviour {
 //			GameManager.Instance.SellCurrentPlantProduct(plant);
 //		} else {
 //			if(GardenCursor.currentPlantTrigger.GetComponentInChildren<PlantPrefab>() == null){
-				if(plant.seedNumber > 0){
-					GardenManager.Instance.GrowThatHere(plant);
-				} else {
-					GameManager.Instance.BuyCurrentPlantSeed(plant);
-				}
+		if(plant.seedNumber > 0){
+			GardenManager.GrowAtPosition(plant, GardenCursor.cursorPosition);
+			GardenManager.IncreaseSeedNumber(plant, false);
+
+		} else {
+			GameManager.Instance.BuyPlantSeed(plant);
+		}
 //			}
 //		}
 	}
 
 	public void RefreshInventory(){
-		if(UIManager.IsCooking)
+		if(UIManager.isCooking)
 			GetComponentInChildren<Text>().text = plant.productNumber.ToString();
 		else {
 			if(plant.seedNumber <= 0){
@@ -40,8 +42,6 @@ public class BtnPlant : MonoBehaviour {
 	}
 
 	public void SetPlantUI(){
-		if(UIManager.Instance.debugUI)
-			Debug.Log("Adding sprite to button");
 		transform.GetComponent<Image>().sprite = plant.plantIcon;
 		RefreshInventory();
 	}
@@ -53,7 +53,11 @@ public class BtnPlant : MonoBehaviour {
 
 	public void SelectDisplayDetail(){
 		EventSystem.current.SetSelectedGameObject(this.gameObject);
-		UIManager.Instance.SetPlantDetails(plant);
-//		GardenCursor.UpdatePlantSurface(plant.growthSize);
+		if(plant.seedNumber > 0){
+			UIManager.currentPlant = plant;
+			GardenCursor.DisplayPreviewPlant(plant);
+		} else {
+			GameManager.Instance.BuyPlantSeed(plant);
+		}
 	}
 }

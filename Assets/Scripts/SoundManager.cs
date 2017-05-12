@@ -5,13 +5,12 @@ public class SoundManager : MonoBehaviour
 {
 	public bool debugAudio;
 
-
-
 	public AudioClip rain;
 	public AudioClip thunder;
 	public AudioClip wind;
 	public AudioClip cicadas;
 	public AudioClip birds;
+	public AudioClip shovel;
 
 	private static AudioSource audioSource;
 	// Use this for initialization
@@ -50,7 +49,12 @@ public class SoundManager : MonoBehaviour
 	public static void PlayRain(){
 			if(Instance.rain != null)
 			PlaySound(Instance.rain);
-		}
+	}
+
+	public static void PlayShovel(){
+		if(Instance.shovel != null)
+			PlaySound(Instance.shovel);
+	}
 
 	public static void PlayStorm(){
 		if(Instance.thunder != null)

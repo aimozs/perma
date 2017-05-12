@@ -15,10 +15,10 @@ public class CustomInputManager : MonoBehaviour {
 	private float yRot = 0;
 	private float xRot = 0;
 
-	private Vector3 gardenPos;
-	private float gardenArea;
+//	private Vector3 gardenPos;
+//	private float gardenArea;
 	private Camera custCamera;
-	private GameObject terrain;
+//	private GameObject terrain;
 
 	private float angle;
 	private float previousAngle;
@@ -29,6 +29,8 @@ public class CustomInputManager : MonoBehaviour {
 
 	Touch touch0;
 	Touch touch1;
+
+	private static bool _inputInitOnUI = false;
 
 	private static CustomInputManager instance;
 	public static CustomInputManager Instance {
@@ -46,9 +48,9 @@ public class CustomInputManager : MonoBehaviour {
 
 	void Start(){
 		custCamera = Camera.main;
-		gardenPos = GardenManager.Instance.transform.position;
-		gardenArea = GardenManager.Instance.gardenArea;
-		terrain = GameObject.FindGameObjectWithTag("Terrain");
+//		gardenPos = GardenManager.Instance.transform.position;
+//		gardenArea = GardenManager.Instance.gardenArea;
+//		terrain = GameObject.FindGameObjectWithTag("Terrain");
 		m_CameraTarget = custCamera.transform.parent.transform;
 	}
 
@@ -57,8 +59,9 @@ public class CustomInputManager : MonoBehaviour {
 //	void FixedUpdate(){}
 
 	void LateUpdate () {
-		if(!UIManager.IsCooking)
+		if(!UIManager.isCooking) {
 			GetInput();
+		}
 	}
 
 	#endregion
@@ -79,30 +82,40 @@ public class CustomInputManager : MonoBehaviour {
 
 		if(Input.touchCount == 1){
 			touch0 = Input.GetTouch(0);
-			GetClick(touch0.position);
-			if (touch0.phase == TouchPhase.Moved) {
-				Vector2 touchDeltaPosition = touch0.deltaPosition;
-				Vector3 move = new Vector3(-touchDeltaPosition.x * MOVE_SPEED *0.2f, 0f,-touchDeltaPosition.y * MOVE_SPEED *0.2f);
 
-				TranslateConfined(move);
+			if(!_inputInitOnUI){
+				if(EventSystem.current.IsPointerOverGameObject(touch0.fingerId)){
+					_inputInitOnUI = true;
+				}
+
+				if (touch0.phase == TouchPhase.Moved) {
+					PickUp.pickUpAllowed = false;
+					Vector2 touchDeltaPosition = touch0.deltaPosition;
+					Vector3 move = new Vector3(-touchDeltaPosition.x * MOVE_SPEED *0.1f, 0f,-touchDeltaPosition.y * MOVE_SPEED *0.1f);
+					if(!UIManager.isOverUI){
+						TranslateConfined(move);
+					}
+				} else {
+					GetClick(touch0.position);
+				}
+			}
+
+			if(touch0.phase == TouchPhase.Ended){
+				PickUp.pickUpAllowed = true;
+				_inputInitOnUI = false;
 			}
 
 		} else {
-
 			if(Input.touchCount == 2){
-				
-				
-
 				touch0 = Input.GetTouch(0);
 				touch1 = Input.GetTouch(1);
 
-				if(touch1.phase == TouchPhase.Ended){
+				if(touch1.phase != TouchPhase.Ended){
+					PinchToZoom(touch0, touch1);
+					DragToRotate(touch0, touch1);
+				} else {
 					previousAngle = 0;
 				}
-
-				PinchToZoom(touch0, touch1);
-				DragToRotate(touch0, touch1);
-				
 			}
 		}
 
@@ -113,7 +126,8 @@ public class CustomInputManager : MonoBehaviour {
 			ApplyZoom(zoomDelta);
 		}
 
-		DragCameraOnClick();
+		if(!UIManager.isOverUI)
+			DragCameraOnClick();
 
 		if(Input.GetButtonDown("Fire1")){
 			Vector2 pos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
@@ -159,6 +173,8 @@ public class CustomInputManager : MonoBehaviour {
 		Vector2 newAngle = new Vector2(touch1.position.y - touch0.position.y, touch1.position.x - touch0.position.x);
 
 		angle = Mathf.Atan2(newAngle.x, newAngle.y) * Mathf.Rad2Deg;
+
+//		UIManager.Notify(angle.ToString());
 
 		float deltaHeight = touch1.deltaPosition.y - touch0.deltaPosition.y;
 		ApplyXRotation(deltaHeight);
@@ -243,17 +259,18 @@ public class CustomInputManager : MonoBehaviour {
 			}
 		}
 	}
-	#endregion
 
+	#endregion
 
 	void TranslateConfined(Vector3 direction){
 		cursorTransform = GameManager.CursorTransform;
 		cursorTransform.Translate(direction, Space.Self);
+		UIManager.RefreshConditions();
 	}
 //
 //	void MoveToPoint(){
 //
-//		#if (UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR
+//		#if (UNITY_ANDROID || UNITY_IOS)
 //			if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) {
 //				// Check if finger is over a UI element
 //				if(EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId)) {

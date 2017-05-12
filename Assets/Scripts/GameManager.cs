@@ -38,13 +38,15 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void Start () {
-		GardenManager.Instance.InitPlants();
+		GardenManager.Instance.InitGarden();
 
 		UIManager.Instance.Init();
 		SoundManager.SetVolume(0f);
 
+
 		SaveManager.InitSave();
 		SaveManager.SignIn();
+		SaveManager.LoadGame();
 	}
 
 //	void OnEnable(){}
@@ -84,9 +86,9 @@ public class GameManager : MonoBehaviour {
 		UIManager.Instance.SetCoinText(coins.ToString());
 	}
 
-	public void BuyCurrentPlantSeed(Plant plant){
+	public void BuyPlantSeed(Plant plant){
 		if(plant.price <= coins){
-			GardenManager.Instance.IncreaseSeedNumber(plant, true);
+			GardenManager.IncreaseSeedNumber(plant, true);
 			AddCoin(-plant.price);
 		}
 	}
@@ -103,13 +105,13 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void SellCurrentPlantProduct(Plant plant){
-		if(UIManager.Instance.currenPlant){
+//		if(UIManager.Instance._currenPlant){
 			if(plant.productNumber > 0){
 //				Debug.Log("Selling " + plant.plantName);
 				GardenManager.IncreaseProductNumber(plant, false);
 				AddCoin(plant.price);
 			}
-		}
+//		}
 	}
 
 

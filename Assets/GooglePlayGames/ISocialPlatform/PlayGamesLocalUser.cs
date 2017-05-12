@@ -49,6 +49,10 @@ namespace GooglePlayGames
             mPlatform.Authenticate(callback);
         }
 
+		public void Authenticate(Action<bool, string> callback)
+		{
+		}
+
         /// <summary>
         /// Authenticates the local user. Equivalent to calling
         /// <see cref="PlayGamesPlatform.Authenticate" />.

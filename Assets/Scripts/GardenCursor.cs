@@ -4,9 +4,12 @@ using System.Collections;
 public class GardenCursor : MonoBehaviour {
 
 	public GameObject plantTrigger;
-	public GameObject areaMarker;
-	public ParticleSystem highlight;
+	public MeshFilter _previewPlant;
 	private MeshRenderer meshRend;
+
+	private static DeferredNightVisionEffect _visionEffect;
+	private static int _triggerCounter = 0;
+
 
 	private static GardenCursor instance;
 	public static GardenCursor Instance {
@@ -21,9 +24,11 @@ public class GardenCursor : MonoBehaviour {
 	#region 0.Basics
 //	void Awake(){}
 
-//	void Start(){
+	void Start(){
+//		_visionEffect = GetComponentInChildren<DeferredNightVisionEffect>();
+//		_visionEffect.enabled = false;
 //		meshRend = GetComponentInChildren<MeshRenderer>();
-//	}
+	}
 
 //	void Update(){}
 
@@ -35,10 +40,36 @@ public class GardenCursor : MonoBehaviour {
 	public static GameObject currentPlantTrigger{
 		get {return Instance.plantTrigger;}
 		set {
-			Instance.plantTrigger = value;
-			Instance.UpdateCursor(currentPlantTrigger);
+			if(value != null){
+				_triggerCounter++;
+				Instance.plantTrigger = value;
+			} else {
+				_triggerCounter--;
+				if(_triggerCounter == 0){
+					Instance.plantTrigger = null;
+					UIManager.Instance.DisplayMenu(false);
+				}
+			}
+
+//			Instance.UpdateCursor(currentPlantTrigger);
+
 		}
 	}
+
+	public static Vector3 cursorPosition{
+		get { return Instance.transform.position; }
+	}
+
+
+	public static void DisplayPreviewPlant(Plant plant = null){
+		if(plant != null){
+			Instance._previewPlant.mesh = plant.growth.GetComponent<MeshFilter>().sharedMesh;
+		 } else {
+			Instance._previewPlant.mesh = null;
+
+		}
+	}
+
 
 	#endregion
 
@@ -67,8 +98,7 @@ public class GardenCursor : MonoBehaviour {
 		}
 	}
 
-	public static void UpdatePlantSurface(float rayon){
-		Instance.areaMarker.transform.localScale = new Vector3(rayon, rayon, 1f);
-	}
+
+
 
 }

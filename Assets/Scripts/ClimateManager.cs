@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class ClimateManager : MonoBehaviour {
 
 	public bool debugClimate = true;
-	public float climateInterval = 10f;
+	public float climateInterval = 24f;
 	public int days_forecast = 3;
 	public Climate.ClimateType previousWeather = Climate.ClimateType.sunny;
 	public Dictionary<string, Climate> climatesDict = new Dictionary<string, Climate>();
@@ -14,21 +14,21 @@ public class ClimateManager : MonoBehaviour {
 
 	public List<Climate> forecast = new List<Climate>();
 
-	public GameObject direction;
-	public float dir = 0f;
-	public int strength = 5;
-	public GameObject windZone;
+	private static float _windDir = 0f;
+	private int _windStr = 5;
+	public WindZone windZone;
 
-	public GameObject snowFlake;
-	public GameObject cloud;
-	public GameObject rain;
+
+	public ParticleSystem cloud;
+	public ParticleSystem rain;
+	public ParticleSystem snowFlake;
 	public Light thunder;
 
-
+	private static bool _displayParticles = true;
   
 	public delegate void EmitClimate(Climate climate);
 	public static event EmitClimate OnTriggerClimate;
-	private bool _initialized = false;
+	private static bool _initialized = false;
 
 	private static ClimateManager instance;
 	public static ClimateManager Instance {
@@ -39,6 +39,8 @@ public class ClimateManager : MonoBehaviour {
 			return instance;
 		}
 	}
+
+
 	
 	void Start(){
 		InitClimate();
@@ -56,13 +58,40 @@ public class ClimateManager : MonoBehaviour {
 		InvokeRepeating("UpdateClimate", 2f, climateInterval);
 
 		UIManager.Instance.StartTimerForecast();
+
+		UpdateTemperature();
 	}
+
+	#region 1.Statics
+
+	public static float currentTemp {
+		get { return BtnTemperature.currentTemp; }
+	}
+
+	public static float windDirection{
+		get { return _windDir; }
+	}
+
+	public static float windStrength{
+		get { return Instance._windStr; }
+	}
+
+	public static bool displayParticles{
+		get { 
+//			Debug.Log(_displayParticles);
+			return _displayParticles; }
+		set {
+			_displayParticles = value;
+			Instance.UpdateTemperature();
+		}
+	}
+	#endregion
 
 
 	void DisableAllParticles(){
-		cloud.GetComponent<ParticleSystem>().Stop();
-		snowFlake.GetComponent<ParticleSystem>().Stop();
-		rain.GetComponent<ParticleSystem>().Stop();
+		cloud.Stop();
+		snowFlake.Stop();
+		rain.Stop();
 	}
 
 	void AddClimateToForecast(Climate climate = null){
@@ -70,6 +99,12 @@ public class ClimateManager : MonoBehaviour {
 		if(climate == null)
 			climate = GetRandomClimate();
 
+		if(forecast.Count > 0){
+			while(climate == forecast[forecast.Count-1]){
+				climate = GetRandomClimate();
+			}
+		}
+		
 		forecast.Add(climate);
 		
 		UIManager.Instance.AddClimate(climate);
@@ -77,7 +112,9 @@ public class ClimateManager : MonoBehaviour {
 //		Debug.Log(_initialized);
 
 		if(_initialized)
-			UpdateTemperature(forecast[0]);
+			UpdateTemperature();
+
+
 	}
 
 	public void RenewCLimate(){
@@ -86,6 +123,7 @@ public class ClimateManager : MonoBehaviour {
 		forecast.RemoveAt(0);
 
 		AddClimateToForecast();
+
 	}
 
 	void UpdateClimate(){
@@ -128,62 +166,74 @@ public class ClimateManager : MonoBehaviour {
 
 	}
 
-	public void UpdateTemperature(Climate climate){
-//		Debug.Log(climate.climateType.ToString());
-		dir = UnityEngine.Random.Range(0f, 359f);
-		direction.transform.rotation = Quaternion.Euler(0f, 0f, dir);
-//		windZone.transform.rotation = Quaternion.Euler(0f, -dir, 0f);
+	public void UpdateTemperature(){
 
+//		direction.transform.rotation = Quaternion.Euler(0f, 0f, _windDir);
+		DisableAllParticles();
 
-		switch(climate.climateType){
+		switch(forecast[0].climateType){
 		case Climate.ClimateType.storm:
-			strength = UnityEngine.Random.Range(20, 50);
-//			cloud.GetComponent<ParticleSystem>().Play();
-//			rain.GetComponent<ParticleSystem>().Play();
-//			snowFlake.GetComponent<ParticleSystem>().Stop();
-			StartCoroutine(SetSun(false));
+			_windStr = UnityEngine.Random.Range(20, 50);
+			if(_displayParticles){
+				cloud.Play();
+				rain.Play();
+				snowFlake.Stop();
+			}
+			StartCoroutine(SetSun(.4f));
 			SoundManager.PlayStorm();
 			SoundManager.PlayRain();
 			StartCoroutine(FlashThunder());
 			break;
 		case Climate.ClimateType.rainy:
-			strength = UnityEngine.Random.Range(20, 50);
-//			cloud.GetComponent<ParticleSystem>().Play();
-//			rain.GetComponent<ParticleSystem>().Play();
-//			snowFlake.GetComponent<ParticleSystem>().Stop();
-			StartCoroutine(SetSun(false));
+			_windStr = UnityEngine.Random.Range(10, 40);
+			if(_displayParticles){
+				cloud.Play();
+				rain.Play();
+				snowFlake.Stop();
+			}
+			StartCoroutine(SetSun(.6f));
 			SoundManager.PlayRain();
 			break;
 		case Climate.ClimateType.cloudy:
-			strength = UnityEngine.Random.Range(5, 20);
-//			cloud.GetComponent<ParticleSystem>().Play();
-//			snowFlake.GetComponent<ParticleSystem>().Stop();
-//			rain.GetComponent<ParticleSystem>().Stop();
-			StartCoroutine(SetSun(true));
+			_windStr = UnityEngine.Random.Range(5, 30);
+			if(_displayParticles){
+				cloud.Play();
+				snowFlake.Stop();
+				rain.Stop();
+			}
+			StartCoroutine(SetSun(.8f));
 			SoundManager.PlayBirds();
 			break;
 		case Climate.ClimateType.snowy:
-			strength = UnityEngine.Random.Range(5, 30);
-//			snowFlake.GetComponent<ParticleSystem>().Play();
-//			cloud.GetComponent<ParticleSystem>().Play();
-//			rain.GetComponent<ParticleSystem>().Stop();
-			StartCoroutine(SetSun(false));
+			_windStr = UnityEngine.Random.Range(5, 40);
+			if(_displayParticles){
+				snowFlake.Play();
+				cloud.Play();
+				rain.Stop();
+			}
+			StartCoroutine(SetSun(.4f));
 			break;
 		default:
-			//DisableAllParticles();
-			StartCoroutine(SetSun(true));
-			strength = UnityEngine.Random.Range(1, 20);
+			DisableAllParticles();
+			StartCoroutine(SetSun(.9f));
+			_windStr = UnityEngine.Random.Range(1, 20);
 			if(BtnTemperature.Instance.temperature > 22)
 				SoundManager.PlayCicadas();
 			else if(BtnTemperature.Instance.temperature > 10)
 				SoundManager.PlayBirds();
 			break;
 		}
-//		windZone.GetComponentInChildren<WindZone>().windMain = strength;
-		StartCoroutine(SetWindStrength(strength * .9f));
-		StartCoroutine(SoundManager.Instance.TransitionToVolume(strength /50f));
 
-		UIManager.Instance.SetWindUI(strength);
+		//Set wind direction
+		_windDir = UnityEngine.Random.Range(0f, 359f);
+		Debug.Log("wind orientation " + _windDir);
+		windZone.transform.rotation = Quaternion.Euler(0f, _windDir, 0f);
+		UIManager.Instance.SetWindDir(_windDir);
+
+		//Set wind strength
+		StartCoroutine(SetWindStrength(_windStr / 50f));
+		StartCoroutine(SoundManager.Instance.TransitionToVolume(_windStr /50f));
+		UIManager.Instance.SetWindStrength(_windStr);
 
 	}
 
@@ -207,30 +257,23 @@ public class ClimateManager : MonoBehaviour {
 		float elapsedTime = 0;
 
 		while (elapsedTime < 3f) {
-//			windZone.GetComponentInChildren<WindZone>().windMain = Mathf.Lerp(windZone.GetComponentInChildren<WindZone>().windMain, newStrength, elapsedTime / 3f);
+			windZone.windMain = Mathf.Lerp(windZone.windMain, newStrength, elapsedTime / 3f);
 			elapsedTime += Time.deltaTime;
 			yield return new WaitForEndOfFrame();
 		}
 	}
 
-	IEnumerator SetSun(bool on){
+	IEnumerator SetSun(float newIntensity = .9f){
 		float elapsedTime = 0;
 
-		if(on){
-			while (elapsedTime < 3f)
-			{
-				sunLight.intensity = Mathf.Lerp(sunLight.intensity, 1f, elapsedTime / 3f);
-				elapsedTime += Time.deltaTime;
-				yield return new WaitForEndOfFrame();
-			}
-		} else {
-			while (elapsedTime < 3f)
-			{
-				sunLight.intensity = Mathf.Lerp(sunLight.intensity, .7f, elapsedTime / 3f);
-				elapsedTime += Time.deltaTime;
-				yield return new WaitForEndOfFrame();
-			}
+
+		while (elapsedTime < 3f)
+		{
+			sunLight.intensity = Mathf.Lerp(sunLight.intensity, newIntensity, elapsedTime / 3f);
+			elapsedTime += Time.deltaTime;
+			yield return new WaitForEndOfFrame();
 		}
+		
 
 //		if(on)
 //			do{

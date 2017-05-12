@@ -11,6 +11,8 @@ public class Recipe : MonoBehaviour {
 	public RecipeType recipeType;
 	public Sprite icon;
 	public string description;
+	public string linkRecipe = "";
+	public string linkPhoto = "";
 
 	private float _calories = .1f;
 	private int _price = 1;

@@ -1,0 +1,2292 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1506150462353498}
+  m_IsPrefabParent: 1
+--- !u!1 &1011074100460686
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4306865294069696}
+  - component: {fileID: 114475019147904876}
+  m_Layer: 0
+  m_Name: soupMushroom
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 0
+--- !u!1 &1015148236867848
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4331835948833158}
+  - component: {fileID: 114764370706766642}
+  m_Layer: 0
+  m_Name: Blueberry
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!1 &1038076799433348
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4717718891096774}
+  - component: {fileID: 114234831685349366}
+  m_Layer: 0
+  m_Name: soupPumpkin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!1 &1070905965923382
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4449946924779118}
+  m_Layer: 0
+  m_Name: salads
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!1 &1082388358633968
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4311887205639674}
+  m_Layer: 0
+  m_Name: soups
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!1 &1114185476258108
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4042351002004590}
+  - component: {fileID: 114813174890939646}
+  m_Layer: 0
+  m_Name: Brussel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!1 &1163254886908612
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4174262400335844}
+  m_Layer: 0
+  m_Name: desserts
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!1 &1171158043491582
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4450836490601908}
+  - component: {fileID: 114444494748305016}
+  m_Layer: 0
+  m_Name: Potato
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!1 &1188384664674946
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4882527307095758}
+  - component: {fileID: 114412977371176906}
+  m_Layer: 0
+  m_Name: stuffedMushroom
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!1 &1197495098362898
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4911580763982564}
+  - component: {fileID: 114685538185938914}
+  m_Layer: 0
+  m_Name: beetrootIceCream
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!1 &1242426084240730
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4742463711355032}
+  - component: {fileID: 114412087895667160}
+  m_Layer: 0
+  m_Name: Mushroom
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!1 &1255047770627256
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4351674095228842}
+  - component: {fileID: 114740799532736116}
+  m_Layer: 0
+  m_Name: Tomato
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!1 &1256002712306326
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4884895680772890}
+  m_Layer: 0
+  m_Name: PlantsSetup
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!1 &1281229462129958
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4273631773783034}
+  - component: {fileID: 114797417080120436}
+  m_Layer: 0
+  m_Name: bananaIceCream
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!1 &1391198308869168
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4319203349196380}
+  m_Layer: 0
+  m_Name: fruits
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!1 &1412356797515184
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4437535695886344}
+  - component: {fileID: 114487617892751200}
+  m_Layer: 0
+  m_Name: raspberryIceCream
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!1 &1417046153877264
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4074608439552844}
+  m_Layer: 0
+  m_Name: vegies
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!1 &1463272185072484
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4121255668272796}
+  - component: {fileID: 114685545207038526}
+  m_Layer: 0
+  m_Name: Eggplant
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!1 &1502570966424192
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4337829026765090}
+  - component: {fileID: 114671303281206808}
+  m_Layer: 0
+  m_Name: Beetroot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!1 &1506150462353498
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4859948408572808}
+  - component: {fileID: 114027489842979690}
+  - component: {fileID: 114018925952726566}
+  - component: {fileID: 114224948853287126}
+  - component: {fileID: 114279333139407448}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!1 &1506951436427352
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4193865953237106}
+  - component: {fileID: 114216712320905484}
+  m_Layer: 0
+  m_Name: RecipesSetup
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!1 &1551123083715500
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4962495102887484}
+  - component: {fileID: 114488475399425486}
+  m_Layer: 0
+  m_Name: saladPumpkin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!1 &1575459325244762
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4214015469463126}
+  - component: {fileID: 114484245650154052}
+  m_Layer: 0
+  m_Name: Banana
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!1 &1580224906053900
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4458153360223400}
+  - component: {fileID: 114157044524446296}
+  m_Layer: 0
+  m_Name: Corn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!1 &1580403002421060
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4255770041350026}
+  m_Layer: 0
+  m_Name: meals
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!1 &1612249426034270
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4106058035370778}
+  - component: {fileID: 114063168618904648}
+  m_Layer: 0
+  m_Name: Broccoli
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!1 &1617088936491156
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4859716793032960}
+  m_Layer: 0
+  m_Name: herbs
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!1 &1638449348819270
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4645871670921844}
+  - component: {fileID: 114637934131304438}
+  m_Layer: 0
+  m_Name: Pumpkin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!1 &1664248795925800
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4826505591623378}
+  - component: {fileID: 114659738458834620}
+  m_Layer: 0
+  m_Name: Rhubarb
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!1 &1719105373723182
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4665925930813140}
+  - component: {fileID: 114352403269174854}
+  m_Layer: 0
+  m_Name: roastedPumpkins
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!1 &1723049747980258
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4401474484954084}
+  - component: {fileID: 114275861430844220}
+  m_Layer: 0
+  m_Name: sautedPotatoes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!1 &1724823809607702
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4706949726053266}
+  - component: {fileID: 114093530510204322}
+  m_Layer: 0
+  m_Name: Onion
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!1 &1748735370209776
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4659018587758402}
+  - component: {fileID: 114155304928275660}
+  m_Layer: 0
+  m_Name: Rosemary
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!1 &1812050052551142
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4607738335711142}
+  - component: {fileID: 114555309855582766}
+  m_Layer: 0
+  m_Name: Pineapple
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!1 &1873621723882824
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4506803960393422}
+  - component: {fileID: 114813821201778632}
+  m_Layer: 0
+  m_Name: Basil
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!1 &1893360839366198
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4681228716969764}
+  - component: {fileID: 114380077730787130}
+  m_Layer: 0
+  m_Name: saladBeetroot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!1 &1936614984878488
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4123320762870986}
+  - component: {fileID: 114361265421623808}
+  m_Layer: 0
+  m_Name: blueberryTart
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!1 &1944474317138852
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4614401883896652}
+  - component: {fileID: 114314422165384492}
+  m_Layer: 0
+  m_Name: soupTomato
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!1 &1956685180048276
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4004351387280276}
+  - component: {fileID: 114890100224955456}
+  m_Layer: 0
+  m_Name: vegieBurger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!1 &1983005489463812
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4196917820371924}
+  - component: {fileID: 114781155737847098}
+  m_Layer: 0
+  m_Name: rhubarbCrumble
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!1 &1994558955809780
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4761227907004834}
+  - component: {fileID: 114373354952475826}
+  m_Layer: 0
+  m_Name: Raspberry
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &4004351387280276
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1956685180048276}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4255770041350026}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4042351002004590
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1114185476258108}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4074608439552844}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4074608439552844
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1417046153877264}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4458153360223400}
+  - {fileID: 4450836490601908}
+  - {fileID: 4645871670921844}
+  - {fileID: 4351674095228842}
+  - {fileID: 4337829026765090}
+  - {fileID: 4706949726053266}
+  - {fileID: 4121255668272796}
+  - {fileID: 4042351002004590}
+  - {fileID: 4106058035370778}
+  m_Father: {fileID: 4884895680772890}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4106058035370778
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1612249426034270}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4074608439552844}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4121255668272796
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1463272185072484}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4074608439552844}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4123320762870986
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1936614984878488}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4174262400335844}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4174262400335844
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1163254886908612}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4911580763982564}
+  - {fileID: 4437535695886344}
+  - {fileID: 4273631773783034}
+  - {fileID: 4123320762870986}
+  - {fileID: 4196917820371924}
+  m_Father: {fileID: 4193865953237106}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4193865953237106
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1506951436427352}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4449946924779118}
+  - {fileID: 4311887205639674}
+  - {fileID: 4255770041350026}
+  - {fileID: 4174262400335844}
+  m_Father: {fileID: 4859948408572808}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4196917820371924
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1983005489463812}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4174262400335844}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4214015469463126
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1575459325244762}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4319203349196380}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4255770041350026
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1580403002421060}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4665925930813140}
+  - {fileID: 4401474484954084}
+  - {fileID: 4004351387280276}
+  - {fileID: 4882527307095758}
+  m_Father: {fileID: 4193865953237106}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4273631773783034
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1281229462129958}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4174262400335844}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4306865294069696
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1011074100460686}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4311887205639674}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4311887205639674
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1082388358633968}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4717718891096774}
+  - {fileID: 4614401883896652}
+  - {fileID: 4306865294069696}
+  m_Father: {fileID: 4193865953237106}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4319203349196380
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1391198308869168}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4761227907004834}
+  - {fileID: 4214015469463126}
+  - {fileID: 4331835948833158}
+  - {fileID: 4826505591623378}
+  - {fileID: 4607738335711142}
+  m_Father: {fileID: 4884895680772890}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4331835948833158
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1015148236867848}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4319203349196380}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4337829026765090
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1502570966424192}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4074608439552844}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4351674095228842
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1255047770627256}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4074608439552844}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4401474484954084
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1723049747980258}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4255770041350026}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4437535695886344
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1412356797515184}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4174262400335844}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4449946924779118
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1070905965923382}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4681228716969764}
+  - {fileID: 4962495102887484}
+  m_Father: {fileID: 4193865953237106}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4450836490601908
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1171158043491582}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4074608439552844}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4458153360223400
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1580224906053900}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4074608439552844}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4506803960393422
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1873621723882824}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4859716793032960}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4607738335711142
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1812050052551142}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4319203349196380}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4614401883896652
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1944474317138852}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4311887205639674}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4645871670921844
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1638449348819270}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4074608439552844}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4659018587758402
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1748735370209776}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4859716793032960}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4665925930813140
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1719105373723182}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4255770041350026}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4681228716969764
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1893360839366198}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4449946924779118}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4706949726053266
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1724823809607702}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4074608439552844}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4717718891096774
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1038076799433348}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4311887205639674}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4742463711355032
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1242426084240730}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4859716793032960}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4761227907004834
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1994558955809780}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4319203349196380}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4826505591623378
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1664248795925800}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4319203349196380}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4859716793032960
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1617088936491156}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4506803960393422}
+  - {fileID: 4659018587758402}
+  - {fileID: 4742463711355032}
+  m_Father: {fileID: 4884895680772890}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4859948408572808
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1506150462353498}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4884895680772890}
+  - {fileID: 4193865953237106}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4882527307095758
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1188384664674946}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4255770041350026}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4884895680772890
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1256002712306326}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4859716793032960}
+  - {fileID: 4074608439552844}
+  - {fileID: 4319203349196380}
+  m_Father: {fileID: 4859948408572808}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4911580763982564
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1197495098362898}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4174262400335844}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4962495102887484
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1551123083715500}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4449946924779118}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114018925952726566
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1506150462353498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a97e642e6558d43438cf361460b5d68e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  btnPlantPrefab: {fileID: 178098, guid: 675caaf09e9754b429964f82e45911c2, type: 2}
+  btnClimatePrefab: {fileID: 178098, guid: 2d1fbb83181a04641be630c2d7ab2329, type: 2}
+  plantPrefab: {fileID: 185598, guid: 76ab72a085a1141afae195db237d6441, type: 2}
+  seedling: {fileID: 4300002, guid: 91a9cfececd764631af8a71192472851, type: 3}
+  germination: {fileID: 100000, guid: fadea00c147c74f208207da63257cf64, type: 3}
+  parcelReady: {fileID: 127360, guid: acc77ce7b0e2b4bb4a8ea601cc86ba16, type: 2}
+  waste: {fileID: 136856, guid: 51415b2f3f11146f791d26be00a18601, type: 2}
+  icon: {fileID: 21300000, guid: c92cb54df572040328c975d0748a9703, type: 3}
+  cold: {r: 0.30882353, g: 0.9713995, b: 1, a: 1}
+  hot: {r: 1, g: 0, b: 0, a: 1}
+  acid: {r: 0, g: 0.33823532, b: 0.11430025, a: 1}
+  basic: {r: 0.34544787, g: 0.04995676, b: 0.5661765, a: 1}
+  wet: {r: 0.29411763, g: 0.35740378, b: 1, a: 1}
+  dry: {r: 1, g: 0.825355, b: 0.09558821, a: 1}
+  onHold: {r: 0, g: 1, b: 1, a: 1}
+  growing: {r: 0, g: 1, b: 0, a: 1}
+  gold: {r: 1, g: 0.8745098, b: 0, a: 1}
+--- !u!114 &114027489842979690
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1506150462353498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de54b639d51174bfbbca95720af60e18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debugGame: 0
+  coins: 5
+  cursor: {fileID: 0}
+  custCamera: {fileID: 0}
+  sensitivity: 0.3
+--- !u!114 &114063168618904648
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1612249426034270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 821bfdcd9fb074e70b386734cc557db8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantName: 16
+  plantType: 1
+  waterNeeds: 3
+  color: {r: 0.10640138, g: 0.30147058, b: 0.10774667, a: 1}
+  seedNumber: 0
+  productNumber: 0
+  price: 2
+  calories: 34
+  pHAve: 7
+  germinationSize: 3
+  growthSize: 7
+  pollinationSize: 13
+  productSize: 23
+  maxSize: 26
+  tempMin: 15
+  tempMax: 20
+  description: Broccoli is an edible green plant in the cabbage family whose large
+    flowering head is eaten as a vegetable.
+  source: https://en.wikipedia.org/wiki/Broccoli
+  plantIcon: {fileID: 21300016, guid: 6dae94211f98d415bb98283909af577e, type: 3}
+  plantBtn: {fileID: 0}
+  growth: {fileID: 168732, guid: ae1345b9e4fef4416a2804f33823114f, type: 2}
+  pollination: {fileID: 121470, guid: 9eefb0acbc4c54efcb1474cb82bd25d1, type: 2}
+  product: {fileID: 151468, guid: 67f51afcd5adb4cafb6fa8b2b5859cf1, type: 2}
+  friends: 02000000
+  foes: 
+--- !u!114 &114093530510204322
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1724823809607702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 821bfdcd9fb074e70b386734cc557db8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantName: 8
+  plantType: 1
+  waterNeeds: 1
+  color: {r: 0.9058824, g: 0.7176471, b: 0.27058825, a: 1}
+  seedNumber: 0
+  productNumber: 2
+  price: 1
+  calories: 40
+  pHAve: 6
+  germinationSize: 2
+  growthSize: 5
+  pollinationSize: 8
+  productSize: 14
+  maxSize: 19
+  tempMin: 12
+  tempMax: 22
+  description: The onion, also known as the bulb onion or common onion, is a vegetable
+    and is the most widely cultivated species of the genus Allium
+  source: https://en.wikipedia.org/wiki/Onion
+  plantIcon: {fileID: 21300010, guid: 6dae94211f98d415bb98283909af577e, type: 3}
+  plantBtn: {fileID: 0}
+  growth: {fileID: 1000013637426062, guid: c4eacfd25c78f4fa29923ccf66ba4043, type: 2}
+  pollination: {fileID: 1000011054404360, guid: 259ccd72e0c7943089213240f80b95e6,
+    type: 2}
+  product: {fileID: 1000011781512490, guid: 797a2b14ccc9e4fb498b5f9e44273855, type: 2}
+  friends: 
+  foes: 
+--- !u!114 &114155304928275660
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1748735370209776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 821bfdcd9fb074e70b386734cc557db8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantName: 7
+  plantType: 0
+  waterNeeds: 0
+  color: {r: 0.5647059, g: 0.7372549, b: 0.48235297, a: 1}
+  seedNumber: 0
+  productNumber: 1
+  price: 3
+  calories: 131
+  pHAve: 6.5
+  germinationSize: 3
+  growthSize: 8
+  pollinationSize: 10
+  productSize: 16
+  maxSize: 18
+  tempMin: 5
+  tempMax: 20
+  description: Rosmarinus officinalis, commonly known as rosemary, is a woody, perennial
+    herb with fragrant, evergreen, needle-like leaves and white, pink, purple, or
+    blue flowers, native to the Mediterranean region.
+  source: https://en.wikipedia.org/wiki/Rosemary
+  plantIcon: {fileID: 21300000, guid: 170fb30ca1a5549118e57ac95b004ce2, type: 3}
+  plantBtn: {fileID: 0}
+  growth: {fileID: 1000011070606038, guid: 39988422012dc421e9ef77c085913e67, type: 2}
+  pollination: {fileID: 1000011509870270, guid: a38889d7471324df78dc2e305878a95b,
+    type: 2}
+  product: {fileID: 1000012607901240, guid: b64722df677d74bcebace67e871672b2, type: 2}
+  friends: 00000000
+  foes: 
+--- !u!114 &114157044524446296
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1580224906053900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 821bfdcd9fb074e70b386734cc557db8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantName: 3
+  plantType: 1
+  waterNeeds: 3
+  color: {r: 0.9490197, g: 0.7568628, b: 0.20392159, a: 1}
+  seedNumber: 0
+  productNumber: 3
+  price: 1
+  calories: 365
+  pHAve: 7
+  germinationSize: 3
+  growthSize: 5
+  pollinationSize: 16
+  productSize: 28
+  maxSize: 31
+  tempMin: 20
+  tempMax: 27
+  description: Maize, commonly known as corn, is a large grain plant domesticated
+    by indigenous peoples in Mexico in prehistoric times about 10,000 years ago. The
+    six major types of corn are dent corn, flint corn, pod corn, popcorn, flour corn,
+    and sweet corn.
+  source: https://en.wikipedia.org/wiki/Maize
+  plantIcon: {fileID: 21300006, guid: 6dae94211f98d415bb98283909af577e, type: 3}
+  plantBtn: {fileID: 0}
+  growth: {fileID: 1000010509126236, guid: c8e307bc6fb8c4223a9e8334ba03cd40, type: 2}
+  pollination: {fileID: 105856, guid: 1a34e6295a7c9439590d9250f4f7d103, type: 2}
+  product: {fileID: 132372, guid: 283233fe6211342d8b9a006d94b9567c, type: 2}
+  friends: 01000000
+  foes: 00000000
+--- !u!114 &114216712320905484
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1506951436427352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b60e2435ffddf48a79ffcfcc551ce9cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recipeBtnPrefab: {fileID: 1000010040937038, guid: 0590e0c7feff24934bf38f37c3e090c3,
+    type: 2}
+  saladPanel: {fileID: 0}
+  soupPanel: {fileID: 0}
+  mealPanel: {fileID: 0}
+  dessertPanel: {fileID: 0}
+  basicPanel: {fileID: 0}
+--- !u!114 &114224948853287126
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1506150462353498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35ea18363d68c4129ab0d20d442c119c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114234831685349366
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1038076799433348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f8f532edbe93463f89088530071b1d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recipeName: "Pumpkin velout\xE9"
+  recipeType: 1
+  icon: {fileID: 21300002, guid: 087f34d81013541af9a253185aa2fd14, type: 3}
+  description: Chop and fry your ingredients in you cooking pot. When ready add water
+    to finish the cooking and towards the end, add cream and cheese. Blend safely
+    and serve.
+  linkRecipe: 
+  linkPhoto: 
+  ingredients:
+  - {fileID: 114637934131304438}
+  - {fileID: 114093530510204322}
+  - {fileID: 114155304928275660}
+--- !u!114 &114275861430844220
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1723049747980258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f8f532edbe93463f89088530071b1d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recipeName: Sauteed Potatoes
+  recipeType: 2
+  icon: {fileID: 21300010, guid: 087f34d81013541af9a253185aa2fd14, type: 3}
+  description: Chop the potatoes and onions, fry all that on medium heat, add salt,
+    herbs, and serve with a green salad.
+  linkRecipe: 
+  linkPhoto: 
+  ingredients:
+  - {fileID: 114444494748305016}
+  - {fileID: 114093530510204322}
+  - {fileID: 114155304928275660}
+--- !u!114 &114279333139407448
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1506150462353498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2965b6b5e9985401ca1ffe8268fce222, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114314422165384492
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1944474317138852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f8f532edbe93463f89088530071b1d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recipeName: Tomato pottage
+  recipeType: 1
+  icon: {fileID: 21300008, guid: 087f34d81013541af9a253185aa2fd14, type: 3}
+  description: Chop potatoes, leeks and tomatoes, start frying in the cooking pot
+    and add the water. Season to your taste and serve as is. The chunk of potatoes
+    will melt in your mouth.
+  linkRecipe: 
+  linkPhoto: 
+  ingredients:
+  - {fileID: 114740799532736116}
+  - {fileID: 114444494748305016}
+  - {fileID: 114813821201778632}
+--- !u!114 &114352403269174854
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1719105373723182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f8f532edbe93463f89088530071b1d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recipeName: Roasted pumpkins
+  recipeType: 2
+  icon: {fileID: 21300004, guid: 087f34d81013541af9a253185aa2fd14, type: 3}
+  description: Chop and cook in the oven with a drizzle of olive oil, herbs, garlic
+    and more. Boil the corn on the side.When ready plate and serve.
+  linkRecipe: 
+  linkPhoto: 
+  ingredients:
+  - {fileID: 114637934131304438}
+  - {fileID: 114157044524446296}
+  - {fileID: 114813821201778632}
+--- !u!114 &114361265421623808
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1936614984878488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f8f532edbe93463f89088530071b1d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recipeName: Blueberry tart
+  recipeType: 3
+  icon: {fileID: 21300016, guid: 087f34d81013541af9a253185aa2fd14, type: 3}
+  description: Get your pastry ready, add some jam and blueberries on top and put
+    in the oven
+  linkRecipe: 
+  linkPhoto: 
+  ingredients:
+  - {fileID: 114764370706766642}
+  - {fileID: 114157044524446296}
+--- !u!114 &114373354952475826
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1994558955809780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 821bfdcd9fb074e70b386734cc557db8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantName: 6
+  plantType: 2
+  waterNeeds: 2
+  color: {r: 0.8745099, g: 0.18039216, b: 0.3019608, a: 1}
+  seedNumber: 0
+  productNumber: 2
+  price: 3
+  calories: 53
+  pHAve: 5.9
+  germinationSize: 2
+  growthSize: 8
+  pollinationSize: 14
+  productSize: 19
+  maxSize: 25
+  tempMin: 10
+  tempMax: 22
+  description: The raspberry is the edible fruit of a multitude of plant species in
+    the genus Rubus of the rose family, most of which are in the subgenus Idaeobatus;
+    the name also applies to these plants themselves.
+  source: https://en.wikipedia.org/wiki/Raspberry
+  plantIcon: {fileID: 21300014, guid: 5618c9a18ff734a58ba0338cae9d6c6e, type: 3}
+  plantBtn: {fileID: 0}
+  growth: {fileID: 1000014234450362, guid: b4045a8466f3f402d8cd8c24d0a3f93c, type: 2}
+  pollination: {fileID: 1000014051659008, guid: 9fc5dd195e0a84ee190821d11b35a300,
+    type: 2}
+  product: {fileID: 1000010162138300, guid: 2fcc5f5ce2cf54a5088a4071bbb54968, type: 2}
+  friends: 
+  foes: 
+--- !u!114 &114380077730787130
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1893360839366198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f8f532edbe93463f89088530071b1d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recipeName: Beetroot salad
+  recipeType: 0
+  icon: {fileID: 21300000, guid: 087f34d81013541af9a253185aa2fd14, type: 3}
+  description: Boil and chop the beetroots, add a couple of tomatoes and some basil
+    leafs. Season to your taste (we love olive oil and lemon), and maybe some pine
+    nuts and goat cheese!
+  linkRecipe: http://asmpgame.blogspot.com.au/2017/02/perma-recipe-roasted-beetroot-and.html
+  linkPhoto: https://1.bp.blogspot.com/-mlZ_GCppQC8/WJ6WBJCuIkI/AAAAAAABuiU/t9t4mI1UjZIxeqroKklffQfDXYvUhwdXQCLcB/s1600/kale-broccoli-salad.jpg
+  ingredients:
+  - {fileID: 114671303281206808}
+  - {fileID: 114740799532736116}
+  - {fileID: 114155304928275660}
+--- !u!114 &114412087895667160
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1242426084240730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 821bfdcd9fb074e70b386734cc557db8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantName: 9
+  plantType: 0
+  waterNeeds: 0
+  color: {r: 1, g: 0.88640976, b: 0.7647059, a: 1}
+  seedNumber: 1
+  productNumber: 0
+  price: 2
+  calories: 22
+  pHAve: 7.3
+  germinationSize: 3
+  growthSize: 5
+  pollinationSize: 9
+  productSize: 15
+  maxSize: 21
+  tempMin: 15
+  tempMax: 22
+  description: "Agaricus bisporus is an edible basidiomycete mushroom native to grasslands
+    in Europe and North America. It has two color states while immature\u2014white
+    and brown\u2014both of which have various names. When mature, it is known as portobello
+    mushroom, often shortened to just portobello."
+  source: https://en.wikipedia.org/wiki/Agaricus_bisporus
+  plantIcon: {fileID: 21300004, guid: 170fb30ca1a5549118e57ac95b004ce2, type: 3}
+  plantBtn: {fileID: 0}
+  growth: {fileID: 1000012035734316, guid: a7e1019d05394406391ea11efcbe26ba, type: 2}
+  pollination: {fileID: 1000010472457384, guid: 6ca30033b67e74178ab9589a3cdf7a43,
+    type: 2}
+  product: {fileID: 1000010337531062, guid: 47e61dadffd83410190d0b62fe9cd972, type: 2}
+  friends: 00000000
+  foes: 
+--- !u!114 &114412977371176906
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1188384664674946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f8f532edbe93463f89088530071b1d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recipeName: Stuffed Mushrooms
+  recipeType: 2
+  icon: {fileID: 21300006, guid: 087f34d81013541af9a253185aa2fd14, type: 3}
+  description: Precook your pumpkin, add baby spinach leaves, feta cheese and some
+    roasted chestnusts. Season to your taste (honey and balsamic vinegar is pretty
+    good)
+  linkRecipe: http://asmpgame.blogspot.com/2017/02/perma-recipe-stuffed-mushrooms.html
+  linkPhoto: https://1.bp.blogspot.com/-Cm5d9pAgFLA/WJEqPBdMFNI/AAAAAAABuU0/yLfcx5G49k0LRKdvZAr9BiOfc2MyguDMwCLcB/s1600/stuffed_mushrooms.jpg
+  ingredients:
+  - {fileID: 114412087895667160}
+  - {fileID: 114813821201778632}
+  - {fileID: 114093530510204322}
+--- !u!114 &114444494748305016
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1171158043491582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 821bfdcd9fb074e70b386734cc557db8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantName: 1
+  plantType: 1
+  waterNeeds: 2
+  color: {r: 0.69803923, g: 0.58431375, b: 0.3647059, a: 1}
+  seedNumber: 0
+  productNumber: 3
+  price: 1
+  calories: 77
+  pHAve: 6
+  germinationSize: 3
+  growthSize: 7
+  pollinationSize: 18
+  productSize: 30
+  maxSize: 33
+  tempMin: 18
+  tempMax: 22
+  description: The potato is a starchy, tuberous crop from the perennial nightshade
+    Solanum tuberosum L. The word "potato" may refer either to the plant itself or
+    to the edible tuber. In the Andes, where the species is indigenous, there are
+    some other closely related cultivated potato species. Potatoes were introduced
+    outside the Andes region approximately four centuries ago, and have since become
+    an integral part of much of the world's food supply. It is the world's fourth-largest
+    food crop, following maize, wheat, and rice.
+  source: https://en.wikipedia.org/wiki/Potato
+  plantIcon: {fileID: 21300008, guid: 6dae94211f98d415bb98283909af577e, type: 3}
+  plantBtn: {fileID: 0}
+  growth: {fileID: 176998, guid: 449f7c35da34549869957de0f5a165c9, type: 2}
+  pollination: {fileID: 167432, guid: 5a85ad98ed6704c89a3fb459838a11f9, type: 2}
+  product: {fileID: 157720, guid: cc638e0fa96684904b8749bee108a7f9, type: 2}
+  friends: 03000000
+  foes: 00000000
+--- !u!114 &114475019147904876
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1011074100460686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f8f532edbe93463f89088530071b1d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recipeName: Tomato pottage
+  recipeType: 1
+  icon: {fileID: 21300008, guid: 087f34d81013541af9a253185aa2fd14, type: 3}
+  description: 
+  linkRecipe: 
+  linkPhoto: 
+  ingredients:
+  - {fileID: 114412087895667160}
+  - {fileID: 114093530510204322}
+  - {fileID: 114155304928275660}
+--- !u!114 &114484245650154052
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1575459325244762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 821bfdcd9fb074e70b386734cc557db8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantName: 10
+  plantType: 2
+  waterNeeds: 3
+  color: {r: 0.8745099, g: 0.82663965, b: 0.18039218, a: 1}
+  seedNumber: 0
+  productNumber: 2
+  price: 2
+  calories: 89
+  pHAve: 5.9
+  germinationSize: 4
+  growthSize: 14
+  pollinationSize: 20
+  productSize: 28
+  maxSize: 40
+  tempMin: 10
+  tempMax: 22
+  description: The banana is an edible fruit, botanically a berry, produced by several
+    kinds of large herbaceous flowering plants in the genus Musa. In some countries,
+    bananas used for cooking may be called plantains.
+  source: https://en.wikipedia.org/wiki/Banana
+  plantIcon: {fileID: 21300012, guid: 5618c9a18ff734a58ba0338cae9d6c6e, type: 3}
+  plantBtn: {fileID: 0}
+  growth: {fileID: 1000012035734316, guid: a7f8e778005d2421e8e84c86f7277ac0, type: 2}
+  pollination: {fileID: 1000010472457384, guid: 7f4d6c93aa07440ab97c15ddd8a67aa2,
+    type: 2}
+  product: {fileID: 1000010337531062, guid: 0eb8d7c19b0d04788bc6b8608a0c63fc, type: 2}
+  friends: 
+  foes: 
+--- !u!114 &114487617892751200
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1412356797515184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f8f532edbe93463f89088530071b1d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recipeName: Raspberry sorbet
+  recipeType: 3
+  icon: {fileID: 21300012, guid: 087f34d81013541af9a253185aa2fd14, type: 3}
+  description: Take your bowl of raspberries, add sugar, lemon juice, filter if you
+    feel like it and freeze until wanted consistancy.
+  linkRecipe: 
+  linkPhoto: 
+  ingredients:
+  - {fileID: 114373354952475826}
+  - {fileID: 114157044524446296}
+--- !u!114 &114488475399425486
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1551123083715500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f8f532edbe93463f89088530071b1d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recipeName: Roasted pumpkin salad
+  recipeType: 0
+  icon: {fileID: 21300006, guid: 087f34d81013541af9a253185aa2fd14, type: 3}
+  description: Precook your pumpkin, add baby spinach leaves, feta cheese and some
+    roasted chestnusts. Season to your taste (honey and balsamic vinegar is pretty
+    good)
+  linkRecipe: 
+  linkPhoto: 
+  ingredients:
+  - {fileID: 114637934131304438}
+  - {fileID: 114685545207038526}
+  - {fileID: 114813821201778632}
+--- !u!114 &114555309855582766
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1812050052551142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 821bfdcd9fb074e70b386734cc557db8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantName: 14
+  plantType: 2
+  waterNeeds: 1
+  color: {r: 0.99264705, g: 0.95288074, b: 0.4160359, a: 1}
+  seedNumber: 0
+  productNumber: 0
+  price: 2
+  calories: 50
+  pHAve: 5.5
+  germinationSize: 3
+  growthSize: 15
+  pollinationSize: 20
+  productSize: 30
+  maxSize: 33
+  tempMin: 5
+  tempMax: 24
+  description: Rhubarb is a species of plant in the family Polygonaceae. It is a herbaceous
+    perennial growing from short, thick rhizomes.
+  source: https://en.wikipedia.org/wiki/Rhubarb
+  plantIcon: {fileID: 21300022, guid: 5618c9a18ff734a58ba0338cae9d6c6e, type: 3}
+  plantBtn: {fileID: 0}
+  growth: {fileID: 1000012454173366, guid: 050539d8e8bcc4221bdb0c6eaeb3cf86, type: 2}
+  pollination: {fileID: 167432, guid: 049e666609f9941578ecf3c14806bb26, type: 2}
+  product: {fileID: 157720, guid: 57eeae3d8af924e929be5c92c1f70fc8, type: 2}
+  friends: 
+  foes: 
+--- !u!114 &114637934131304438
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1638449348819270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 821bfdcd9fb074e70b386734cc557db8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantName: 4
+  plantType: 1
+  waterNeeds: 3
+  color: {r: 0.9058824, g: 0.5686275, b: 0.21960786, a: 1}
+  seedNumber: 0
+  productNumber: 1
+  price: 2
+  calories: 26
+  pHAve: 7
+  germinationSize: 3
+  growthSize: 6
+  pollinationSize: 20
+  productSize: 33
+  maxSize: 36
+  tempMin: 15
+  tempMax: 20
+  description: A pumpkin is a cultivar of a squash plant, most commonly of Cucurbita
+    pepo, that is round, with smooth, slightly ribbed skin, and deep yellow to orange
+    coloration. The thick shell contains the seeds and pulp. Some exceptionally large
+    cultivars of squash with similar appearance have also been derived from Cucurbita
+    maxima. Specific cultivars of winter squash derived from other species, including
+    C. argyrosperma, and C. moschata, are also sometimes called "pumpkin".
+  source: https://en.wikipedia.org/wiki/Pumpkin
+  plantIcon: {fileID: 21300004, guid: 6dae94211f98d415bb98283909af577e, type: 3}
+  plantBtn: {fileID: 0}
+  growth: {fileID: 1000011190441204, guid: b644eaa8bec3d435e9984375b2797144, type: 2}
+  pollination: {fileID: 150988, guid: 141a0d080825e42b69dbc89e775af8fe, type: 2}
+  product: {fileID: 186354, guid: bb0a03563959a44cea9ecc43bda93bce, type: 2}
+  friends: 03000000
+  foes: 01000000
+--- !u!114 &114659738458834620
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1664248795925800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 821bfdcd9fb074e70b386734cc557db8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantName: 13
+  plantType: 2
+  waterNeeds: 1
+  color: {r: 0.6764706, g: 0.19896193, b: 0.42619017, a: 1}
+  seedNumber: 2
+  productNumber: 0
+  price: 2
+  calories: 21
+  pHAve: 6.4
+  germinationSize: 3
+  growthSize: 15
+  pollinationSize: 20
+  productSize: 30
+  maxSize: 33
+  tempMin: 5
+  tempMax: 24
+  description: Rhubarb is a species of plant in the family Polygonaceae. It is a herbaceous
+    perennial growing from short, thick rhizomes.
+  source: https://en.wikipedia.org/wiki/Rhubarb
+  plantIcon: {fileID: 21300020, guid: 5618c9a18ff734a58ba0338cae9d6c6e, type: 3}
+  plantBtn: {fileID: 0}
+  growth: {fileID: 1000012035734316, guid: 514981424a83e4ed2a71ad4ba5a4beff, type: 2}
+  pollination: {fileID: 1000010472457384, guid: 931cfbe26c6a34d498f992828f33de41,
+    type: 2}
+  product: {fileID: 1000010472457384, guid: 01bff382d029f4cda8b767a4ce38faad, type: 2}
+  friends: 
+  foes: 
+--- !u!114 &114671303281206808
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1502570966424192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 821bfdcd9fb074e70b386734cc557db8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantName: 5
+  plantType: 1
+  waterNeeds: 2
+  color: {r: 0.6509804, g: 0.29803923, b: 0.47450984, a: 1}
+  seedNumber: 0
+  productNumber: 2
+  price: 1
+  calories: 43
+  pHAve: 6.5
+  germinationSize: 2
+  growthSize: 4
+  pollinationSize: 6
+  productSize: 12
+  maxSize: 15
+  tempMin: 12
+  tempMax: 22
+  description: The beetroot is the taproot portion of the beet plant, usually known
+    in North America as the beet, also table beet, garden beet, red beet, or golden
+    beet. It is several of the cultivated varieties of Beta vulgaris grown for their
+    edible taproots and their leaves.
+  source: https://en.wikipedia.org/wiki/Beetroot
+  plantIcon: {fileID: 21300000, guid: 6dae94211f98d415bb98283909af577e, type: 3}
+  plantBtn: {fileID: 0}
+  growth: {fileID: 1000012454173366, guid: b906320bba05a430695977b12054bb70, type: 2}
+  pollination: {fileID: 172338, guid: c11ffaca5b7214555898cbbe7ddc7acf, type: 2}
+  product: {fileID: 141152, guid: 4bc6ad2e872ba4cd991a6dade82bec4a, type: 2}
+  friends: 
+  foes: 
+--- !u!114 &114685538185938914
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1197495098362898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f8f532edbe93463f89088530071b1d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recipeName: Beetroot sorbet
+  recipeType: 3
+  icon: {fileID: 21300012, guid: 087f34d81013541af9a253185aa2fd14, type: 3}
+  description: Unusual, isn't it? Boil and peel, when done, chop and transfer to blender
+    with lemon juice and corn kernels to naturally flavour it. Some people add agave
+    syrup, up to you.
+  linkRecipe: 
+  linkPhoto: 
+  ingredients:
+  - {fileID: 114671303281206808}
+  - {fileID: 114157044524446296}
+--- !u!114 &114685545207038526
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1463272185072484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 821bfdcd9fb074e70b386734cc557db8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantName: 12
+  plantType: 1
+  waterNeeds: 2
+  color: {r: 0.24172695, g: 0.05741782, b: 0.43382353, a: 1}
+  seedNumber: 2
+  productNumber: 0
+  price: 2
+  calories: 25
+  pHAve: 5.7
+  germinationSize: 3
+  growthSize: 7
+  pollinationSize: 12
+  productSize: 20
+  maxSize: 28
+  tempMin: 20
+  tempMax: 28
+  description: Eggplant, or aubergine, is a species of nightshade grown for its edible
+    fruit. Eggplant is the common name in North America and Australia, but British
+    English uses aubergine.
+  source: http://en.wikipedia.org/wiki/Eggplant
+  plantIcon: {fileID: 21300012, guid: 6dae94211f98d415bb98283909af577e, type: 3}
+  plantBtn: {fileID: 0}
+  growth: {fileID: 168732, guid: 4c98e97a9032647abbc329c7506b7f0b, type: 2}
+  pollination: {fileID: 121470, guid: fb5c61095b52848c1b5bc60a0ccdc6ea, type: 2}
+  product: {fileID: 151468, guid: 115f34fc1b87d485eb5a3c5ed218c583, type: 2}
+  friends: 02000000
+  foes: 
+--- !u!114 &114740799532736116
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1255047770627256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 821bfdcd9fb074e70b386734cc557db8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantName: 0
+  plantType: 1
+  waterNeeds: 3
+  color: {r: 0.8000001, g: 0, b: 0, a: 1}
+  seedNumber: 0
+  productNumber: 3
+  price: 2
+  calories: 18
+  pHAve: 7
+  germinationSize: 3
+  growthSize: 6
+  pollinationSize: 10
+  productSize: 25
+  maxSize: 28
+  tempMin: 20
+  tempMax: 24
+  description: The tomato is the edible, often red berry-type fruit of the nightshade
+    Solanum lycopersicum, commonly known as a tomato plant. The tomato is consumed
+    in diverse ways, including raw, as an ingredient in many dishes, sauces, salads,
+    and drinks. The English word tomato comes from the Spanish word, tomate, derived
+    from the Nahuatl (Aztec language) word tomatl.
+  source: https://en.wikipedia.org/wiki/Tomato
+  plantIcon: {fileID: 21300002, guid: 6dae94211f98d415bb98283909af577e, type: 3}
+  plantBtn: {fileID: 0}
+  growth: {fileID: 168732, guid: 224018221580947e7a2f7c11da11aca4, type: 2}
+  pollination: {fileID: 121470, guid: fb5c61095b52848c1b5bc60a0ccdc6ea, type: 2}
+  product: {fileID: 151468, guid: bac7ba7cc22fa4edf9adeae7e547abe2, type: 2}
+  friends: 02000000
+  foes: 
+--- !u!114 &114764370706766642
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1015148236867848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 821bfdcd9fb074e70b386734cc557db8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantName: 11
+  plantType: 2
+  waterNeeds: 1
+  color: {r: 0.2778546, g: 0.18555363, b: 0.64705884, a: 1}
+  seedNumber: 3
+  productNumber: 0
+  price: 3
+  calories: 57
+  pHAve: 4.5
+  germinationSize: 3
+  growthSize: 12
+  pollinationSize: 16
+  productSize: 26
+  maxSize: 30
+  tempMin: -10
+  tempMax: 20
+  description: Blueberries are perennial flowering plants with indigo-colored berries
+    from the section Cyanococcus within the genus Vaccinium
+  source: https://en.wikipedia.org/wiki/Blueberry
+  plantIcon: {fileID: 21300018, guid: 5618c9a18ff734a58ba0338cae9d6c6e, type: 3}
+  plantBtn: {fileID: 0}
+  growth: {fileID: 1000012035734316, guid: 78d6c6cb537c1433ebe240d96e848a98, type: 2}
+  pollination: {fileID: 1000010472457384, guid: b01d34630bb0742af94f19de0cb0eecd,
+    type: 2}
+  product: {fileID: 1000010337531062, guid: 76772e8757f444322a85e2343e547c45, type: 2}
+  friends: 
+  foes: 
+--- !u!114 &114781155737847098
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1983005489463812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f8f532edbe93463f89088530071b1d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recipeName: Rhubarb Crumble
+  recipeType: 3
+  icon: {fileID: 21300016, guid: 087f34d81013541af9a253185aa2fd14, type: 3}
+  description: Boil rhubarb and sugar in a sauce pan for 5 minutes on low heat, transfer
+    in ramequins. Top up with crumble mix and bake for 15 minutes.
+  linkRecipe: 
+  linkPhoto: 
+  ingredients:
+  - {fileID: 114764370706766642}
+  - {fileID: 114659738458834620}
+--- !u!114 &114797417080120436
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1281229462129958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f8f532edbe93463f89088530071b1d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recipeName: Banana ice cream
+  recipeType: 3
+  icon: {fileID: 21300012, guid: 087f34d81013541af9a253185aa2fd14, type: 3}
+  description: Bananas are already kinda creamy, skin and chop, transfer to a blender
+    with corn kernels, blend until smooth and put in freezer for couple of hours.
+  linkRecipe: 
+  linkPhoto: 
+  ingredients:
+  - {fileID: 114484245650154052}
+  - {fileID: 114157044524446296}
+--- !u!114 &114813174890939646
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1114185476258108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 821bfdcd9fb074e70b386734cc557db8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantName: 15
+  plantType: 1
+  waterNeeds: 3
+  color: {r: 0.2977941, g: 0.5955882, b: 0.39842802, a: 1}
+  seedNumber: 0
+  productNumber: 0
+  price: 1
+  calories: 43
+  pHAve: 7
+  germinationSize: 5
+  growthSize: 10
+  pollinationSize: 20
+  productSize: 35
+  maxSize: 38
+  tempMin: 7
+  tempMax: 24
+  description: The Brussels sprout is a member of the Gemmifera Group of cabbages
+    (Brassica oleracea), grown for its edible buds.
+  source: https://en.wikipedia.org/wiki/Brussels_sprout
+  plantIcon: {fileID: 21300014, guid: 6dae94211f98d415bb98283909af577e, type: 3}
+  plantBtn: {fileID: 0}
+  growth: {fileID: 168732, guid: 9900f178786e4474283b18234a41affa, type: 2}
+  pollination: {fileID: 121470, guid: 663c1eb9c545c4a09a7ebec2cc5e1c8d, type: 2}
+  product: {fileID: 151468, guid: e7977f6a1a7484d7e8ddb06d49e567d4, type: 2}
+  friends: 02000000
+  foes: 
+--- !u!114 &114813821201778632
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1873621723882824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 821bfdcd9fb074e70b386734cc557db8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantName: 2
+  plantType: 0
+  waterNeeds: 0
+  color: {r: 0.41960788, g: 0.6627451, b: 0.31764707, a: 1}
+  seedNumber: 0
+  productNumber: 1
+  price: 2
+  calories: 22
+  pHAve: 6
+  germinationSize: 3
+  growthSize: 6
+  pollinationSize: 10
+  productSize: 14
+  maxSize: 16
+  tempMin: 10
+  tempMax: 25
+  description: Basil, Thai basil, or sweet basil, is a common name for the culinary
+    herb Ocimum basilicum of the family Lamiaceae (mints), sometimes known as Saint
+    Joseph's Wort in some English speaking countries.  Basil is possibly native to
+    India, and has been cultivated there for more than 5,000 years. It was thoroughly
+    familiar to the Greek authors Theophrastus and Dioscorides. It is a half-hardy
+    annual plant, best known as a culinary herb prominently featured in Italian cuisine,
+    and also plays a major role in Southeast Asian cuisines.
+  source: https://en.wikipedia.org/wiki/Basil
+  plantIcon: {fileID: 21300002, guid: 170fb30ca1a5549118e57ac95b004ce2, type: 3}
+  plantBtn: {fileID: 0}
+  growth: {fileID: 1000013966470294, guid: 6baf0b1c7122b4a649fb2e6cbe01fafe, type: 2}
+  pollination: {fileID: 120394, guid: 20005cb64f122441483b6a3bd4895bf6, type: 2}
+  product: {fileID: 122164, guid: 4c660dbcb2db54664bcba615f78c9a38, type: 2}
+  friends: 00000000
+  foes: 
+--- !u!114 &114890100224955456
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1956685180048276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f8f532edbe93463f89088530071b1d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recipeName: Vegie Burger
+  recipeType: 2
+  icon: {fileID: 21300014, guid: 087f34d81013541af9a253185aa2fd14, type: 3}
+  description: Cook and season your fillings to taste. Assemble in between two buns
+    and you're ready to eat!
+  linkRecipe: 
+  linkPhoto: 
+  ingredients:
+  - {fileID: 114412087895667160}
+  - {fileID: 114671303281206808}
+  - {fileID: 114093530510204322}

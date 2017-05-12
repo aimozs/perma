@@ -21,7 +21,7 @@ public class Well : MonoBehaviour {
 
 	void Start(){
 
-		SetLevel(level);
+//		SetLevel(level);
 	}
 
 	void OnEnable(){
@@ -72,8 +72,8 @@ public class Well : MonoBehaviour {
 		if(levelUI == null)
 			levelUI = GetComponentInChildren<Slider>();
 
-		if(level != null)
-			levelUI.value = level;
+//		if(level != null)
+		levelUI.value = level;
 	}
 
 }

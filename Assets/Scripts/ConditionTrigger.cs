@@ -1,21 +1,41 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof (BoxCollider))]
 public class ConditionTrigger : MonoBehaviour {
 
-	public enum Condition { cool, dry, moist }
+	public enum Condition { temp, dry, water, pH }
 	public Condition condition;
 
-	private Collider collider;
+	[Range(0,10)]
+	public float val;
+
+//	private Collider _col;
+//	private MeshRenderer _meshRend;
+
 	// Use this for initialization
-	void Start () {
-		collider = GetComponent<Collider>();
-		collider.isTrigger = true;
+//	void Start () {
+//		_col = GetComponent<Collider>();
+//		_col.isTrigger = true;
+//		_meshRend = GetComponent<MeshRenderer>();
+//		_meshRend.enabled = false;
+//	}
+//
+//	void OnEnable(){
+//		UIManager.OnDisplayCondition += DisplayCond;
+//	}
+//
+//	void OnDisable(){
+//		UIManager.OnDisplayCondition -= DisplayCond;
+//	}
+//	
+//	void DisplayCond(Condition _condition){
+//		if(_condition == condition)
+//			_meshRend.enabled = !_meshRend.enabled;
+//	}
+
+	public float phVal {
+		get { return val - 5f; }
 	}
-	
-	// Update is called once per frame
-//	void Update () {}
 
 	void OnTriggerEnter(Collider other){
 		if(other.CompareTag("Player"))

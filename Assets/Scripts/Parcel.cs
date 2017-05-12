@@ -43,9 +43,9 @@ public class Parcel : MonoBehaviour {
 
 	}
 
-	void OnTriggerExit(Collider other){
-		GardenCursor.currentPlantTrigger = null;
-
-	}
+//	void OnTriggerExit(Collider other){
+//		GardenCursor.currentPlantTrigger = null;
+//
+//	}
 
 }

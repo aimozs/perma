@@ -24,8 +24,10 @@ public class TutorialManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		HideAllTutoPanels();
-
-		if(PlayerPrefs.GetString("tutorial") == null || PlayerPrefs.GetString("tutorial") == "")
+//		PlayerPrefs.DeleteAll();
+//		PlayerPrefs.Save();
+//		UIManager.Notify(PlayerPrefs.GetInt("tutorial").ToString());
+		if(PlayerPrefs.GetInt("tutorial") == 0)
 			StartTutorial();
 	}
 
@@ -36,7 +38,6 @@ public class TutorialManager : MonoBehaviour {
 	}
 
 	void StartTutorial(){
-		Debug.Log("Starting tutorial at index " + tipIndex);
 		SetCanvasVisible(tips[tipIndex], true);
 		EventSystem.current.SetSelectedGameObject(tips[tipIndex].GetComponentInChildren<Button>().gameObject);
 	}
@@ -44,7 +45,7 @@ public class TutorialManager : MonoBehaviour {
 	public void ShowNextTip(){
 		SetCanvasVisible(tips[tipIndex], false);
 		if(tipIndex < tips.Count-1 && showTutorial){
-			if(tipIndex == 2)
+			if(tipIndex == 3)
 				UIManager.Instance.DisplayMenu(true);
 			
 			tipIndex++;
@@ -70,8 +71,8 @@ public class TutorialManager : MonoBehaviour {
 		UIManager.Instance.DisplayMenu(false);
 //		EventSystem.current.SetSelectedGameObject(GameManager.Instance.garden[0]);
 		showTutorial = false;
-		PlayerPrefs.SetString("tutorial", "done");
+		PlayerPrefs.SetInt("tutorial", 1);
 		PlayerPrefs.Save();
-		StartCoroutine(GameManager.Instance.Save());
+//		StartCoroutine(GameManager.Instance.Save());
 	}
 }

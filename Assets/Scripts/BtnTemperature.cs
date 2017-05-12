@@ -16,6 +16,7 @@ public class BtnTemperature : MonoBehaviour {
 		}
 	}
 
+	#region 0.Basics
 	void OnEnable(){
 		ClimateManager.OnTriggerClimate += UpdateTemperature;
 	}
@@ -23,6 +24,16 @@ public class BtnTemperature : MonoBehaviour {
 	void OnDisable(){
 		ClimateManager.OnTriggerClimate -= UpdateTemperature;
 	}
+
+	#endregion
+
+	#region 1.Statics
+
+	public static int currentTemp {
+		get { return Instance.temperature; }
+	}
+
+	#endregion
 
 	void UpdateTemperature(Climate climate){
 		if(temperature < climate.tempTarget)

@@ -4,7 +4,6 @@ using System.Collections;
 public class GameModel : MonoBehaviour {
 
 	public GameObject btnPlantPrefab;
-	public GameObject btnPlantShop;
 	public GameObject btnClimatePrefab;
 
 	public GameObject plantPrefab;
@@ -13,12 +12,20 @@ public class GameModel : MonoBehaviour {
 	public GameObject parcelReady;
 	public GameObject waste;
 
-	public Color frozen;
+	public Sprite icon;
+
+	public Color cold;
+	public Color hot;
+
+	public Color acid;
+	public Color basic;
+
+	public Color wet;
+	public Color dry;
+
 	public Color onHold;
 	public Color growing;
-	public Color tooWarm;
 	public Color gold;
-	public Color bronze;
 
 	private static GameModel instance;
 	public static GameModel Instance {

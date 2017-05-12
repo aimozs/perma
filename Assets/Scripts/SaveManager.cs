@@ -8,11 +8,15 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 
+#if (UNITY_ANDROID)
+
 using GooglePlayGames;
 using GooglePlayGames.OurUtils;
 
 using GooglePlayGames.BasicApi;
 using GooglePlayGames.BasicApi.SavedGame;
+
+#endif
 
 
 
@@ -25,7 +29,10 @@ public class SaveManager : MonoBehaviour {
 
 	private static bool _signedIn = false;
 	private static DateTime gameStart;
+	#if (UNITY_ANDROID)
 	private static ISavedGameMetadata gameMetaData;
+
+	#endif
 
 	private static byte[] dataBytes;
 
@@ -47,11 +54,12 @@ public class SaveManager : MonoBehaviour {
 		get { return _signedIn; }
 		set {
 			_signedIn = value;
-			UIManager.SignedIn = _signedIn;
+			UIManager.signedIn = _signedIn;
 		}
 	}
 
 	public static void InitSave(){
+		#if (UNITY_ANDROID)
 		PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder()
 			// enables saving game progress.
 			.EnableSavedGames()
@@ -69,24 +77,25 @@ public class SaveManager : MonoBehaviour {
 		PlayGamesPlatform.DebugLogEnabled = true;
 		// Activate the Google Play Games platform
 		PlayGamesPlatform.Activate();
+
+		#endif
 	}
 
 	public static void SignIn(){
 		SetGameStart();
 
-		LoadGame();
-
 		Social.localUser.Authenticate((bool success) => {
-//			signedIn = success;
-//			LoadGame();
+			signedIn = success;
+
 		});
-		loadFinished = true;
 
 	}
 
 	public static void SignOut(){
+		#if (UNITY_ANDROID)
 		PlayGamesPlatform.Instance.SignOut();
 		signedIn = false;
+		#endif
 	}
 
 	public static void SaveGame(){
@@ -98,29 +107,47 @@ public class SaveManager : MonoBehaviour {
 			playerData.lsParcels = GetListOfSerializableParcel();
 
 			BinaryFormatter bf = new BinaryFormatter();
-			FileStream file = File.Create(Application.persistentDataPath + fileName);
+			FileStream file = null;
 
+			if(File.Exists(Application.persistentDataPath + fileName)){
+				file = File.OpenWrite(Application.persistentDataPath + fileName);
+			} else {
+				file = File.Create(Application.persistentDataPath + fileName);
+			}
 			bf.Serialize(file, playerData);
 
 			UIManager.DisplaySaveState(UIManager.SaveState.saved);
 
 			if(_signedIn){
 				UIManager.Notify("Saving online");
+				#if (UNITY_ANDROID)
 				OpenSavedGame(fileName, SaveOnSavedGameOpened);
+				#endif
 			} else {
 				file.Close();
 			}
 		}
 	}
 
+	public static void DeleteSaveFile(){
+		
+		File.Delete(Application.persistentDataPath + fileName);
+		UIManager.DisplaySaveState(UIManager.SaveState.error);
+	}
+
 	public static void LoadGame(){
 		if(_signedIn){
+			#if (UNITY_ANDROID)
 			OpenSavedGame(fileName, LoadOnSavedGameOpened);
+			#endif
 		} else {
 			DeserializeFromFile();
 		}
-	}
 
+		loadFinished = true;
+
+	}
+	#if (UNITY_ANDROID)
 	/// <summary>
 	/// Opens GPGS saved game
 	/// </summary>
@@ -171,6 +198,8 @@ public class SaveManager : MonoBehaviour {
 		}
 	}
 
+	#endif
+
 	/// <summary>
 	/// Open local file, deserialize and restore locally saved data
 	/// </summary>
@@ -185,6 +214,7 @@ public class SaveManager : MonoBehaviour {
 		ApplyRetreivedPlayerData(_playerData);
 	}
 
+	#if (UNITY_ANDROID)
 	/// <summary>
 	/// Prepare retreived data from GPGS saved game to be applied
 	/// </summary>
@@ -201,6 +231,8 @@ public class SaveManager : MonoBehaviour {
 			UIManager.DisplaySaveState(UIManager.SaveState.loadOnline);
 		}
 	}
+
+	#endif
 
 	/// <summary>
 	/// Applies the retreived player data class.
@@ -276,6 +308,10 @@ public class SaveManager : MonoBehaviour {
 		UIManager.DisplaySaveState(UIManager.SaveState.loaded);
 	}
 
+	static void SetGameStart(){
+		gameStart = DateTime.Now;
+	}
+
 //	static void DeserializeData(string data){
 //		string[] ListRecipes;
 //		ListRecipes = data.Split("@"[0]);
@@ -311,7 +347,7 @@ public class SaveManager : MonoBehaviour {
 //		loadFinished = true;
 //		TutorialManager.Instance.ShowNextTip();
 //	}
-
+	#if (UNITY_ANDROID)
 	static void OnSavedGameSelected (SelectUIStatus status, ISavedGameMetadata _gameMD) {
 		if (status == SelectUIStatus.SavedGameSelected) {
 			// handle selected game save
@@ -358,9 +394,7 @@ public class SaveManager : MonoBehaviour {
 		}
 	}
 
-	static void SetGameStart(){
-		gameStart = DateTime.Now;
-	}
+
 
 	public static void ClearSavedGames(){
 		ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
@@ -375,6 +409,7 @@ public class SaveManager : MonoBehaviour {
 		ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
 		savedGameClient.Delete(gameMetaData);
 	}
+
 
 	public static void ShowSelectUI() {
 
@@ -395,6 +430,8 @@ public class SaveManager : MonoBehaviour {
 			UIManager.Notify("client is null");
 		}
 	}
+
+	#endif
 
 	static Texture2D getScreenshot() {
 		// Create a 2D texture that is 1024x700 pixels from which the PNG will be
